@@ -56,16 +56,14 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		Statement st = null;
 		try{
 			airlineConn = DBUtil.createConnection();
-			String sql = "SELECT * FROM BookingInformation";
+			String sql = "SELECT * FROM BookingInformation WHERE ";
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql);
 			while(rs.next()){
-				Flight flights = new Flight(rs.getString(1),rs.getString(2)
-						,rs.getString(3),rs.getString(4),rs.getString(5),
-						rs.getString(6),rs.getString(7),rs.getString(8),
-						rs.getInt(9),rs.getDouble(10),rs.getInt(11),
-						rs.getDouble(12));
-				bookingList.add(flights);
+				BookingInfo bookingInfo = new BookingInfo(rs.getString(1),rs.getString(2),rs.getInt(3),
+						rs.getString(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),
+						rs.getString(8),rs.getString(9));
+				bookingList.add(bookingInfo);
 			}
 		}catch(Exception e){
 			throw new AirlineException("Cannot retrieve flight details",e);
@@ -76,7 +74,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				throw new AirlineException("Cannot close database connection",e);
 			}
 		}
-		return flightList;
+		return bookingList;
 	}
 
 }
