@@ -1,9 +1,12 @@
 package com.cg.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,5 +89,94 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		}
 		return bookingList;
 	}
-
+	
+	/* Method to update schedule of a particular flight*/
+	@Override
+	public String updateFlightSchedule(String flightNo, String newInput, int choice) throws AirlineException{
+		Connection connFlight = null;
+		int status = 0;
+		Date newDate = null;
+		
+		if(choice==1 || choice==2){
+			String[] str = newInput.split("-");
+			int year = Integer.parseInt(str[0]);
+			int month = Integer.parseInt(str[1]);
+			int date = Integer.parseInt(str[2]);
+			LocalDate takeDate = LocalDate.of(year, month, date);
+			newDate = Date.valueOf(takeDate);
+		}
+		
+		
+		String sql1 = new String("Update Flightinformation Set Arr_Date =? where flightNo=?");
+		String sql2 = new String("Update Flightinformation Set Dep_Date =? where flightNo=?");
+		String sql3 = new String("Update Flightinformation Set Arr_time =? where flightNo=?");
+		String sql4 = new String("Update Flightinformation Set Dep_time =? where flightNo=?");
+		PreparedStatement pstFlight = null;
+		try{
+			connFlight = DBUtil.createConnection();
+			if(choice==1){
+				pstFlight = connFlight.prepareStatement(sql1);
+				pstFlight.setDate(1, newDate);
+				pstFlight.setString(2,flightNo);
+			}
+			else if(choice==2){
+				pstFlight = connFlight.prepareStatement(sql2);
+				pstFlight.setDate(1, newDate);
+				pstFlight.setString(2,flightNo);
+			}
+			else if(choice==3){
+				pstFlight = connFlight.prepareStatement(sql3);
+				pstFlight.setString(1, newInput);
+				pstFlight.setString(2,flightNo);
+			}
+			else if(choice==4){
+				pstFlight = connFlight.prepareStatement(sql4);
+				pstFlight.setString(1, newInput);
+				pstFlight.setString(2,flightNo);
+			}
+			status = pstFlight.executeUpdate();
+		}catch(Exception e){
+			throw new AirlineException("Cannot update the table");
+		}finally{
+			try {
+				DBUtil.closeConnection();
+			} catch (SQLException e) {
+				throw new AirlineException("Cannot close database connection",e);
+			}
+		}
+		
+		if(status==0)
+			return "Flight Updation Failed";
+		else
+			return "Schedule updated for the flight number " + flightNo;
+	}
+	
+	public String updateFlightInformation(String oldFlightNo, String newFlightNo) throws AirlineException{
+		Connection connFlight = null;
+		int status = 0;
+		
+		String sql = new String("Update Flightinformation Set Flightno =? where flightNo=?");
+		PreparedStatement pstFlight = null;
+		
+		try{
+			connFlight = DBUtil.createConnection();
+			pstFlight = connFlight.prepareStatement(sql);
+			pstFlight.setString(1, oldFlightNo);
+			pstFlight.setString(2, newFlightNo);
+			status = pstFlight.executeUpdate();
+		}catch(Exception e){
+			throw new AirlineException("Cannot update the table");
+		}finally{
+			try {
+				DBUtil.closeConnection();
+			} catch (SQLException e) {
+				throw new AirlineException("Cannot close database connection",e);
+			}
+		}
+		
+		if(status==0)
+			return "Flight Updation Failed";
+		else
+			return "Following changes made:\n Old Flight number: " + oldFlightNo + "\n New Flight Number: " + newFlightNo;
+	}
 }
