@@ -8,5 +8,5 @@ import com.cg.exception.AirlineException;
 
 public interface IAirlineDAO {
 	public List<Flight> viewListOfFlights() throws AirlineException;
-	public List<BookingInfo> viewBookingsOfFlight() throws AirlineException;
+	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException;
 }

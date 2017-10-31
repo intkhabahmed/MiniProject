@@ -50,13 +50,13 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	}
 
 	@Override
-	public List<BookingInfo> viewBookingsOfFlight() throws AirlineException {
+	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException {
 		List<BookingInfo> bookingList = new ArrayList<BookingInfo>();
 		ResultSet rs = null;
 		Statement st = null;
 		try{
 			airlineConn = DBUtil.createConnection();
-			String sql = "SELECT * FROM BookingInformation WHERE ";
+			String sql = "SELECT * FROM BookingInformation WHERE flightNo='"+flightNo+"'";
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql);
 			while(rs.next()){
@@ -66,7 +66,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				bookingList.add(bookingInfo);
 			}
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve flight details",e);
+			throw new AirlineException("Cannot retrieve booking details for the given flight",e);
 		}finally{
 			try {
 				DBUtil.closeConnection();

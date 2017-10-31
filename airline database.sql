@@ -14,7 +14,7 @@ Location varchar2(40) not null
 );
 
 Create table FlightInformation(
-flightno varchar2(5), 
+flightno varchar2(5) primary key, 
 airline varchar2(10), 
 dep_city varchar2(10), 
 arr_city varchar2(10), 
@@ -39,5 +39,6 @@ total_fare number(10,2),
 seat_number number(5), 
 CreditCard_info varchar2(10), 
 rc_city varchar2(10), 
-dest_city varchar2(10)
+dest_city varchar2(10),
+flightNo varchar2(5) references flightInformation(flightno)
 );
