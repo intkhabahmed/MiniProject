@@ -1,6 +1,7 @@
 Create table Users( 
 userid number(11) primary key,
-username varchar2(20) not null, 
+username varchar2(20) not null,
+cust_email varchar2(20), 
 password varchar2(20) not null, 
 role varchar2(10) not null,
 mobile_no number(10)
@@ -38,7 +39,7 @@ class_type varchar2(10),
 total_fare number(10,2), 
 seat_number number(5), 
 CreditCard_info varchar2(10), 
-rc_city varchar2(10), 
+src_city varchar2(10), 
 dest_city varchar2(10),
 flightNo varchar2(5) references flightInformation(flightno)
 );

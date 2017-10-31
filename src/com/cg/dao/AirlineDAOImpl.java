@@ -19,6 +19,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	}
 	private Connection airlineConn = null;
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.cg.dao.IAirlineDAO#viewListOfFlights()
+	 * Method for retrieving all flight details
+	 */
 	@Override
 	public List<Flight> viewListOfFlights() throws AirlineException {
 		List<Flight> flightList = new ArrayList<Flight>();
@@ -49,6 +54,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return flightList;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.cg.dao.IAirlineDAO#viewBookingsOfFlight(java.lang.String)
+	 * Method to see booking details of a particular flight
+	 */
 	@Override
 	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException {
 		List<BookingInfo> bookingList = new ArrayList<BookingInfo>();
@@ -66,7 +76,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				bookingList.add(bookingInfo);
 			}
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve booking details for the given flight",e);
+			throw new AirlineException("Cannot retrieve booking details for the given flightNo-"+flightNo,e);
 		}finally{
 			try {
 				DBUtil.closeConnection();
