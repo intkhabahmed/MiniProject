@@ -7,7 +7,7 @@ import com.cg.exception.AirlineException;
 import com.cg.service.AirlineServiceImpl;
 
 
-public class AirlineClient {
+public class SanjayClient {
 
 	public static void main(String[] args) throws AirlineException {
 		Scanner sc=new Scanner(System.in);
