@@ -38,7 +38,7 @@ class_type varchar2(10),
 total_fare number(10,2), 
 seat_number number(5), 
 CreditCard_info varchar2(10), 
-rc_city varchar2(10), 
+src_city varchar2(10), 
 dest_city varchar2(10),
 flightNo varchar2(5) references flightInformation(flightno)
 );

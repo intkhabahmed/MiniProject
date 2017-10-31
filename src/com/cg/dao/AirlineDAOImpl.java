@@ -66,7 +66,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				bookingList.add(bookingInfo);
 			}
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve booking details for the given flight",e);
+			throw new AirlineException("Cannot retrieve booking details for the given flightNo-"+flightNo,e);
 		}finally{
 			try {
 				DBUtil.closeConnection();
