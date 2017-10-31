@@ -1,6 +1,7 @@
 package com.cg.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
+import com.cg.bean.LoginMaster;
 import com.cg.exception.AirlineException;
 import com.cg.utility.DBUtil;
 
@@ -86,5 +88,120 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		}
 		return bookingList;
 	}
+	
+	@Override
+	public int usernameIsAvail(String username) throws AirlineException{
+		int status = 0;
+		Connection connBook = null;
+		Statement pstBook = null;
+		String sql=new String("Select count(username) from users where username='"+username+"'");
+
+		try{
+			connBook=DBUtil.createConnection();
+			pstBook = connBook.createStatement();
+			ResultSet rset  = pstBook.executeQuery(sql);
+			if(rset.next())
+			{
+				status = rset.getInt(1);
+			}
+		}catch(SQLException se){
+			throw new AirlineException("Record not inserted",se);
+		}finally{
+			try{
+				DBUtil.closeConnection();
+
+			}catch(SQLException se){
+				throw new AirlineException("Problems in Closing Connection",se);
+			}
+		}
+		return status;
+
+	}
+	@Override
+	public int mobileIsAvail(long mobile) throws AirlineException{
+		int status = 0;
+		Connection connBook = null;
+		Statement pstBook = null;
+		String sql=new String("Select count(mobile_no) from users where mobile_no="+mobile);
+
+		try{
+			connBook=DBUtil.createConnection();
+			pstBook = connBook.createStatement();
+			ResultSet rset  = pstBook.executeQuery(sql);
+			if(rset.next())
+			{
+				status = rset.getInt(1);
+			}
+		}catch(SQLException se){
+			throw new AirlineException("Record not inserted",se);
+		}finally{
+			try{
+				DBUtil.closeConnection();
+
+			}catch(SQLException se){
+				throw new AirlineException("Problems in Closing Connection",se);
+			}
+		}
+		return status;
+
+	}
+	@Override
+	public int validLogin(LoginMaster login) throws AirlineException{
+		int status = 0;
+		Connection connBook = null;
+		Statement pstBook = null;
+		String sql=new String("Select count(username) from users where username='"+login.getUsername()+"' AND password='"+login.getPassword()+"' AND role='"+login.getRole()+"'");
+
+		try{
+			connBook=DBUtil.createConnection();
+			pstBook = connBook.createStatement();
+			ResultSet rset  = pstBook.executeQuery(sql);
+			if(rset.next())
+			{
+				status = rset.getInt(1);
+			}
+		}catch(SQLException se){
+			throw new AirlineException("Record not inserted",se);
+		}finally{
+			try{
+				DBUtil.closeConnection();
+
+			}catch(SQLException se){
+				throw new AirlineException("Problems in Closing Connection",se);
+			}
+		}
+		return status;
+
+	}
+	
+	@Override
+	public int signUp(LoginMaster login) throws AirlineException{
+		int status = 0;
+		Connection connBook = null;
+		PreparedStatement pstBook = null;
+
+		String sql = new String("INSERT INTO users VALUES(booking_sequence.nextval,?,?,?,?)");
+
+		try{
+			connBook=DBUtil.createConnection();
+			pstBook = connBook.prepareStatement(sql);
+			pstBook.setString(1, login.getUsername());
+			pstBook.setString(2, login.getPassword());
+			pstBook.setString(3, login.getRole());
+			pstBook.setLong(4, login.getMobile());
+			status = pstBook.executeUpdate();
+		}catch(SQLException se){
+			throw new AirlineException("Record not inserted",se);
+		}finally{
+			try{
+				DBUtil.closeConnection();
+
+			}catch(SQLException se){
+				throw new AirlineException("Problems in Closing Connection",se);
+			}
+		}
+		return status;
+	}
+
 
 }
