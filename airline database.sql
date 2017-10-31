@@ -1,6 +1,7 @@
 Create table Users( 
 userid number(11) primary key,
-username varchar2(20) not null, 
+username varchar2(20) not null,
+cust_email varchar2(20), 
 password varchar2(20) not null, 
 role varchar2(10) not null,
 mobile_no number(10)
