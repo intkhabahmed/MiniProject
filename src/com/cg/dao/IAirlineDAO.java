@@ -19,8 +19,10 @@ public interface IAirlineDAO {
 	public List<Flight> retrieveFlightList(String source, String destination) throws AirlineException;
 	int bookingCancel(String bookingId, String username) throws AirlineException;
 	public String updateFlightInformation(String flightNo, String depCity,int choice) throws AirlineException;
-    public void flightOccupancyDetails(String classType,String flightNo) throws AirlineException;
+    public int[] flightOccupancyDetails(String classType,String flightNo) throws AirlineException;
 	int emailIsAvail(String email) throws AirlineException;
 	int flightIsAvail(String source, String destination, String flightNo) throws AirlineException;
+	List<BookingInfo> viewBookingsOfFlightGivenUser(String username)
+			throws AirlineException;
 
 }

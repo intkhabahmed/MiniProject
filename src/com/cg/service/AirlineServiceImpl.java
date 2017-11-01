@@ -29,7 +29,7 @@ public class AirlineServiceImpl implements IAirlineService{
 	
 	@Override
 	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException{
-		return dao.viewBookingsOfFlight(null);
+		return dao.viewBookingsOfFlight(flightNo);
 	}
 	
 	@Override
@@ -194,8 +194,27 @@ public class AirlineServiceImpl implements IAirlineService{
 	}
 	
 	@Override
-	public void flightOccupancyDetails(String classType, String flightNo) throws AirlineException {
-		dao.flightOccupancyDetails(classType,flightNo);
+	public int flightOccupancyDetails(String classType, String flightNo) throws AirlineException {
+		int[] seats = dao.flightOccupancyDetails(classType,flightNo);
+		if(classType.equalsIgnoreCase("FirstClass")){
+		return (seats[0]-seats[2]);
+		}
+		else
+		return (seats[1]-seats[3]);
+	}
+	
+	@Override
+	public void viewBookingsOfFlightGivenUser(String username) throws AirlineException{
+		ArrayList<BookingInfo> list = (ArrayList<BookingInfo>) dao.viewBookingsOfFlightGivenUser(username);
+		Iterator<BookingInfo> bookingIt=list.iterator();
+		while(bookingIt.hasNext())
+		{
+			BookingInfo bookingInfo = bookingIt.next();
+			System.out.println(bookingInfo);
+		}
+		if(list.isEmpty()){
+			System.out.println("Sorry! No flight Booking done by you.");
+		}
 	}
 
 	

@@ -23,6 +23,7 @@ public interface IAirlineService {
 	public String caseFlightSearch() throws AirlineException;
 	public int bookingCancel(String bookingId, String username) throws AirlineException;
 	public String updateFlightInformation(String oldFlightNo, String newFlightNo, int choice) throws AirlineException;
-	public void flightOccupancyDetails(String classType,String flightNo) throws AirlineException;
+	public int flightOccupancyDetails(String classType,String flightNo) throws AirlineException;
 
+	void viewBookingsOfFlightGivenUser(String username) throws AirlineException;
 }

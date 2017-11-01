@@ -473,7 +473,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	
 	//for getting flight occupancy details
 	//public int []flightOccupancyDetails(String classType,String flightNo) throws AirlineException
-	public void flightOccupancyDetails(String classType,String flightNo) throws AirlineException
+	public int[] flightOccupancyDetails(String classType,String flightNo) throws AirlineException
 	{
 		int a[]=new int[4];
 		ResultSet rs = null;
@@ -543,8 +543,33 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		{
 			throw new AirlineException("Cannot get number of seats",e);
 		}
-		//return a;
-		
+		return a;
 	}
-
+	@Override
+	public List<BookingInfo> viewBookingsOfFlightGivenUser(String username) throws AirlineException {
+		List<BookingInfo> bookingList = new ArrayList<BookingInfo>();
+		ResultSet rs = null;
+		Statement st = null;
+		try{
+			airlineConn = DBUtil.createConnection();
+			String sql = "SELECT * FROM BookingInformation WHERE cust_email=(SELECT cust_email FROM users WHERE username='"+username+"')";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql);
+			while(rs.next()){
+				BookingInfo bookingInfo = new BookingInfo(rs.getString(1),rs.getString(2),rs.getInt(3),
+						rs.getString(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),
+						rs.getString(8),rs.getString(9));
+				bookingList.add(bookingInfo);
+			}
+		}catch(Exception e){
+			throw new AirlineException("Cannot retrieve booking details for the given user",e);
+		}finally{
+			try {
+				DBUtil.closeConnection();
+			} catch (SQLException e) {
+				throw new AirlineException("Cannot close database connection",e);
+			}
+		}
+		return bookingList;
+	}
 }
