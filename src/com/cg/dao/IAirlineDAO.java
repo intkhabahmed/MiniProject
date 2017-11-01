@@ -1,6 +1,5 @@
 package com.cg.dao;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.cg.bean.BookingInfo;
@@ -17,4 +16,9 @@ public interface IAirlineDAO {
 	public int validLogin(LoginMaster login) throws AirlineException;
 	public int mobileIsAvail(long mobile) throws AirlineException;
 	public int usernameIsAvail(String username) throws AirlineException;
+	List<Flight> retrieveFlightList(String source, String destination)
+			throws AirlineException;
+
+	int bookingCancel(String bookingId, String username)
+			throws AirlineException;
 }

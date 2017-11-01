@@ -18,4 +18,12 @@ public interface IAirlineService {
 	public String updateFlightSchedule(String flightNo, String newInput, int choice) throws AirlineException;
 
 	public String updateFlightInformation(String oldFlightNo, String newFlightNo) throws AirlineException;
+	String caseLogin() throws AirlineException;
+	void caseSignUp() throws AirlineException;
+	List<Flight> retrieveFlightList(String source, String destination)
+			throws AirlineException;
+	String caseFlightSearch() throws AirlineException;
+	
+	int bookingCancel(String bookingId, String username)
+			throws AirlineException;
 }

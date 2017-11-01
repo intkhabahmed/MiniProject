@@ -3,6 +3,7 @@ package com.cg.bean;
 public class LoginMaster {
 	private int userId;
 	private String username;
+	private String email;
 	private String password;
 	private String role;
 	private long mobile;
@@ -44,6 +45,18 @@ public class LoginMaster {
 	}
 	public void setMobile(long mobile) {
 		this.mobile = mobile;
+	}
+	@Override
+	public String toString() {
+		return "LoginMaster [userId=" + userId + ", username=" + username
+				+ ", password=" + password + ", role=" + role + ", mobile="
+				+ mobile + "]";
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
