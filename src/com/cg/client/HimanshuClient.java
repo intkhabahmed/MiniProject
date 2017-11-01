@@ -42,7 +42,7 @@ public class HimanshuClient {
 			System.out.println(service.updateFlightSchedule(flightNumber, newInput, choiceForUpdation));
 		}
 		*/
-	/*
+	
 		System.out.println("Enter the flight number for which you want change the information");
 		String flightNumber = sc.next();
 		System.out.println("What do you want to change");
@@ -71,7 +71,7 @@ public class HimanshuClient {
 		}
 		
 		
-		sc.close();*/
+		sc.close();
 	}
 
 }

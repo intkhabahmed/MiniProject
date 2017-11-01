@@ -6,32 +6,49 @@ import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
 import com.cg.bean.LoginMaster;
 import com.cg.dao.AirlineDAOImpl;
+import com.cg.dao.IAirlineDAO;
 import com.cg.exception.AirlineException;
 
 public class AirlineServiceImpl implements IAirlineService{
 
-	AirlineDAOImpl dao = new AirlineDAOImpl();
+	IAirlineDAO dao;
+	
+	public AirlineServiceImpl() {
+		dao = new AirlineDAOImpl();
+	}
 
+	@Override
 	public List<Flight> viewListOfFlights() throws AirlineException{
 		return dao.viewListOfFlights();
 	}
 	
+	@Override
 	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException{
 		return dao.viewBookingsOfFlight(null);
 	}
 	
+	@Override
+	public List<BookingInfo> viewPassengersOfFlight(String flightNo)
+			throws AirlineException {
+		return dao.viewPassengersOfFlight(flightNo);
+	}
+	
+	@Override
 	public int signUp(LoginMaster login) throws AirlineException{
 		return dao.signUp(login);
 	}
 	
+	@Override
 	public int validLogin(LoginMaster login) throws AirlineException{
 		return dao.validLogin(login);
 	}
 	
+	@Override
 	public int mobileIsAvail(long mobile) throws AirlineException{
 		return dao.mobileIsAvail(mobile);
 	}
 	
+	@Override
 	public int usernameIsAvail(String username) throws AirlineException{
 		return dao.usernameIsAvail(username);
 	}
@@ -47,4 +64,12 @@ public class AirlineServiceImpl implements IAirlineService{
 		String status = dao.updateFlightInformation(oldFlightNo, newFlightNo, choice);
 		return status;
 	}
+	
+	@Override
+	public void flightOccupancyDetails(String classType, String flightNo) throws AirlineException {
+		dao.flightOccupancyDetails(classType,flightNo);
+	}
+
+	
+	
 }

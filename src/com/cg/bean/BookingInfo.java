@@ -103,4 +103,13 @@ public class BookingInfo {
 		this.destCity = destCity;
 	}
 
+	@Override
+	public String toString() {
+		return "BookingInfo [bookingId=" + bookingId + ", custEmail="
+				+ custEmail + ", noOfPassengers=" + noOfPassengers
+				+ ", classType=" + classType + ", totalFare=" + totalFare
+				+ ", seatnumber=" + seatnumber + ", creditcardInfo="
+				+ creditcardInfo + ", rcCity=" + rcCity + ", destCity="
+				+ destCity + "]";
+	}
 }

@@ -1,11 +1,13 @@
 package com.cg.bean;
 
 public class User {
+	private int userId;
 	private String username;
 	private String password;
 	private String email;
 	private long mobileNo;
 	private String role;
+	private String flightNo;
 	
 	public User(){
 		System.out.println("Empty constructor is called");
@@ -60,5 +62,22 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getFlightNo() {
+		return flightNo;
+	}
+
+	public void setFlightNo(String flightNo) {
+		this.flightNo = flightNo;
+	}
+	
 	
 }
