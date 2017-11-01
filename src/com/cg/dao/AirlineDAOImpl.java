@@ -327,15 +327,16 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		Connection connBook = null;
 		PreparedStatement pstBook = null;
 
-		String sql = new String("INSERT INTO users VALUES(booking_sequence.nextval,?,?,?,?)");
+		String sql = new String("INSERT INTO users VALUES(booking_sequence.nextval,?,?,?,?,?)");
 
 		try{
 			connBook=DBUtil.createConnection();
 			pstBook = connBook.prepareStatement(sql);
 			pstBook.setString(1, login.getUsername());
-			pstBook.setString(2, login.getPassword());
-			pstBook.setString(3, login.getRole());
-			pstBook.setLong(4, login.getMobile());
+			pstBook.setString(2, login.getEmail());
+			pstBook.setString(3, login.getPassword());
+			pstBook.setString(4, login.getRole());
+			pstBook.setLong(5, login.getMobile());
 			status = pstBook.executeUpdate();
 		}catch(SQLException se){
 			throw new AirlineException("Record not inserted",se);
@@ -349,6 +350,124 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		}
 		return status;
 	}
+<<<<<<< HEAD
+	@Override
+	public List<Flight> retrieveFlightList(String source, String destination) throws AirlineException {
+		List<Flight> flightList=new ArrayList<Flight>();
+		Connection conn = null;
+		PreparedStatement pst = null;
+		Flight flight =null;
+
+		String sql=new String("SELECT * FROM FlightInformation WHERE DEP_CITY='"+source+"' AND ARR_CITY='"+destination+"'");
+
+		try{
+			conn=DBUtil.createConnection();
+			pst = conn.prepareStatement(sql);
+			ResultSet rs=pst.executeQuery(sql);
+			while(rs.next())
+			{
+				//System.out.println(rset.getInt(1)+" "+rset.getString(2)+" "+rset.getString(3)+" "+rset.getString(4)+" "+rset.getFloat(5)+" "+rset.getInt(6));
+				flight= new Flight(rs.getString(1),rs.getString(2)
+						,rs.getString(3),rs.getString(4),rs.getString(5),
+						rs.getString(6),rs.getString(7),rs.getString(8),
+						rs.getInt(9),rs.getDouble(10),rs.getInt(11),
+						rs.getDouble(12));
+			    flightList.add(flight);
+			}
+		}catch(SQLException se){
+			throw new AirlineException("Error in retrieve data",se);
+		}finally{
+			try{
+				DBUtil.closeConnection();
+
+			}catch(SQLException se){
+				throw new AirlineException("Problems in Closing Connection",se);
+			}
+		}
+		
+		return flightList;
+	}
+	@Override
+	public int bookingCancel(String bookingId, String username) throws AirlineException {
+		int status = 0;
+		Connection connBook = null;
+		PreparedStatement pstBook = null;
+
+		String sql = new String("DELETE FROM BookingInformation WHERE Booking_id='"+bookingId+"' AND cust_email=(SELECT cust_email FROM users WHERE username='"+username+"')");
+
+		try{
+			connBook=DBUtil.createConnection();
+			pstBook = connBook.prepareStatement(sql);
+			status = pstBook.executeUpdate();
+		}catch(SQLException se){
+			throw new AirlineException("Problem in cancel",se);
+		}finally{
+			try{
+				DBUtil.closeConnection();
+
+			}catch(SQLException se){
+				throw new AirlineException("Problems in Closing Connection",se);
+			}
+		}
+		return status;
+	}
+
+	public int emailIsAvail(String email) throws AirlineException {
+		int status = 0;
+		Connection connBook = null;
+		Statement pstBook = null;
+		String sql=new String("Select count(cust_email) from users where cust_email='"+email+"'");
+
+		try{
+			connBook=DBUtil.createConnection();
+			pstBook = connBook.createStatement();
+			ResultSet rset  = pstBook.executeQuery(sql);
+			if(rset.next())
+			{
+				status = rset.getInt(1);
+			}
+		}catch(SQLException se){
+			throw new AirlineException("Error in email validation",se);
+		}finally{
+			try{
+				DBUtil.closeConnection();
+
+			}catch(SQLException se){
+				throw new AirlineException("Problems in Closing Connection",se);
+			}
+		}
+		return status;
+
+	}
+	
+	public int flightIsAvail(String source,String destination,String flightNo) throws AirlineException {
+		int status = 0;
+		Connection connBook = null;
+		Statement pstBook = null;
+		String sql=new String("SELECT count(flightno) FROM FlightInformation WHERE DEP_CITY='"+source+"' AND ARR_CITY='"+destination+"' AND flightNo='"+flightNo+"'");
+
+		try{
+			connBook=DBUtil.createConnection();
+			pstBook = connBook.createStatement();
+			ResultSet rset  = pstBook.executeQuery(sql);
+			if(rset.next())
+			{
+				status = rset.getInt(1);
+			}
+		}catch(SQLException se){
+			throw new AirlineException("Error in flight validation",se);
+		}finally{
+			try{
+				DBUtil.closeConnection();
+
+			}catch(SQLException se){
+				throw new AirlineException("Problems in Closing Connection",se);
+			}
+		}
+		return status;
+
+	}
+=======
 	
 	
 	//for getting flight occupancy details
@@ -427,5 +546,6 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		
 	}
 
+>>>>>>> c45b86bd90da8f5ef8fa2cb765f0750a0edaec2a
 
 }

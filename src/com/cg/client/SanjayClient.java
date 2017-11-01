@@ -1,5 +1,7 @@
 package com.cg.client;
 
+
+
 import java.util.Scanner;
 
 import com.cg.bean.LoginMaster;
@@ -10,99 +12,89 @@ import com.cg.service.AirlineServiceImpl;
 public class SanjayClient {
 
 	public static void main(String[] args) throws AirlineException {
-		Scanner sc=new Scanner(System.in);
+		
+		Scanner dc =new Scanner(System.in);
 		int choice = 0;
-		String username = "";
-		String password = "";
+		String username = null;
+		String password = null;
+		String flightNo = null;
+		String bookingId = null;
 		LoginMaster login = new LoginMaster();
 		AirlineServiceImpl service = new AirlineServiceImpl();
 		String user = null;
-		while(true){
-			if(username.isEmpty())
-			{
-				System.out.println("Hi user! What do you want to do today");
-				choice =0;
-				System.out.println("1.LogIn\n2.SignUp\n3.Flight Search");
-			}
-			else
-			{
-				System.out.println("Hi "+username+"! What do you want to do today");
-				choice=2;
-				System.out.println("1.Flight Search\n2.Logout");
-			}
-
-			choice += sc.nextInt();
-
+		System.out.println("Hi user! What do you want to do today");
+		System.out.println("1.LogIn\n2.SignUp\n3.Flight Search");
+		choice = dc.nextInt();
+			
 			switch(choice){
 			case 3:
-				System.out.println("Sorry!! Server busy");
+			flightNo = service.caseFlightSearch();
+				
+				System.out.println("Please login or Signup");
+				System.out.println("1.Login\n2.Signup");
+				choice = dc.nextInt();
+				if(choice==1){
+					username = service.caseLogin();	
+				}
+				else if(choice == 2){
+					service.caseSignUp();
+					System.out.println("Please login");
+					username = service.caseLogin();
+				}
+				if(!username.isEmpty() && !flightNo.isEmpty())
+				{
+					System.out.println("Booking Confirmed! for Flight No"+flightNo);
+				}
 				break;
 			case 1:
-				System.out.print("Username :");
-				//username = sc.next();
-				login.setUsername(sc.next());
-				sc.nextLine();
-				System.out.print("Password :");
-				//password = sc.nextLine();
-				login.setPassword(sc.nextLine());
-				login.setRole("customer");
-				if(service.validLogin(login) !=0)
+				username = service.caseLogin();
+
+				if(!username.isEmpty())
 				{
-					username = login.getUsername();
-				}
-				break;
+					int x=1;
+					while(x == 1)
+					{
+						System.out.println("Hi "+username+"! What do you want to do today");
+						System.out.println("1.Flight Search\n2.View Booking\n3.Booking Cancel\n4.Logout");
+						choice = dc.nextInt();
+						if(choice == 4)
+						{
+							username="";
+							x=0;
+						}
+						else if(choice == 1){
 
+							flightNo = service.caseFlightSearch();
+							if(!flightNo.isEmpty())
+							System.out.println("Booking Confirmed!");
+						}
+						else if(choice == 3)
+						{
+							System.out.println("Please give Booking id :");
+							bookingId = dc.next();
+							if(service.bookingCancel(bookingId,username)==1){
+								System.out.println("Booking Successfully cancel");
+							}
+						}
+						else{
+							System.out.println("Provide Valid Input");
+						}
+					}
+				}
+
+
+
+				break;
 			case 2:
-				System.out.println("Hello new User! Please provide Some information to create your account");
-				sc.nextLine();
-				do{
-					System.out.print("Username :");
-					user = sc.nextLine();
-					login.setUsername(user);
-					if(user.contains(" "))
-					{
-						System.out.println("Username will not contain any Spaces");
-					}
-					else if(service.usernameIsAvail(user) == 1){
-						System.out.println("Username Already Exist !! ");
-					}
-				}while(user.contains(" ") ||(service.usernameIsAvail(user) ==1) );
-				
-				long mobile = 0;
-				do{
-					System.out.print("mobile :");
-					mobile = sc.nextLong();
-					if(service.mobileIsAvail(mobile) ==1)
-					{
-						System.out.println("Mobile Number is already exist");
-					}
-				}while(service.mobileIsAvail(mobile) ==1);
-				login.setMobile(mobile);
-				
-                sc.nextLine();
-				System.out.print("Password :");
-				login.setPassword(sc.nextLine());
-				
-				login.setRole("customer");
-
-				service.signUp(login);
-				System.out.println("SignUp Success");
-
-				break;
-			case 4:
-				if(!username.isEmpty()){
-					username="";
-				System.out.println("you are Successfully log out");
-				}
-				else
-					System.out.println("Please provide valid input");
+				service.caseSignUp();
 				break;
 			default:
 				System.out.println("Please provide valid input");
 
 			}
-		}	
+			dc.close();
 
+	
 	}
 
 }

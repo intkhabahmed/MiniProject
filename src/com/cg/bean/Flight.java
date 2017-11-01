@@ -87,6 +87,7 @@ public class Flight {
 
 	@Override
 	public String toString() {
+
 		return "Flight \n[flightNo=" + flightNo + ", flightName=" + flightName
 				+ ", arrCity=" + arrCity + ", deptCity=" + deptCity
 				+ ", arrDate=" + arrDate + ", deptDate=" + deptDate
