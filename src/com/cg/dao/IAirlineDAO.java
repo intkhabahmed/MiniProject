@@ -17,4 +17,5 @@ public interface IAirlineDAO {
 	public int validLogin(LoginMaster login) throws AirlineException;
 	public int mobileIsAvail(long mobile) throws AirlineException;
 	public int usernameIsAvail(String username) throws AirlineException;
+	public String updateFlightInformation(String flightNo, String depCity,int choice) throws AirlineException;
 }
