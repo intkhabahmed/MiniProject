@@ -47,4 +47,11 @@ public class AirlineServiceImpl implements IAirlineService{
 		String status = dao.updateFlightInformation(oldFlightNo, newFlightNo);
 		return status;
 	}
+	
+	@Override
+	public void flightOccupancyDetails(String classType, String flightNo) throws AirlineException {
+		// TODO Auto-generated method stub
+		dao.flightOccupancyDetails(classType,flightNo);
+	}
+	
 }

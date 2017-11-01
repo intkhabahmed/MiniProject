@@ -323,5 +323,83 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		}
 		return status;
 	}
+	
+	
+	//for getting flight occupancy details
+	//public int []flightOccupancyDetails(String classType,String flightNo) throws AirlineException
+	public void flightOccupancyDetails(String classType,String flightNo) throws AirlineException
+	{
+		int a[]=new int[4];
+		ResultSet rs = null;
+		Statement st = null;
+		try
+		{
+			System.out.println("class type"+classType);
+			System.out.println("flight no"+flightNo);
+			int totalFirstSeats=0;
+			int totalBussSeats=0;
+			int bookedFirstSeats =0;
+			int bookedBussSeats = 0;
+			int nonOccupiedFirstSeats = 0;
+			int nonOccupiedBussSeats = 0;
+			
+			airlineConn = DBUtil.createConnection();
+			String sql1 = "select firstSeats from flightInformation where flightNo="+flightNo;
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql1);
+			while(rs.next())
+			{
+				totalFirstSeats = rs.getInt(1);
+			}
+			
+			String sql2 = "select bussSeats from flightInformation where flightNo="+flightNo;
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql2);
+			while(rs.next())
+			{
+				totalBussSeats = rs.getInt(1);
+			}
+			
+			String sql3 ="select sum(no_of_passengers) from Bookinginformation where class_type='first' and flightno="+flightNo+"group by class_type,flightno";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql3);
+			while(rs.next())
+			{
+					bookedFirstSeats= rs.getInt(1);
+			}
+			String sql4 ="select sum(no_of_passengers) from Bookinginformation where class_type='business' and flightno="+flightNo+"group by class_type,flightno";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql4);
+			
+			while(rs.next())
+			{
+				bookedBussSeats=rs.getInt(1);
+			}
+			
+			a[0] = totalFirstSeats;
+			a[1] = totalBussSeats;
+			a[2] = bookedFirstSeats;
+			a[3] = bookedBussSeats;
+			
+			
+			
+			nonOccupiedFirstSeats = totalFirstSeats-bookedFirstSeats;
+			nonOccupiedBussSeats = totalBussSeats-bookedBussSeats;
+			System.out.println("totalFirstSeats"+totalFirstSeats);
+			System.out.println("totalBussSeats "+totalBussSeats );
+			System.out.println("bookedFirstSeats"+bookedFirstSeats);
+			System.out.println("bookedBussSeats"+bookedBussSeats);
+			System.out.println("Total number of non occupied first seats"+nonOccupiedFirstSeats);
+			System.out.println("Total number of non occupied business seats"+nonOccupiedBussSeats);
+		
+		}
+		catch(Exception e)
+		{
+			throw new AirlineException("Cannot get number of seats",e);
+		}
+		//return a;
+		
+	}
+
 
 }
