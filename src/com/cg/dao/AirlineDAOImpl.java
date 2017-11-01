@@ -349,7 +349,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			int nonOccupiedBussSeats = 0;
 			
 			airlineConn = DBUtil.createConnection();
-			String sql1 = "select firstSeats from flightInformation where flightNo="+flightNo;
+			String sql1 = "select firstSeats from flightInformation where flightNo="+flightNo+"";
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql1);
 			while(rs.next())
@@ -357,7 +357,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				totalFirstSeats = rs.getInt(1);
 			}
 			
-			String sql2 = "select bussSeats from flightInformation where flightNo="+flightNo;
+			String sql2 = "select bussSeats from flightInformation where flightNo="+flightNo+"";
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql2);
 			while(rs.next())
@@ -365,14 +365,14 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				totalBussSeats = rs.getInt(1);
 			}
 			
-			String sql3 ="select sum(no_of_passengers) from Bookinginformation where class_type='first' and flightno="+flightNo+"group by class_type,flightno";
+			String sql3 ="select sum(no_of_passengers) from Bookinginformation group by class_type,flightno where class_type='first' and flightno="+flightNo+"";
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql3);
 			while(rs.next())
 			{
 					bookedFirstSeats= rs.getInt(1);
 			}
-			String sql4 ="select sum(no_of_passengers) from Bookinginformation where class_type='business' and flightno="+flightNo+"group by class_type,flightno";
+			String sql4 ="select sum(no_of_passengers) from Bookinginformation group by class_type,flightno where class_type='business' and flightno="+flightNo+"";
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql4);
 			
