@@ -91,6 +91,40 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return bookingList;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.cg.dao.IAirlineDAO#viewPassengersOfFlight(java.lang.String)
+	 * Method to retrieve passenger list of a particular flight
+	 */
+	@Override
+	public List<BookingInfo> viewPassengersOfFlight(String flightNo)
+			throws AirlineException {
+		List<BookingInfo> passengerList = new ArrayList<BookingInfo>();
+		ResultSet rs = null;
+		Statement st = null;
+		try{
+			airlineConn = DBUtil.createConnection();
+			String sql = "SELECT booking_id,cust_email FROM BookingInformation WHERE flightNo='"+flightNo+"'";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql);
+			while(rs.next()){
+				BookingInfo bookingInfo = new BookingInfo();
+				bookingInfo.setBookingId(rs.getString(1));
+				bookingInfo.setCustEmail(rs.getString(2));
+				passengerList.add(bookingInfo);
+			}
+		}catch(Exception e){
+			throw new AirlineException("Cannot retrieve booking details for the given flightNo-"+flightNo,e);
+		}finally{
+			try {
+				DBUtil.closeConnection();
+			} catch (SQLException e) {
+				throw new AirlineException("Cannot close database connection",e);
+			}
+		}
+		return passengerList;
+	}
+	
 	/* Method to update schedule of a particular flight*/
 	@Override
 	public String updateFlightSchedule(String flightNo, String newInput, int choice) throws AirlineException{
@@ -152,18 +186,39 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			return "Schedule updated for the flight number " + flightNo;
 	}
 	
-	public String updateFlightInformation(String oldFlightNo, String newFlightNo) throws AirlineException{
+	@Override
+	public String updateFlightInformation(String flightNo, String newInput, int choice) throws AirlineException{
+		
+		
 		Connection connFlight = null;
 		int status = 0;
 		
-		String sql = new String("Update Flightinformation Set Flightno =? where flightNo=?");
+		String sql1 = new String("Update Flightinformation Set dep_city =? where flightNo=?");
+		String sql2 = new String("Update Flightinformation Set arr_city =? where flightNo=?");
+		String sql3 = new String("Update Flightinformation Set firstseatfare =? where flightNo=?");
+		String sql4 = new String("Update Flightinformation Set BUSSSEATSFARE =? where flightNo=?");
 		PreparedStatement pstFlight = null;
 		
 		try{
 			connFlight = DBUtil.createConnection();
-			pstFlight = connFlight.prepareStatement(sql);
-			pstFlight.setString(1, oldFlightNo);
-			pstFlight.setString(2, newFlightNo);
+			if(choice==1){
+				pstFlight = connFlight.prepareStatement(sql1);
+				pstFlight.setString(1,newInput);
+			}
+			else if(choice==2){
+				pstFlight = connFlight.prepareStatement(sql2);
+				pstFlight.setString(1,newInput);
+			}
+			else if(choice==3){
+				pstFlight = connFlight.prepareStatement(sql3);
+				pstFlight.setDouble(1, Double.parseDouble(newInput) );
+			}
+			else if(choice==4){
+				pstFlight = connFlight.prepareStatement(sql4);
+				pstFlight.setDouble(1, Double.parseDouble(newInput) );
+			}
+			
+			pstFlight.setString(2, flightNo);
 			status = pstFlight.executeUpdate();
 		}catch(Exception e){
 			throw new AirlineException("Cannot update the table");
@@ -178,7 +233,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		if(status==0)
 			return "Flight Updation Failed";
 		else
-			return "Following changes made:\n Old Flight number: " + oldFlightNo + "\n New Flight Number: " + newFlightNo;
+			return "Following changes made";
 	}
 
 	@Override
@@ -295,6 +350,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		}
 		return status;
 	}
+<<<<<<< HEAD
 	@Override
 	public List<Flight> retrieveFlightList(String source, String destination) throws AirlineException {
 		List<Flight> flightList=new ArrayList<Flight>();
@@ -411,5 +467,85 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return status;
 
 	}
+=======
+	
+	
+	//for getting flight occupancy details
+	//public int []flightOccupancyDetails(String classType,String flightNo) throws AirlineException
+	public void flightOccupancyDetails(String classType,String flightNo) throws AirlineException
+	{
+		int a[]=new int[4];
+		ResultSet rs = null;
+		Statement st = null;
+		try
+		{
+			System.out.println("class type"+classType);
+			System.out.println("flight no"+flightNo);
+			int totalFirstSeats=0;
+			int totalBussSeats=0;
+			int bookedFirstSeats =0;
+			int bookedBussSeats = 0;
+			int nonOccupiedFirstSeats = 0;
+			int nonOccupiedBussSeats = 0;
+			
+			airlineConn = DBUtil.createConnection();
+			String sql1 = "select firstSeats from flightInformation where flightNo="+flightNo+"";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql1);
+			while(rs.next())
+			{
+				totalFirstSeats = rs.getInt(1);
+			}
+			
+			String sql2 = "select bussSeats from flightInformation where flightNo="+flightNo+"";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql2);
+			while(rs.next())
+			{
+				totalBussSeats = rs.getInt(1);
+			}
+			
+			String sql3 ="select sum(no_of_passengers) from Bookinginformation group by class_type,flightno where class_type='first' and flightno="+flightNo+"";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql3);
+			while(rs.next())
+			{
+					bookedFirstSeats= rs.getInt(1);
+			}
+			String sql4 ="select sum(no_of_passengers) from Bookinginformation group by class_type,flightno where class_type='business' and flightno="+flightNo+"";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql4);
+			
+			while(rs.next())
+			{
+				bookedBussSeats=rs.getInt(1);
+			}
+			
+			a[0] = totalFirstSeats;
+			a[1] = totalBussSeats;
+			a[2] = bookedFirstSeats;
+			a[3] = bookedBussSeats;
+			
+			
+			
+			nonOccupiedFirstSeats = totalFirstSeats-bookedFirstSeats;
+			nonOccupiedBussSeats = totalBussSeats-bookedBussSeats;
+			System.out.println("totalFirstSeats"+totalFirstSeats);
+			System.out.println("totalBussSeats "+totalBussSeats );
+			System.out.println("bookedFirstSeats"+bookedFirstSeats);
+			System.out.println("bookedBussSeats"+bookedBussSeats);
+			System.out.println("Total number of non occupied first seats"+nonOccupiedFirstSeats);
+			System.out.println("Total number of non occupied business seats"+nonOccupiedBussSeats);
+		
+		}
+		catch(Exception e)
+		{
+			throw new AirlineException("Cannot get number of seats",e);
+		}
+		//return a;
+		
+	}
+
+>>>>>>> c45b86bd90da8f5ef8fa2cb765f0750a0edaec2a
 
 }

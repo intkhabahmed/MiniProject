@@ -9,29 +9,49 @@ import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
 import com.cg.bean.LoginMaster;
 import com.cg.dao.AirlineDAOImpl;
+import com.cg.dao.IAirlineDAO;
 import com.cg.exception.AirlineException;
 
 public class AirlineServiceImpl implements IAirlineService{
 
+<<<<<<< HEAD
 	AirlineDAOImpl dao = new AirlineDAOImpl();
 	LoginMaster login = new LoginMaster();
+=======
+	IAirlineDAO dao;
+	
+	public AirlineServiceImpl() {
+		dao = new AirlineDAOImpl();
+	}
+>>>>>>> c45b86bd90da8f5ef8fa2cb765f0750a0edaec2a
 
+	@Override
 	public List<Flight> viewListOfFlights() throws AirlineException{
 		return dao.viewListOfFlights();
 	}
 	
+	@Override
 	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException{
 		return dao.viewBookingsOfFlight(null);
 	}
 	
+	@Override
+	public List<BookingInfo> viewPassengersOfFlight(String flightNo)
+			throws AirlineException {
+		return dao.viewPassengersOfFlight(flightNo);
+	}
+	
+	@Override
 	public int signUp(LoginMaster login) throws AirlineException{
 		return dao.signUp(login);
 	}
 	
+	@Override
 	public int validLogin(LoginMaster login) throws AirlineException{
 		return dao.validLogin(login);
 	}
 	
+	@Override
 	public int mobileIsAvail(long mobile) throws AirlineException{
 		return dao.mobileIsAvail(mobile);
 	}
@@ -39,6 +59,7 @@ public class AirlineServiceImpl implements IAirlineService{
 		return dao.emailIsAvail(email);
 	}
 	
+	@Override
 	public int usernameIsAvail(String username) throws AirlineException{
 		return dao.usernameIsAvail(username);
 	}
@@ -53,10 +74,11 @@ public class AirlineServiceImpl implements IAirlineService{
 	}
 	
 	@Override
-	public String updateFlightInformation(String oldFlightNo, String newFlightNo) throws AirlineException{
-		String status = dao.updateFlightInformation(oldFlightNo, newFlightNo);
+	public String updateFlightInformation(String oldFlightNo, String newFlightNo, int choice) throws AirlineException{
+		String status = dao.updateFlightInformation(oldFlightNo, newFlightNo, choice);
 		return status;
 	}
+<<<<<<< HEAD
 	@Override
 	public List<Flight>retrieveFlightList(String source, String destination) throws AirlineException{
 		return dao.retrieveFlightList(source,destination);
@@ -173,6 +195,14 @@ public class AirlineServiceImpl implements IAirlineService{
 		return dao.bookingCancel(bookingId,username);
 		
 	}
+=======
+	
+	@Override
+	public void flightOccupancyDetails(String classType, String flightNo) throws AirlineException {
+		dao.flightOccupancyDetails(classType,flightNo);
+	}
+
+>>>>>>> c45b86bd90da8f5ef8fa2cb765f0750a0edaec2a
 	
 	
 }
