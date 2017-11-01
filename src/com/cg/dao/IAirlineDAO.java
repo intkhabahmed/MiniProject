@@ -8,7 +8,8 @@ import com.cg.bean.LoginMaster;
 import com.cg.exception.AirlineException;
 
 public interface IAirlineDAO {
-	public List<Flight> viewListOfFlights() throws AirlineException;
+	public String getCityName(String abbreviation) throws AirlineException;
+	public List<Flight> viewListOfFlights(String query, String searchBasis) throws AirlineException;
 	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException;
 	public List<BookingInfo> viewPassengersOfFlight(String flightNo) throws AirlineException;
 	public String updateFlightSchedule(String flightNo, String dateInput, int choice) throws AirlineException;

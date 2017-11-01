@@ -3,8 +3,8 @@ package com.cg.bean;
 public class Flight {
 	private String flightNo;
 	private String flightName;
-	private String arrCity;
 	private String deptCity;
+	private String arrCity;
 	private String arrDate;
 	private String deptDate;
 	private String arrTime;
@@ -14,8 +14,8 @@ public class Flight {
 	private int bussSeats;
 	private double bussSeatsFare;
 	
-	public Flight(String flightNo, String flightName, String arrCity,
-			String deptCity, String arrDate, String deptDate, String arrTime,
+	public Flight(String flightNo, String flightName, String deptCity, String arrCity,
+			String arrDate, String deptDate, String arrTime,
 			String deptTime, int firstSeats, double firstSeatsFare,
 			int bussSeats, double bussSeatsFare) {
 		super();
@@ -89,7 +89,7 @@ public class Flight {
 	public String toString() {
 
 		return "Flight \n[flightNo=" + flightNo + ", flightName=" + flightName
-				+ ", arrCity=" + arrCity + ", deptCity=" + deptCity
+				+ ", deptCity=" + deptCity + ", arrCity=" + arrCity 
 				+ ", arrDate=" + arrDate + ", deptDate=" + deptDate
 				+ ", arrTime=" + arrTime + ", deptTime=" + deptTime
 				+ ", firstSeats=" + firstSeats + ", firstSeatsFare="

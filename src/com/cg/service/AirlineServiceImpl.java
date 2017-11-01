@@ -23,8 +23,14 @@ public class AirlineServiceImpl implements IAirlineService{
 	}
 
 	@Override
-	public List<Flight> viewListOfFlights() throws AirlineException{
-		return dao.viewListOfFlights();
+	public List<Flight> viewListOfFlights(String query, String searchBasis) throws AirlineException{
+		List<Flight> flights = dao.viewListOfFlights(query,searchBasis);
+		if(searchBasis.equals("dest") && flights.size()==0){
+			throw new AirlineException("No Flights found for the given destination: "+query);
+		}else if(searchBasis.equals("day") && flights.size()==0){
+			throw new AirlineException("No Flights found for the date: "+query);
+		}
+		return dao.viewListOfFlights(query,searchBasis);
 	}
 	
 	@Override
