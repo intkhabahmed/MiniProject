@@ -25,5 +25,7 @@ public interface IAirlineDAO {
 	int flightIsAvail(String source, String destination, String flightNo) throws AirlineException;
 	List<BookingInfo> viewBookingsOfFlightGivenUser(String username)
 			throws AirlineException;
+	int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
+			String creditCard) throws AirlineException;
 
 }

@@ -24,6 +24,7 @@ public interface IAirlineService {
 	public int bookingCancel(String bookingId, String username) throws AirlineException;
 	public String updateFlightInformation(String oldFlightNo, String newFlightNo, int choice) throws AirlineException;
 	public int flightOccupancyDetails(String classType,String flightNo) throws AirlineException;
-
+	int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
+			String creditCard) throws AirlineException;
 	void viewBookingsOfFlightGivenUser(String username) throws AirlineException;
 }

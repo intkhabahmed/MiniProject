@@ -390,14 +390,14 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	public List<Flight> retrieveFlightList(String source, String destination) throws AirlineException {
 		List<Flight> flightList=new ArrayList<Flight>();
 		Connection conn = null;
-		PreparedStatement pst = null;
+		Statement pst = null;
 		Flight flight =null;
 
 		String sql=new String("SELECT * FROM FlightInformation WHERE DEP_CITY='"+source+"' AND ARR_CITY='"+destination+"'");
 
 		try{
 			conn=DBUtil.createConnection();
-			pst = conn.prepareStatement(sql);
+			pst = conn.createStatement();
 			ResultSet rs=pst.executeQuery(sql);
 			while(rs.next())
 			{
@@ -501,6 +501,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				throw new AirlineException("Problems in Closing Connection",se);
 			}
 		}
+		System.out.println(status);
 		return status;
 
 	}
@@ -606,5 +607,47 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			}
 		}
 		return bookingList;
+	}
+	
+	@Override
+	public int bookingConfirm(String username,String flightNo,int noOfPassengers,String classType,String creditCard) throws AirlineException{
+		String depCity = null;
+		String arrCity = null;
+		double fare = 0 ;
+		int status =0;
+		Connection conn = null;
+		Statement st = null;
+		try{
+			conn = DBUtil.createConnection();;
+			String sql = "SELECT * FROM FLIGHTINFORMATION WHERE FLIGHTNO='"+flightNo+"'";
+			st = conn.createStatement();
+		ResultSet rs=st.executeQuery(sql);
+			while(rs.next()){
+				depCity = rs.getString(3);
+				arrCity = rs.getString(4);
+				fare =0;
+				if(classType.equalsIgnoreCase("firstclass")){
+					fare=rs.getDouble(10);
+				}else
+					fare=rs.getDouble(12);
+				fare*=noOfPassengers;
+			}
+		
+		String sql2 = "INSERT INTO BOOKINGINFORMATION VALUES(booking_id_seq.nextval,(SELECT cust_email FROM users WHERE username='"+username+"'),'"+noOfPassengers+"','"+classType+"',"+fare+",'"+creditCard+"','"+depCity+"','"+arrCity+"','"+flightNo+"')";
+		st = conn.createStatement();
+		status = st.executeUpdate(sql2);
+		
+		}catch(Exception e){
+			throw new AirlineException("Cannot retrieve booking details for the given user",e);
+		}finally{
+			try {
+				DBUtil.closeConnection();
+			} catch (SQLException e) {
+				throw new AirlineException("Cannot close database connection",e);
+			}
+		}
+		return status;
+		
+		
 	}
 }
