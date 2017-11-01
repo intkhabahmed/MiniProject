@@ -1,6 +1,5 @@
 package com.cg.dao;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.cg.bean.BookingInfo;
