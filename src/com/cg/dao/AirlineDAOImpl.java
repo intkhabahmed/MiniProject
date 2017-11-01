@@ -91,6 +91,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return bookingList;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.cg.dao.IAirlineDAO#viewPassengersOfFlight(java.lang.String)
+	 * Method to retrieve passenger list of a particular flight
+	 */
 	@Override
 	public List<BookingInfo> viewPassengersOfFlight(String flightNo)
 			throws AirlineException {
