@@ -10,8 +10,8 @@ import com.cg.exception.AirlineException;
 public interface IAirlineDAO {
 	public List<Flight> viewListOfFlights() throws AirlineException;
 	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException;
+	public List<BookingInfo> viewPassengersOfFlight(String flightNo) throws AirlineException;
 	public String updateFlightSchedule(String flightNo, String dateInput, int choice) throws AirlineException;
-
 	public int signUp(LoginMaster login) throws AirlineException;
 	public int validLogin(LoginMaster login) throws AirlineException;
 	public int mobileIsAvail(long mobile) throws AirlineException;

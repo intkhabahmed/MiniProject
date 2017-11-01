@@ -1,7 +1,6 @@
 package com.cg.dao;
 
 import java.sql.Connection;
-
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -90,6 +89,35 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			}
 		}
 		return bookingList;
+	}
+	
+	@Override
+	public List<BookingInfo> viewPassengersOfFlight(String flightNo)
+			throws AirlineException {
+		List<BookingInfo> passengerList = new ArrayList<BookingInfo>();
+		ResultSet rs = null;
+		Statement st = null;
+		try{
+			airlineConn = DBUtil.createConnection();
+			String sql = "SELECT booking_id,cust_email FROM BookingInformation WHERE flightNo='"+flightNo+"'";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql);
+			while(rs.next()){
+				BookingInfo bookingInfo = new BookingInfo();
+				bookingInfo.setBookingId(rs.getString(1));
+				bookingInfo.setCustEmail(rs.getString(2));
+				passengerList.add(bookingInfo);
+			}
+		}catch(Exception e){
+			throw new AirlineException("Cannot retrieve booking details for the given flightNo-"+flightNo,e);
+		}finally{
+			try {
+				DBUtil.closeConnection();
+			} catch (SQLException e) {
+				throw new AirlineException("Cannot close database connection",e);
+			}
+		}
+		return passengerList;
 	}
 	
 	/* Method to update schedule of a particular flight*/
