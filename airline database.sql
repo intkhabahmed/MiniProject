@@ -4,7 +4,8 @@ username varchar2(20) not null,
 cust_email varchar2(20), 
 password varchar2(20) not null, 
 role varchar2(10) not null,
-mobile_no number(10)
+mobile_no number(10),
+flightNo varchar2(5) references flightInformation(flightno)
 );
 
 Create table  Airport(
