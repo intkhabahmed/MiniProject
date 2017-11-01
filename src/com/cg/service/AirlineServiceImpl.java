@@ -60,8 +60,8 @@ public class AirlineServiceImpl implements IAirlineService{
 	}
 	
 	@Override
-	public String updateFlightInformation(String oldFlightNo, String newFlightNo) throws AirlineException{
-		String status = dao.updateFlightInformation(oldFlightNo, newFlightNo);
+	public String updateFlightInformation(String oldFlightNo, String newFlightNo, int choice) throws AirlineException{
+		String status = dao.updateFlightInformation(oldFlightNo, newFlightNo, choice);
 		return status;
 	}
 	

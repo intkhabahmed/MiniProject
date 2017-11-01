@@ -186,18 +186,39 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			return "Schedule updated for the flight number " + flightNo;
 	}
 	
-	public String updateFlightInformation(String oldFlightNo, String newFlightNo) throws AirlineException{
+	@Override
+	public String updateFlightInformation(String flightNo, String newInput, int choice) throws AirlineException{
+		
+		
 		Connection connFlight = null;
 		int status = 0;
 		
-		String sql = new String("Update Flightinformation Set Flightno =? where flightNo=?");
+		String sql1 = new String("Update Flightinformation Set dep_city =? where flightNo=?");
+		String sql2 = new String("Update Flightinformation Set arr_city =? where flightNo=?");
+		String sql3 = new String("Update Flightinformation Set firstseatfare =? where flightNo=?");
+		String sql4 = new String("Update Flightinformation Set BUSSSEATSFARE =? where flightNo=?");
 		PreparedStatement pstFlight = null;
 		
 		try{
 			connFlight = DBUtil.createConnection();
-			pstFlight = connFlight.prepareStatement(sql);
-			pstFlight.setString(1, oldFlightNo);
-			pstFlight.setString(2, newFlightNo);
+			if(choice==1){
+				pstFlight = connFlight.prepareStatement(sql1);
+				pstFlight.setString(1,newInput);
+			}
+			else if(choice==2){
+				pstFlight = connFlight.prepareStatement(sql2);
+				pstFlight.setString(1,newInput);
+			}
+			else if(choice==3){
+				pstFlight = connFlight.prepareStatement(sql3);
+				pstFlight.setDouble(1, Double.parseDouble(newInput) );
+			}
+			else if(choice==4){
+				pstFlight = connFlight.prepareStatement(sql4);
+				pstFlight.setDouble(1, Double.parseDouble(newInput) );
+			}
+			
+			pstFlight.setString(2, flightNo);
 			status = pstFlight.executeUpdate();
 		}catch(Exception e){
 			throw new AirlineException("Cannot update the table");
@@ -212,7 +233,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		if(status==0)
 			return "Flight Updation Failed";
 		else
-			return "Following changes made:\n Old Flight number: " + oldFlightNo + "\n New Flight Number: " + newFlightNo;
+			return "Following changes made";
 	}
 
 	@Override

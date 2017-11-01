@@ -17,7 +17,11 @@ public interface IAirlineService {
 	public int mobileIsAvail(long mobile) throws AirlineException;
 	public int usernameIsAvail(String username) throws AirlineException;
 	public String updateFlightSchedule(String flightNo, String newInput, int choice) throws AirlineException;
-	public String updateFlightInformation(String oldFlightNo, String newFlightNo) throws AirlineException;
+
+
+	public String updateFlightInformation(String oldFlightNo, String newFlightNo, int choice) throws AirlineException;
+
 	public void flightOccupancyDetails(String classType,String flightNo) throws AirlineException;
+
 
 }
