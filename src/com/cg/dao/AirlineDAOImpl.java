@@ -82,8 +82,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				flightList.add(flights);
 			}
 		}catch(Exception e){
-			//throw new AirlineException("Cannot retrieve flight details",e);
-			e.printStackTrace();
+			throw new AirlineException("Cannot retrieve flight details",e);
 		}finally{
 			try {
 				DBUtil.closeConnection();
