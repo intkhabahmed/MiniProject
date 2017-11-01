@@ -350,7 +350,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		}
 		return status;
 	}
-<<<<<<< HEAD
+
 	@Override
 	public List<Flight> retrieveFlightList(String source, String destination) throws AirlineException {
 		List<Flight> flightList=new ArrayList<Flight>();
@@ -412,6 +412,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return status;
 	}
 
+	@Override
 	public int emailIsAvail(String email) throws AirlineException {
 		int status = 0;
 		Connection connBook = null;
@@ -440,6 +441,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 
 	}
 	
+	@Override
 	public int flightIsAvail(String source,String destination,String flightNo) throws AirlineException {
 		int status = 0;
 		Connection connBook = null;
@@ -467,7 +469,6 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return status;
 
 	}
-=======
 	
 	
 	//for getting flight occupancy details
@@ -545,7 +546,5 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		//return a;
 		
 	}
-
->>>>>>> c45b86bd90da8f5ef8fa2cb765f0750a0edaec2a
 
 }
