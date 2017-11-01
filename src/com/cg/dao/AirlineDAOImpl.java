@@ -23,19 +23,54 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	}
 	private Connection airlineConn = null;
 
+	
+	/*
+	 * Method to get the city name for the given abbreviation
+	 */
+	@Override
+	public String getCityName(String abbreviation) throws AirlineException {
+		ResultSet rs = null;
+		Statement st = null;
+		String cityName = "";
+		try{
+			airlineConn = DBUtil.createConnection();
+			String sql = "SELECT location FROM Airport WHERE abbreviation='"+abbreviation+"'";
+			st = airlineConn.createStatement();
+			rs = st.executeQuery(sql);
+			if(rs.next()){
+				cityName = rs.getString(1);
+			}
+		}catch(Exception e){
+			throw new AirlineException("Cannot retrieve cityName");
+		}finally{
+			try {
+				DBUtil.closeConnection();
+			} catch (SQLException e) {
+				throw new AirlineException("Cannot close database connection",e);
+			}
+		}
+		return cityName;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.cg.dao.IAirlineDAO#viewListOfFlights()
 	 * Method for retrieving all flight details
 	 */
 	@Override
-	public List<Flight> viewListOfFlights() throws AirlineException {
+	public List<Flight> viewListOfFlights(String query, String searchBasis) throws AirlineException {
 		List<Flight> flightList = new ArrayList<Flight>();
 		ResultSet rs = null;
 		Statement st = null;
+		String sql="";
 		try{
 			airlineConn = DBUtil.createConnection();
-			String sql = "SELECT * FROM FlightInformation";
+			if(searchBasis.equals("dest")){
+				sql = "SELECT * FROM FlightInformation WHERE arr_city='"+query+"'";
+			}else if(searchBasis.equals("day")){
+				sql = "SELECT * FROM FlightInformation WHERE dep_date=to_date('"+query+"','yyyy-mm-dd')";
+			}
+			
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql);
 			while(rs.next()){
@@ -47,7 +82,8 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				flightList.add(flights);
 			}
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve flight details",e);
+			//throw new AirlineException("Cannot retrieve flight details",e);
+			e.printStackTrace();
 		}finally{
 			try {
 				DBUtil.closeConnection();

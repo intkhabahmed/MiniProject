@@ -9,7 +9,7 @@ import com.cg.exception.AirlineException;
 
 public interface IAirlineService {
 	
-	public List<Flight> viewListOfFlights() throws AirlineException;
+	public List<Flight> viewListOfFlights(String query, String searchBasis) throws AirlineException;
 	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException;
 	public List<BookingInfo> viewPassengersOfFlight(String flightNo) throws AirlineException;
 	public int signUp(LoginMaster login) throws AirlineException;
