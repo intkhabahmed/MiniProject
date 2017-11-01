@@ -84,6 +84,17 @@ public class Flight {
 	public double getBussSeatsFare() {
 		return bussSeatsFare;
 	}
+
+	@Override
+	public String toString() {
+		return "Flight \n[flightNo=" + flightNo + ", flightName=" + flightName
+				+ ", arrCity=" + arrCity + ", deptCity=" + deptCity
+				+ ", arrDate=" + arrDate + ", deptDate=" + deptDate
+				+ ", arrTime=" + arrTime + ", deptTime=" + deptTime
+				+ ", firstSeats=" + firstSeats + ", firstSeatsFare="
+				+ firstSeatsFare + ", bussSeats=" + bussSeats
+				+ ", bussSeatsFare=" + bussSeatsFare + "]";
+	}
 	
 	
 	

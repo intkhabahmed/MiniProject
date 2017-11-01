@@ -5,7 +5,7 @@ cust_email varchar2(20),
 password varchar2(20) not null, 
 role varchar2(10) not null,
 mobile_no number(10),
-flightNo varchar2(5) references flightInformation(flightno)
+flightNo varchar2(10) references flightInformation(flightno)
 );
 
 Create table  Airport(
@@ -17,14 +17,14 @@ Location varchar2(40) not null
 
 Create table FlightInformation(
 flightno varchar2(10) primary key, 
-airline varchar2(10), 
+airline varchar2(20), 
 dep_city varchar2(10), 
 arr_city varchar2(10), 
 dep_date date, 
 arr_date date, 
-dep_time varchar2(5), 
-arr_time varchar2(5), 
-FirstSeats number(5), 
+dep_time varchar2(10), 
+arr_time varchar2(10), 
+FirstSeats number(10), 
 FirstSeatFare number(10,2), 
 BussSeats number, 
 BussSeatsFare number(10,2)
@@ -41,5 +41,5 @@ total_fare number(10,2),
 CreditCard_info varchar2(10), 
 src_city varchar2(10), 
 dest_city varchar2(10),
-flightNo varchar2(5) references flightInformation(flightno)
+flightNo varchar2(10) references flightInformation(flightno)
 );
