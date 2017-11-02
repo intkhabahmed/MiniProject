@@ -6,14 +6,16 @@ password varchar2(20) not null,
 role varchar2(10) not null,
 mobile_no number(10),
 flightNo varchar2(10) references flightInformation(flightno)
-);
+)
+/
 
 Create table  Airport(
 AirportId number(11) primary key,
 AirportName varchar2(20) not null, 
 Abbreviation varchar2(5) not null,
 Location varchar2(40) not null
-);
+)
+/
 
 Create table FlightInformation(
 flightno varchar2(10) primary key, 
@@ -28,7 +30,8 @@ FirstSeats number(10),
 FirstSeatFare number(10,2), 
 BussSeats number, 
 BussSeatsFare number(10,2)
-);
+)
+/
 
 
 
@@ -42,4 +45,5 @@ CreditCard_info varchar2(10),
 src_city varchar2(10), 
 dest_city varchar2(10),
 flightNo varchar2(10) references flightInformation(flightno)
-);
+)
+/

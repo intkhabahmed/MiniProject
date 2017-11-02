@@ -542,14 +542,14 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				totalBussSeats = rs.getInt(1);
 			}
 			
-			String sql3 ="select sum(no_of_passengers) from Bookinginformation group by class_type,flightno where class_type='first' and flightno="+flightNo+"";
+			String sql3 ="select sum(no_of_passengers) from Bookinginformation group by class_type,flightno having class_type='first' and flightno='"+flightNo+"'";
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql3);
 			while(rs.next())
 			{
 					bookedFirstSeats= rs.getInt(1);
 			}
-			String sql4 ="select sum(no_of_passengers) from Bookinginformation group by class_type,flightno where class_type='business' and flightno="+flightNo+"";
+			String sql4 ="select sum(no_of_passengers) from Bookinginformation group by class_type,flightno having class_type='business' and flightno='"+flightNo+"'";
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql4);
 			
@@ -577,7 +577,8 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		}
 		catch(Exception e)
 		{
-			throw new AirlineException("Cannot get number of seats",e);
+			e.printStackTrace();
+			//throw new AirlineException("Cannot get number of seats",e);
 		}
 		return a;
 	}
