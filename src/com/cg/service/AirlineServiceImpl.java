@@ -76,16 +76,11 @@ public class AirlineServiceImpl implements IAirlineService{
 		String status = dao.updateFlightInformation(oldFlightNo, newFlightNo, choice);
 		return status;
 	}
-
-	@Override
-	public List<Flight>retrieveFlightList(String source, String destination) throws AirlineException{
-		return dao.retrieveFlightList(source,destination);
-	}
 	
 	
 	@Override
 	public String caseLogin() throws AirlineException{
-		try(Scanner sc = new Scanner(System.in)){
+		Scanner sc = new Scanner(System.in);
 			System.out.print("Username :");
 			String username = sc.next();
 			login.setUsername(username);
@@ -99,12 +94,11 @@ public class AirlineServiceImpl implements IAirlineService{
 				return login.getUsername();
 			}
 			return "";
-		}
 	}
 	
 	@Override
 	public void caseSignUp() throws AirlineException {
-		try(Scanner sc = new Scanner(System.in)){
+		Scanner sc = new Scanner(System.in);
 			System.out.println("Hello new User! Please provide Some information to create your account");
 			
 			String user;
@@ -162,13 +156,12 @@ public class AirlineServiceImpl implements IAirlineService{
 			}
 			else
 			System.out.println("Some error occured during signup!");
-		}
 		
 	}
 	
 	@Override 
 	public String caseFlightSearch() throws AirlineException{
-		try(Scanner sc = new Scanner(System.in)){
+		Scanner sc = new Scanner(System.in);
 			int flag;
 			do{
 				flag=0;
@@ -204,7 +197,6 @@ public class AirlineServiceImpl implements IAirlineService{
 				return "";
 				
 			}while(flag==1);
-		}
 		
 	}
 	@Override
