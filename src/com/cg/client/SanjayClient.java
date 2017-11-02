@@ -49,14 +49,14 @@ public class SanjayClient {
 				{
 					System.out.println("No of passengers");
 					int no_of_passengers = dc.nextInt();
-					System.out.println("Class :firstClass or BussinessClass");
+					System.out.println("Enter Class type: first or bussiness");
 					String classType = dc.next();
 
 					if(service.flightOccupancyDetails(classType, flightNo) >= no_of_passengers){
-						System.out.println("Credit card Number");
+						System.out.println("Enter Credit Card Number: ");
 						String creditCard = dc.next();
 						if(service.bookingConfirm(username, flightNo, no_of_passengers, classType, creditCard)==1)
-						System.out.println("Booking Confirmed! for Flight No"+flightNo);
+						System.out.println("Booking Confirmed! for Flight No-"+flightNo);
 					}
 					else
 						System.out.println("No seat available");

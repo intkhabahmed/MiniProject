@@ -7,7 +7,6 @@ public class User {
 	private String email;
 	private long mobileNo;
 	private String role;
-	private String flightNo;
 	
 	public User(){
 		System.out.println("Empty constructor is called");
@@ -71,13 +70,5 @@ public class User {
 		this.userId = userId;
 	}
 
-	public String getFlightNo() {
-		return flightNo;
-	}
-
-	public void setFlightNo(String flightNo) {
-		this.flightNo = flightNo;
-	}
-	
 	
 }

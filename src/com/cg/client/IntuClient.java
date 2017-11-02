@@ -12,9 +12,9 @@ public class IntuClient {
 		try {
 			System.out.println(service.viewListOfFlights("BLR","dest"));
 			System.out.println("****************************");
-			System.out.println(service.viewBookingsOfFlight(""));
+			System.out.println(service.viewBookingsOfFlight("9W-617"));
 			System.out.println("****************************");
-			System.out.println(service.viewPassengersOfFlight(""));
+			System.out.println(service.viewPassengersOfFlight("9W-617"));
 		} catch (AirlineException e) {
 			System.out.println(e.getMessage());
 		}
