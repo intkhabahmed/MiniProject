@@ -71,7 +71,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				sql = "SELECT * FROM FlightInformation WHERE dep_date=to_date('"+query+"','yyyy-mm-dd')";
 			}else if(searchBasis.equals("route")){
 				String route[] = query.split("-");
-				sql = "SELECT * FROM FlightInformation WHERE dep_city='"+route[0]+"' AND arr_city='"+route[1]+"'";
+				sql = "SELECT * FROM FlightInformation WHERE dep_city=lower('"+route[0]+"') AND arr_city=lower('"+route[1]+"')";
 			}
 			
 			st = airlineConn.createStatement();
@@ -461,14 +461,19 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				totalBussSeats = rs.getInt(1);
 			}
 			
+
 			String sql3 ="select sum(no_of_passengers) from Bookinginformation where class_type='first' and flightno='"+flightNo+"' group by class_type,flightno";
+
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql3);
 			while(rs.next())
 			{
 					bookedFirstSeats= rs.getInt(1);
 			}
+
 			String sql4 ="select sum(no_of_passengers) from Bookinginformation where class_type='business' and flightno='"+flightNo+"' group by class_type,flightno";
+
+
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql4);
 			
@@ -496,7 +501,8 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		}
 		catch(Exception e)
 		{
-			throw new AirlineException("Cannot get number of seats",e);
+			e.printStackTrace();
+			//throw new AirlineException("Cannot get number of seats",e);
 		}
 		return a;
 	}

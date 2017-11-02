@@ -9,8 +9,8 @@ mobile_no number(10)
 
 Create table  Airport(
 AirportId number(11) primary key,
-AirportName varchar2(20) not null, 
-Abbreviation varchar2(5) not null,
+AirportName varchar2(50) not null, 
+Abbreviation varchar2(6) not null,
 Location varchar2(40) not null
 );
 

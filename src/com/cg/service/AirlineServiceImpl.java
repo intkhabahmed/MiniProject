@@ -183,22 +183,23 @@ public class AirlineServiceImpl implements IAirlineService{
 					flag=1;
 					System.out.println("Sorry! No Flights between the given cities, Try Again");
 				}
-				
-				List<Flight> flights = dao.viewListOfFlights(source+"-"+destination, "route");
-				System.out.println(flights);
-				if(flights.isEmpty()){
-					System.out.println("Sorry! No flight avail for this route, Try Again");
-					flag=1;
-				}
 				else{
-				System.out.println("Flight Number For booking :");
-				String flightNo = sc.next();
-				if(flightIsAvail(source, destination, flightNo) == 1){
-				return flightNo;
-				}
-				else{
-					return "";
-				}
+					List<Flight> flights = dao.viewListOfFlights(source+"-"+destination, "route");
+					System.out.println(flights);
+					if(flights.isEmpty()){
+						System.out.println("Sorry! No flight avail for this route, Try Again");
+						flag=1;
+					}
+					else{
+					System.out.println("Flight Number For booking :");
+					String flightNo = sc.next();
+					if(flightIsAvail(source, destination, flightNo) == 1){
+					return flightNo;
+					}
+					else{
+						return "";
+					}
+					}
 				}
 				return "";
 				
