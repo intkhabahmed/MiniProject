@@ -1,0 +1,6 @@
+insert into airport values('Lohegaon Airport','PNQ','PUNE');
+insert into airport values('CHHATRAPATI SHIVAJI AIRPORT','BOM','MUMBAI');
+insert into airport values('CHENNAI INTERNATIONAL AIRPORT','MAA','CHENNAI');
+insert into airport values('INDRA GANDHI INTERNATIONAL AIRPORT','DEL','DELHI');
+insert into airport values('NETAJI SUBHAS CHANDRA AIRPORT','CCU','KOLKATA');
+insert into airport values('BENGALURU IINTERNATIONAL AIRPORT','BLR','BANGALORE');
