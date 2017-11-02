@@ -164,11 +164,9 @@ public class AirlineServiceImpl implements IAirlineService{
 	public String caseFlightSearch() throws AirlineException{
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Source :");
-		String source = null;
-			 source  = sc.next();
+		String source = sc.next();
 		System.out.print("Destination :");
-		String destination = null;
-			destination = sc.next();
+		String destination = sc.next();
 		
 		ArrayList<Flight> list = (ArrayList<Flight>) retrieveFlightList(source, destination);
 		Iterator<Flight> flightIt=list.iterator();
@@ -179,6 +177,7 @@ public class AirlineServiceImpl implements IAirlineService{
 		}
 		if(list.isEmpty()){
 			System.out.println("Sorry! No flight avail for this route");
+			//System.out.println(list);
 		}
 		else{
 		System.out.println("Flight Number For booking :");
@@ -223,6 +222,10 @@ public class AirlineServiceImpl implements IAirlineService{
 		}
 	}
 
+	@Override
+	public int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,String creditCard) throws AirlineException{
+	return dao.bookingConfirm(username, flightno, noOfPassengers, classType, creditCard);
+	}
 	
 	
 }

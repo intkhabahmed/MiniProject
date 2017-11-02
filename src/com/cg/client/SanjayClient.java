@@ -32,7 +32,8 @@ public class SanjayClient {
 			switch(choice){
 			case 3:
 				flightNo = service.caseFlightSearch();
-
+				if(!flightNo.isEmpty())
+				{
 				System.out.println("Please login or Signup");
 				System.out.println("1.Login\n2.Signup");
 				choice = dc.nextInt();
@@ -44,7 +45,7 @@ public class SanjayClient {
 					System.out.println("Please login");
 					username = service.caseLogin();
 				}
-				if(!username.isEmpty() && !flightNo.isEmpty())
+				if(!username.isEmpty())
 				{
 					System.out.println("No of passengers");
 					int no_of_passengers = dc.nextInt();
@@ -52,11 +53,17 @@ public class SanjayClient {
 					String classType = dc.next();
 
 					if(service.flightOccupancyDetails(classType, flightNo) >= no_of_passengers){
+						System.out.println("Credit card Number");
+						String creditCard = dc.next();
+						if(service.bookingConfirm(username, flightNo, no_of_passengers, classType, creditCard)==1)
 						System.out.println("Booking Confirmed! for Flight No"+flightNo);
 					}
 					else
 						System.out.println("No seat available");
 				}
+				}
+				else
+					System.out.println("Flight number is invalid");
 				break;
 			case 1:
 				username = service.caseLogin();
@@ -83,13 +90,19 @@ public class SanjayClient {
 								int no_of_passengers = dc.nextInt();
 								System.out.println("Class :firstClass or BussinessClass");
 								String classType = dc.next();
-
-								if(service.flightOccupancyDetails(classType, flightNo) >= no_of_passengers){
+								int pass =service.flightOccupancyDetails(classType, flightNo);
+								//System.out.println(pass);
+								if(pass >= no_of_passengers){
+									System.out.println("Credit card Number");
+									String creditCard = dc.next();
+									if(service.bookingConfirm(username, flightNo, no_of_passengers, classType, creditCard)==1)
 									System.out.println("Booking Confirmed! for Flight No"+flightNo);
 								}
 								else
 									System.out.println("No seat available");
 							}
+							else
+								System.out.println("Flight number is invalid!");
 						}
 						else if(choice == 3)
 						{
