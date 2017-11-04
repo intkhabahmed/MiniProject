@@ -73,6 +73,8 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			}else if(searchBasis.equals("route")){
 				String route[] = query.split("-");
 				sql = "SELECT * FROM FlightInformation WHERE dep_city='"+route[0]+"' AND arr_city='"+route[1]+"'";
+			}else if(searchBasis.equals("flightNo")){
+				sql = "SELECT * FROM FlightInformation WHERE flightNo='"+query+"'";
 			}
 			
 			st = airlineConn.createStatement();
@@ -322,7 +324,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			pstBook.setLong(5, login.getMobile());
 			status = pstBook.executeUpdate();
 		}catch(SQLException se){
-			throw new AirlineException("Record not inserted",se);
+			throw new AirlineException("Record could not be inserted",se);
 		}finally{
 			try{
 				DBUtil.closeConnection();
@@ -385,14 +387,17 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				throw new AirlineException("Problems in Closing Connection",se);
 			}
 		}
-		System.out.println(status);
+		
 		return status;
 
 	}
 	
 	
-	//for getting flight occupancy details
-	//public int []flightOccupancyDetails(String classType,String flightNo) throws AirlineException
+	/*
+	 * (non-Javadoc)
+	 * @see com.cg.dao.IAirlineDAO#flightOccupancyDetails(java.lang.String, java.lang.String)
+	 * for getting flight occupancy details
+	 */
 	public int[] flightOccupancyDetails(String classType,String flightNo) throws AirlineException
 	{
 		int seats[]=new int[4];
