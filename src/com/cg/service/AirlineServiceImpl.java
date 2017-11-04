@@ -48,7 +48,7 @@ public class AirlineServiceImpl implements IAirlineService{
 	}
 	
 	@Override
-	public int validLogin(LoginMaster login) throws AirlineException{
+	public String validLogin(LoginMaster login) throws AirlineException{
 		return dao.validLogin(login);
 	}
 	
@@ -64,7 +64,6 @@ public class AirlineServiceImpl implements IAirlineService{
 		return status;
 	}
 	
-
 	@Override
 	public int bookingCancel(String bookingId, String username) throws AirlineException {
 		return dao.bookingCancel(bookingId,username);

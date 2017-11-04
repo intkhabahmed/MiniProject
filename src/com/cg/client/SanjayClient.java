@@ -2,6 +2,7 @@ package com.cg.client;
 
 
 
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class SanjayClient {
 	public static void main(String[] args) throws AirlineException {
 
 		Scanner sc =new Scanner(System.in);
+
 		int choice = 0;
 		String username = "";
 		String password = "";
@@ -286,7 +288,7 @@ public class SanjayClient {
 						password = sc.nextLine();
 						login.setPassword(password);
 						login.setRole("customer");
-						if(service.validLogin(login) ==0)
+						if(!service.validLogin(login).equalsIgnoreCase("customer"))
 						{
 							System.out.println("Invalid Username/Password, Try Again");
 						}else{
@@ -299,7 +301,7 @@ public class SanjayClient {
 								continue;
 							}
 						}
-					}while(service.validLogin(login) ==0);	
+					}while(!service.validLogin(login).equalsIgnoreCase("customer"));	
 					break;
 				case 8:
 					System.out.println("Hi user! What do you want to do today");

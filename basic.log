@@ -1,0 +1,5 @@
+2017-11-04 13:01:17,624 INFO [com.cg.dao.AirlineDAOImpl] - Flight Information of following flight number updated: 10N
+2017-11-04 13:02:58,130 INFO [com.cg.dao.AirlineDAOImpl] - Flight Information of following flight number updated: 10N
+2017-11-04 13:04:37,800 ERROR [com.cg.dao.AirlineDAOImpl] - ORA-01858: a non-numeric character was found where a numeric was expected
+
+2017-11-04 14:24:37,115 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: 10N
