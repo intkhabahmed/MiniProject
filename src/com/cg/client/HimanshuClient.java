@@ -52,7 +52,9 @@ public class HimanshuClient {
 		if(choiceForUpdation==1){
 			System.out.println("Enter the new Arrival City");
 			String newInput=sc.next();
+			System.out.println("hi");
 			System.out.println(service.updateFlightInformation(flightNumber,newInput,1 ));
+			System.out.println("ho");
 		}
 		else if(choiceForUpdation==2){
 			System.out.println("Enter the new Departure City");

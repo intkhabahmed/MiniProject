@@ -1,13 +1,10 @@
 package com.cg.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -176,12 +173,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	public String updateFlightSchedule(String flightNo, String newInput, int choice) throws AirlineException{
 		Connection connFlight = null;
 		int status = 0;
-		Date newDate = null;
 		
-
-		DateTimeFormatter frmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate ld = LocalDate.parse(newInput, frmt);
-		Date dt = Date.valueOf(ld);
 		
 		PreparedStatement pstFlight = null;
 		try{
@@ -189,13 +181,13 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			if(choice==1){
 				String sql = new String("Update Flightinformation Set arr_Date =? where flightNo=?");
 				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setDate(1, dt);
-				pstFlight.setString(1,flightNo);
+				pstFlight.setString(1,"to_date('newInput','yyyy-MM-dd')");
+				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==2){
 				String sql = new String("Update Flightinformation Set Dep_Date =? where flightNo=?");
 				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setDate(1, newDate);
+				pstFlight.setString(1, "to_date('newInput','yyyy-MM-dd')");
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==3){
