@@ -1,6 +1,7 @@
 package com.cg.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -191,13 +192,15 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			if(choice==1){
 				String sql = new String("Update Flightinformation Set arr_Date =? where flightNo=?");
 				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setString(1,"to_date('newInput','yyyy-MM-dd')");
+				Date d = Date.valueOf(newInput);
+				pstFlight.setDate(1, d);
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==2){
 				String sql = new String("Update Flightinformation Set Dep_Date =? where flightNo=?");
 				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setString(1, "to_date('newInput','yyyy-MM-dd')");
+				Date d = Date.valueOf(newInput);
+				pstFlight.setDate(1, d);
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==3){

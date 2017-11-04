@@ -3,6 +3,7 @@ package com.cg.service;
 import java.io.Console;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
@@ -229,4 +230,25 @@ public class AirlineServiceImpl implements IAirlineService{
 	}
 	
 	
+	@Override
+	public int checkTimeFormat(String newInput){
+		String validTime = "[0-9]{2}[:]{1}[0-9]{2}";
+		
+		if(Pattern.matches(validTime, newInput)){
+			return 1;
+		}else{
+			return 2;
+		}
+	}
+	
+	@Override
+	public int checkDateFormat(String newInput){
+		String validDate = "[20]{2}[0-9]{2}[-]{1}[0-9]{1,2}[-]{1}[0-9]{1,2}";
+		
+		if(Pattern.matches(validDate, newInput)){
+			return 1;
+		}else{
+			return 2;
+		}
+	}
 }

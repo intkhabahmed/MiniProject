@@ -3,3 +3,30 @@
 2017-11-04 13:04:37,800 ERROR [com.cg.dao.AirlineDAOImpl] - ORA-01858: a non-numeric character was found where a numeric was expected
 
 2017-11-04 14:24:37,115 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: 10N
+2017-11-04 15:49:26,104 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 15:49:26,119 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 15:49:43,518 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 15:49:43,534 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 15:49:48,534 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: 10N
+2017-11-04 15:55:50,218 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 15:55:50,249 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:27:56,892 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:27:56,924 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:30:54,503 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:30:54,519 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:31:27,665 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:31:27,696 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:31:49,368 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: 10N
+2017-11-04 16:37:33,781 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:37:33,797 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:37:45,971 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: 10N
+2017-11-04 16:39:49,465 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:39:49,496 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:39:59,221 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: 10N
+2017-11-04 16:43:27,946 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:43:27,977 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:44:41,284 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:44:41,315 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:44:59,478 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:44:59,494 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-04 16:45:14,448 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: 10N

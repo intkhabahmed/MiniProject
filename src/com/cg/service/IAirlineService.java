@@ -25,4 +25,6 @@ public interface IAirlineService {
 	int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
 			String creditCard) throws AirlineException;
 	public int checkAvailability(String query, String type) throws AirlineException;
+	public int checkTimeFormat(String newInput);
+	public int checkDateFormat(String newInput);
 }

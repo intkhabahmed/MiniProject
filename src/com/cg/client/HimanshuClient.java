@@ -3,6 +3,7 @@ package com.cg.client;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.cg.bean.Flight;
 import com.cg.exception.AirlineException;
@@ -38,23 +39,60 @@ public class HimanshuClient {
 				
 				if(choiceForUpdation==1){
 					System.out.println("Enter the New Arrival Date in YYYY-MM-DD format");
-					String newInput = sc.next();
-					System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+					boolean b = true;
+					while(b==true){
+						String newInput = sc.next();
+						if(service.checkDateFormat(newInput)==1){
+							System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+							b =false;
+						}else{
+							System.out.println("Please enter in YYYY-MM-DD format");
+						}
+					}
 				}
 				else if(choiceForUpdation==2){
 					System.out.println("Enter the New Departure Date in YYYY-MM-DD format");
-					String newInput = sc.next();
-					System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+					boolean b = true;
+					while(b==true){
+						String newInput = sc.next();
+						if(service.checkDateFormat(newInput)==1){
+							System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+							b =false;
+						}else{
+							System.out.println("Please enter in YYYY-MM-DD format");
+						}
+					}
 				}
 				else if(choiceForUpdation==3){
 					System.out.println("Enter the New Arrival Time in HH:MM format");
-					String newInput = sc.next();
-					System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+					
+					
+					boolean b = true;
+					while(b==true){
+						String newInput = sc.next();
+						if(service.checkTimeFormat(newInput)==1){
+							System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+							b=false;
+						}
+						else{
+							System.out.println("Please enter in HH:MM format");
+						}
+					}
 				}
 				else if(choiceForUpdation==4){
 					System.out.println("Enter the New Departure Time in HH:MM format");
-					String newInput = sc.next();
-					System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+					
+					boolean b = true;
+					while(b==true){
+						String newInput = sc.next();
+						if(service.checkTimeFormat(newInput)==1){
+							System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+							b=false;
+						}
+						else{
+							System.out.println("Please enter in HH:MM format");
+						}
+					}
 				}
 			}
 			else{
