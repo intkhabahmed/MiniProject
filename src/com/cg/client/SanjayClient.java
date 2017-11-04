@@ -2,8 +2,10 @@ package com.cg.client;
 
 
 
+import java.util.List;
 import java.util.Scanner;
 
+import com.cg.bean.BookingInfo;
 import com.cg.bean.LoginMaster;
 import com.cg.exception.AirlineException;
 import com.cg.service.AirlineServiceImpl;
@@ -88,15 +90,23 @@ public class SanjayClient {
 							{
 								System.out.println("No of passengers");
 								int no_of_passengers = dc.nextInt();
-								System.out.println("Class :firstClass or BussinessClass");
+								System.out.println("Enter Class Type:first or Bussiness");
 								String classType = dc.next();
 								int pass =service.flightOccupancyDetails(classType, flightNo);
 								//System.out.println(pass);
 								if(pass >= no_of_passengers){
-									System.out.println("Credit card Number");
-									String creditCard = dc.next();
-									if(service.bookingConfirm(username, flightNo, no_of_passengers, classType, creditCard)==1)
-									System.out.println("Booking Confirmed! for Flight No"+flightNo);
+									String creditCard="";
+									do{
+										System.out.println("Credit card Number");
+										creditCard = dc.next();
+										if(!creditCard.matches("[0-9]{10}")){
+											System.out.println("Credit card should have only 10 digits, Try again!");
+										}else{
+											if(service.bookingConfirm(username, flightNo, no_of_passengers, classType, creditCard)==1)
+											System.out.println("Booking Confirmed! for Flight No"+flightNo);
+										}
+									}while(!creditCard.matches("[0-9]{10}"));
+									
 								}
 								else
 									System.out.println("No seat available");
@@ -114,7 +124,12 @@ public class SanjayClient {
 						}
 						else if(choice == 2)
 						{
-							service.viewBookingsOfFlightGivenUser(username);
+							List<BookingInfo> bookings = service.viewBookings(username,"byUser");
+							if(bookings.isEmpty()){
+								System.out.println("Sorry! No Flight Booking done by you.");
+							}else{
+								System.out.println(bookings);
+							}
 						}
 						else{
 							System.out.println("Provide Valid Input");

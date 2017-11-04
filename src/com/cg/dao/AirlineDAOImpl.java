@@ -102,13 +102,18 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * Method to see booking details of a particular flight
 	 */
 	@Override
-	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException {
+	public List<BookingInfo> viewBookings(String query, String searchBasis) throws AirlineException {
 		List<BookingInfo> bookingList = new ArrayList<BookingInfo>();
 		ResultSet rs = null;
 		Statement st = null;
+		String sql="";
 		try{
 			airlineConn = DBUtil.createConnection();
-			String sql = "SELECT * FROM BookingInformation WHERE flightNo='"+flightNo+"'";
+			if(searchBasis.equals("byFlight")){
+				sql = "SELECT * FROM BookingInformation WHERE flightNo='"+query+"'";
+			}else if(searchBasis.equals("byUser")){
+				sql = "SELECT * FROM BookingInformation WHERE cust_email=(SELECT cust_email FROM users WHERE username='"+query+"')";
+			}
 			st = airlineConn.createStatement();
 			rs = st.executeQuery(sql);
 			while(rs.next()){
@@ -118,7 +123,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				bookingList.add(bookingInfo);
 			}
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve booking details for the given flightNo-"+flightNo,e);
+			throw new AirlineException("Cannot retrieve booking details for the given query",e);
 		}finally{
 			try {
 				DBUtil.closeConnection();
@@ -394,108 +399,57 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	//public int []flightOccupancyDetails(String classType,String flightNo) throws AirlineException
 	public int[] flightOccupancyDetails(String classType,String flightNo) throws AirlineException
 	{
-		int a[]=new int[4];
+		int seats[]=new int[4];
 		ResultSet rs = null;
 		Statement st = null;
+		String sql="";
 		try
 		{
-			System.out.println("class type"+classType);
-			System.out.println("flight no"+flightNo);
-			int totalFirstSeats=0;
-			int totalBussSeats=0;
-			int bookedFirstSeats =0;
-			int bookedBussSeats = 0;
-			int nonOccupiedFirstSeats = 0;
-			int nonOccupiedBussSeats = 0;
 			
 			airlineConn = DBUtil.createConnection();
-			String sql1 = "select firstSeats from flightInformation where flightNo='"+flightNo+"'";
+			sql = "select firstSeats from flightInformation where flightNo='"+flightNo+"'";
 			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql1);
-			while(rs.next())
+			rs = st.executeQuery(sql);
+			if(rs.next())
 			{
-				totalFirstSeats = rs.getInt(1);
+				seats[0] = rs.getInt(1);
 			}
 			
-			String sql2 = "select bussSeats from flightInformation where flightNo='"+flightNo+"'";
+			sql = "select bussSeats from flightInformation where flightNo='"+flightNo+"'";
 			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql2);
-			while(rs.next())
+			rs = st.executeQuery(sql);
+			if(rs.next())
 			{
-				totalBussSeats = rs.getInt(1);
+				seats[1] = rs.getInt(1);
 			}
 			
 
-			String sql3 ="select sum(no_of_passengers) from Bookinginformation where class_type='first' and flightno='"+flightNo+"' group by class_type,flightno";
+			sql ="select sum(no_of_passengers) from Bookinginformation where class_type='first' and flightno='"+flightNo+"' group by class_type,flightno";
 
 			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql3);
-			while(rs.next())
+			rs = st.executeQuery(sql);
+			if(rs.next())
 			{
-					bookedFirstSeats= rs.getInt(1);
+					seats[2]= rs.getInt(1);
 			}
 
-			String sql4 ="select sum(no_of_passengers) from Bookinginformation where class_type='business' and flightno='"+flightNo+"' group by class_type,flightno";
+			sql ="select sum(no_of_passengers) from Bookinginformation where class_type='business' and flightno='"+flightNo+"' group by class_type,flightno";
 
 
 			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql4);
+			rs = st.executeQuery(sql);
 			
-			while(rs.next())
+			if(rs.next())
 			{
-				bookedBussSeats=rs.getInt(1);
+				seats[3]=rs.getInt(1);
 			}
-			
-			a[0] = totalFirstSeats;
-			a[1] = totalBussSeats;
-			a[2] = bookedFirstSeats;
-			a[3] = bookedBussSeats;
-			
-			
-			
-			nonOccupiedFirstSeats = totalFirstSeats-bookedFirstSeats;
-			nonOccupiedBussSeats = totalBussSeats-bookedBussSeats;
-			System.out.println("totalFirstSeats"+totalFirstSeats);
-			System.out.println("totalBussSeats "+totalBussSeats );
-			System.out.println("bookedFirstSeats"+bookedFirstSeats);
-			System.out.println("bookedBussSeats"+bookedBussSeats);
-			System.out.println("Total number of non occupied first seats"+nonOccupiedFirstSeats);
-			System.out.println("Total number of non occupied business seats"+nonOccupiedBussSeats);
 		
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			//throw new AirlineException("Cannot get number of seats",e);
+			throw new AirlineException("Cannot get number of seats",e);
 		}
-		return a;
-	}
-	@Override
-	public List<BookingInfo> viewBookingsOfFlightGivenUser(String username) throws AirlineException {
-		List<BookingInfo> bookingList = new ArrayList<BookingInfo>();
-		ResultSet rs = null;
-		Statement st = null;
-		try{
-			airlineConn = DBUtil.createConnection();
-			String sql = "SELECT * FROM BookingInformation WHERE cust_email=(SELECT cust_email FROM users WHERE username='"+username+"')";
-			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql);
-			while(rs.next()){
-				BookingInfo bookingInfo = new BookingInfo(rs.getString(1),rs.getString(2),rs.getInt(3),
-						rs.getString(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),
-						rs.getString(8),rs.getString(9));
-				bookingList.add(bookingInfo);
-			}
-		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve booking details for the given user",e);
-		}finally{
-			try {
-				DBUtil.closeConnection();
-			} catch (SQLException e) {
-				throw new AirlineException("Cannot close database connection",e);
-			}
-		}
-		return bookingList;
+		return seats;
 	}
 	
 	@Override
@@ -515,7 +469,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				depCity = rs.getString(3);
 				arrCity = rs.getString(4);
 				fare =0;
-				if(classType.equalsIgnoreCase("firstclass")){
+				if(classType.equalsIgnoreCase("first")){
 					fare=rs.getDouble(10);
 				}else
 					fare=rs.getDouble(12);

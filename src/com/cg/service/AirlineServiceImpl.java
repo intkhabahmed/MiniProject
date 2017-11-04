@@ -1,7 +1,5 @@
 package com.cg.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,8 +38,8 @@ public class AirlineServiceImpl implements IAirlineService{
 	}
 	
 	@Override
-	public List<BookingInfo> viewBookingsOfFlight(String flightNo) throws AirlineException{
-		return dao.viewBookingsOfFlight(flightNo);
+	public List<BookingInfo> viewBookings(String query, String searchBasis) throws AirlineException{
+		return dao.viewBookings(query, searchBasis);
 	}
 	
 	@Override
@@ -214,20 +212,6 @@ public class AirlineServiceImpl implements IAirlineService{
 			return (seats[1]-seats[3]);
 		}else{
 			return -1;
-		}
-	}
-	
-	@Override
-	public void viewBookingsOfFlightGivenUser(String username) throws AirlineException{
-		ArrayList<BookingInfo> list = (ArrayList<BookingInfo>) dao.viewBookingsOfFlightGivenUser(username);
-		Iterator<BookingInfo> bookingIt=list.iterator();
-		while(bookingIt.hasNext())
-		{
-			BookingInfo bookingInfo = bookingIt.next();
-			System.out.println(bookingInfo);
-		}
-		if(list.isEmpty()){
-			System.out.println("Sorry! No flight Booking done by you.");
 		}
 	}
 
