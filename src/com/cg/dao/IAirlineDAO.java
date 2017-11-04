@@ -17,8 +17,7 @@ public interface IAirlineDAO {
 	public int validLogin(LoginMaster login) throws AirlineException;
 	public int bookingCancel(String bookingId, String username) throws AirlineException;
 	public String updateFlightInformation(String flightNo, String depCity,int choice) throws AirlineException;
-    public int[] flightOccupancyDetails(String classType,String flightNo) throws AirlineException;
-	public int flightIsAvail(String source, String destination, String flightNo) throws AirlineException;
+    public int[] flightOccupancyDetails(String flightNo) throws AirlineException;
 	public int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
 			String creditCard) throws AirlineException;
 	public int checkAvailability(String query, String type) throws AirlineException;

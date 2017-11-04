@@ -16,12 +16,9 @@ public interface IAirlineService {
 	public int signUp(LoginMaster login) throws AirlineException;
 	public int validLogin(LoginMaster login) throws AirlineException;
 	public String updateFlightSchedule(String flightNo, String newInput, int choice) throws AirlineException;
-	public String caseLogin() throws AirlineException;
-	public void caseSignUp() throws AirlineException;
-	public String caseFlightSearch() throws AirlineException;
 	public int bookingCancel(String bookingId, String username) throws AirlineException;
 	public String updateFlightInformation(String oldFlightNo, String newFlightNo, int choice) throws AirlineException;
-	public int flightOccupancyDetails(String classType,String flightNo) throws AirlineException;
+	public int[] flightOccupancyDetails(String flightNo) throws AirlineException;
 	int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
 			String creditCard) throws AirlineException;
 	public int checkAvailability(String query, String type) throws AirlineException;
