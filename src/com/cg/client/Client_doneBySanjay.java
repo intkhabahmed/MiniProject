@@ -170,6 +170,9 @@ public class Client_doneBySanjay {
 					}
 					}while(x==1);
 				}
+				else if(role.equalsIgnoreCase("admin")){
+					System.out.println("Hi "+username+" ! have a good day!");
+				}
 				else
 				{
 					System.out.println("Wrong Credentials!");
