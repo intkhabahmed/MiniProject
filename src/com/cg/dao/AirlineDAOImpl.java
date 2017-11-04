@@ -1,13 +1,10 @@
 package com.cg.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +70,8 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			}else if(searchBasis.equals("route")){
 				String route[] = query.split("-");
 				sql = "SELECT * FROM FlightInformation WHERE dep_city='"+route[0]+"' AND arr_city='"+route[1]+"'";
+			}else if(searchBasis.equals("flightNo")){
+				sql = "SELECT * FROM FlightInformation WHERE flightNo='"+query+"'";
 			}
 			
 			st = airlineConn.createStatement();
@@ -174,12 +173,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	public String updateFlightSchedule(String flightNo, String newInput, int choice) throws AirlineException{
 		Connection connFlight = null;
 		int status = 0;
-		Date newDate = null;
 		
-
-		DateTimeFormatter frmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate ld = LocalDate.parse(newInput, frmt);
-		Date dt = Date.valueOf(ld);
 		
 		PreparedStatement pstFlight = null;
 		try{
@@ -187,13 +181,13 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			if(choice==1){
 				String sql = new String("Update Flightinformation Set arr_Date =? where flightNo=?");
 				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setDate(1, dt);
-				pstFlight.setString(1,flightNo);
+				pstFlight.setString(1,"to_date('newInput','yyyy-MM-dd')");
+				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==2){
 				String sql = new String("Update Flightinformation Set Dep_Date =? where flightNo=?");
 				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setDate(1, newDate);
+				pstFlight.setString(1, "to_date('newInput','yyyy-MM-dd')");
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==3){
@@ -323,7 +317,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			pstBook.setLong(5, login.getMobile());
 			status = pstBook.executeUpdate();
 		}catch(SQLException se){
-			throw new AirlineException("Record not inserted",se);
+			throw new AirlineException("Record could not be inserted",se);
 		}finally{
 			try{
 				DBUtil.closeConnection();
@@ -386,14 +380,17 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				throw new AirlineException("Problems in Closing Connection",se);
 			}
 		}
-		System.out.println(status);
+		
 		return status;
 
 	}
 	
 	
-	//for getting flight occupancy details
-	//public int []flightOccupancyDetails(String classType,String flightNo) throws AirlineException
+	/*
+	 * (non-Javadoc)
+	 * @see com.cg.dao.IAirlineDAO#flightOccupancyDetails(java.lang.String, java.lang.String)
+	 * for getting flight occupancy details
+	 */
 	public int[] flightOccupancyDetails(String classType,String flightNo) throws AirlineException
 	{
 		int seats[]=new int[4];
