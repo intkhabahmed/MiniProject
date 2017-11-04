@@ -282,11 +282,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	}
 	
 	@Override
-	public int validLogin(LoginMaster login) throws AirlineException{
-		int status = 0;
+	public String validLogin(LoginMaster login) throws AirlineException{
+		String status = null;
 		Connection connBook = null;
 		Statement pstBook = null;
-		String sql=new String("Select count(username) from users where username='"+login.getUsername()+"' AND password='"+login.getPassword()+"' AND role='"+login.getRole()+"'");
+		String sql=new String("Select role from users where username='"+login.getUsername()+"' AND password='"+login.getPassword()+"'");
 
 		try{
 			connBook=DBUtil.createConnection();
@@ -294,7 +294,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			ResultSet rset  = pstBook.executeQuery(sql);
 			if(rset.next())
 			{
-				status = rset.getInt(1);
+				status = rset.getString(1);
 			}
 			logger.info("Following user logged in: " + login.getUsername());
 		}catch(SQLException se){
@@ -308,6 +308,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				throw new AirlineException("Problems in Closing Connection",se);
 			}
 		}
+	//	System.out.println(status);
 		return status;
 
 	}

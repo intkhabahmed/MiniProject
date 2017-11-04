@@ -1,5 +1,6 @@
 package com.cg.service;
 
+import java.io.Console;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,7 +55,7 @@ public class AirlineServiceImpl implements IAirlineService{
 	}
 	
 	@Override
-	public int validLogin(LoginMaster login) throws AirlineException{
+	public String validLogin(LoginMaster login) throws AirlineException{
 		return dao.validLogin(login);
 	}
 	
@@ -79,6 +80,7 @@ public class AirlineServiceImpl implements IAirlineService{
 	@Override
 	public String caseLogin() throws AirlineException{
 		Scanner sc = new Scanner(System.in);
+		  
 			System.out.print("Username :");
 			String username = sc.next();
 			login.setUsername(username);
@@ -86,12 +88,12 @@ public class AirlineServiceImpl implements IAirlineService{
 			System.out.print("Password :");
 			String password = sc.nextLine();
 			login.setPassword(password);
-			login.setRole("customer");
-			if(validLogin(login) !=0)
+			login.setRole(validLogin(login));
+			if(!(validLogin(login) == null))
 			{
-				return login.getUsername();
+				return (login.getUsername()+"-"+login.getRole());
 			}
-			return "";
+			return "%-%";
 	}
 	
 	@Override
