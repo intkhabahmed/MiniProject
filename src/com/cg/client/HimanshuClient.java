@@ -3,7 +3,6 @@ package com.cg.client;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import com.cg.bean.Flight;
 import com.cg.exception.AirlineException;
