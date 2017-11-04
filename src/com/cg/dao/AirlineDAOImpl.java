@@ -1,15 +1,14 @@
 package com.cg.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
@@ -18,7 +17,7 @@ import com.cg.exception.AirlineException;
 import com.cg.utility.DBUtil;
 
 public class AirlineDAOImpl implements IAirlineDAO {
-
+	private static Logger logger = Logger.getLogger(com.cg.dao.AirlineDAOImpl.class);
 	public AirlineDAOImpl() {
 		
 	}
@@ -41,7 +40,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			if(rs.next()){
 				abbr = rs.getString(1);
 			}
+			logger.info("Abbreviation was retrieved for the following City Name: " + cityName);
 		}catch(Exception e){
+			logger.error("Failed to retrieve abbreviation:" + e.getMessage());
 			throw new AirlineException("Cannot retrieve Abbreviation for given city");
 		}finally{
 			try {
@@ -73,6 +74,8 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			}else if(searchBasis.equals("route")){
 				String route[] = query.split("-");
 				sql = "SELECT * FROM FlightInformation WHERE dep_city='"+route[0]+"' AND arr_city='"+route[1]+"'";
+			}else if(searchBasis.equals("flightNo")){
+				sql = "SELECT * FROM FlightInformation WHERE flightNo='"+query+"'";
 			}
 			
 			st = airlineConn.createStatement();
@@ -85,7 +88,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 						rs.getDouble(12));
 				flightList.add(flights);
 			}
+			logger.info("List of flights retrieved");
 		}catch(Exception e){
+			logger.error("Failed to retrieve list of flights:" + e.getMessage());
 			throw new AirlineException("Cannot retrieve flight details",e);
 		}finally{
 			try {
@@ -123,7 +128,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 						rs.getString(8),rs.getString(9));
 				bookingList.add(bookingInfo);
 			}
+			logger.info("Booking information retrieved");
 		}catch(Exception e){
+			logger.error("Failed to retrieve booking information:" + e.getMessage());
 			throw new AirlineException("Cannot retrieve booking details for the given query",e);
 		}finally{
 			try {
@@ -157,7 +164,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				bookingInfo.setCustEmail(rs.getString(2));
 				passengerList.add(bookingInfo);
 			}
+			logger.info("List Passsengers of following was retrieved: " + flightNo);
 		}catch(Exception e){
+			logger.error("Failed to retrieve passengers list of: " + flightNo+ " with following error " + e.getMessage());
 			throw new AirlineException("Cannot retrieve booking details for the given flightNo-"+flightNo,e);
 		}finally{
 			try {
@@ -204,7 +213,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				pstFlight.setString(2,flightNo);
 			}
 			status = pstFlight.executeUpdate();
+			logger.info("Flight Schedule of following flight number updated: " + flightNo);
 		}catch(Exception e){
+			logger.error("Flight Schedule Updation falied with following error message: " + e.getMessage());
 			throw new AirlineException("Cannot update the table");
 		}finally{
 			try {
@@ -222,8 +233,6 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	
 	@Override
 	public String updateFlightInformation(String flightNo, String newInput, int choice) throws AirlineException{
-		
-		
 		Connection connFlight = null;
 		int status = 0;
 		
@@ -254,7 +263,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			
 			pstFlight.setString(2, flightNo);
 			status = pstFlight.executeUpdate();
+			logger.info("Flight Information of following flight number updated: " + flightNo);
 		}catch(Exception e){
+			logger.error("Flight Schedule Updation falied with following error message: " + e.getMessage());
 			throw new AirlineException("Cannot update the table");
 		}finally{
 			try {
@@ -267,7 +278,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		if(status==0)
 			return "Flight Updation Failed";
 		else
-			return "Following changes made";
+			return "Information Updated for the flight number " + flightNo;
 	}
 	
 	@Override
@@ -285,7 +296,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			{
 				status = rset.getInt(1);
 			}
+			logger.info("Following user logged in: " + login.getUsername());
 		}catch(SQLException se){
+			logger.error("Login failed with user name: "+ login.getUsername()+ " " + se.getMessage());
 			throw new AirlineException("Record not inserted",se);
 		}finally{
 			try{
@@ -316,8 +329,10 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			pstBook.setString(4, login.getRole());
 			pstBook.setLong(5, login.getMobile());
 			status = pstBook.executeUpdate();
+			logger.info(login.getRole() + " registered with following username " + login.getUsername());
 		}catch(SQLException se){
-			throw new AirlineException("Record not inserted",se);
+			logger.error("Signup failed for username: " +login.getUsername());
+			throw new AirlineException("Record could not be inserted",se);
 		}finally{
 			try{
 				DBUtil.closeConnection();
@@ -341,7 +356,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			connBook=DBUtil.createConnection();
 			pstBook = connBook.prepareStatement(sql);
 			status = pstBook.executeUpdate();
+			logger.info("Booking done with following booking id:" + bookingId );
 		}catch(SQLException se){
+			logger.error("Booking failed");
 			throw new AirlineException("Problem in cancel",se);
 		}finally{
 			try{
@@ -370,7 +387,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			{
 				status = rset.getInt(1);
 			}
+			logger.info("Flight availability checked for " + flightNo + " from " + source + " to " + destination);
 		}catch(SQLException se){
+			logger.error("Flight availability checking failed");
 			throw new AirlineException("Error in flight validation",se);
 		}finally{
 			try{
@@ -380,14 +399,17 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				throw new AirlineException("Problems in Closing Connection",se);
 			}
 		}
-		System.out.println(status);
+		
 		return status;
 
 	}
 	
 	
-	//for getting flight occupancy details
-	//public int []flightOccupancyDetails(String classType,String flightNo) throws AirlineException
+	/*
+	 * (non-Javadoc)
+	 * @see com.cg.dao.IAirlineDAO#flightOccupancyDetails(java.lang.String, java.lang.String)
+	 * for getting flight occupancy details
+	 */
 	public int[] flightOccupancyDetails(String classType,String flightNo) throws AirlineException
 	{
 		int seats[]=new int[4];
@@ -434,10 +456,10 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			{
 				seats[3]=rs.getInt(1);
 			}
-		
+			logger.info("Flight occupany details checked for " + flightNo);
 		}
-		catch(Exception e)
-		{
+		catch(Exception e){
+			logger.error("Flight occupancy details checking failed");
 			throw new AirlineException("Cannot get number of seats",e);
 		}
 		return seats;
@@ -470,8 +492,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		String sql2 = "INSERT INTO BOOKINGINFORMATION VALUES(booking_id_seq.nextval,(SELECT cust_email FROM users WHERE username='"+username+"'),'"+noOfPassengers+"','"+classType+"',"+fare+",'"+creditCard+"','"+depCity+"','"+arrCity+"','"+flightNo+"')";
 		st = conn.createStatement();
 		status = st.executeUpdate(sql2);
-		
+		logger.info(username + "booked the tickets");
 		}catch(Exception e){
+			logger.error("Booking failed");
 			throw new AirlineException("Cannot retrieve booking details for the given user",e);
 		}finally{
 			try {
@@ -505,7 +528,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			{
 				status = rset.getInt(1);
 			}
+			logger.info("Availability checked");
 		}catch(SQLException se){
+			logger.error("Availability checking  failed");
 			throw new AirlineException("Record not inserted",se);
 		}finally{
 			try{
