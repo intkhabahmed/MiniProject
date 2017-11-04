@@ -2,6 +2,7 @@ package com.cg.client;
 
 
 
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class SanjayClient {
 	public static void main(String[] args) throws AirlineException {
 
 		Scanner dc =new Scanner(System.in);
+		 
 		int choice = 0;
 		String username = null;
 		String password = null;

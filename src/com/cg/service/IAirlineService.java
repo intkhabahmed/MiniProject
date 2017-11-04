@@ -14,7 +14,7 @@ public interface IAirlineService {
 	public List<BookingInfo> viewBookings(String query, String searchBasis) throws AirlineException;
 	public List<BookingInfo> viewPassengersOfFlight(String flightNo) throws AirlineException;
 	public int signUp(LoginMaster login) throws AirlineException;
-	public int validLogin(LoginMaster login) throws AirlineException;
+	public String validLogin(LoginMaster login) throws AirlineException;
 	public String updateFlightSchedule(String flightNo, String newInput, int choice) throws AirlineException;
 	public String caseLogin() throws AirlineException;
 	public void caseSignUp() throws AirlineException;
