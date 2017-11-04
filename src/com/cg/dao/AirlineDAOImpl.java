@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -175,40 +176,35 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		int status = 0;
 		Date newDate = null;
 		
-		if(choice==1 || choice==2){
-			String[] str = newInput.split("-");
-			int year = Integer.parseInt(str[0]);
-			int month = Integer.parseInt(str[1]);
-			int date = Integer.parseInt(str[2]);
-			LocalDate takeDate = LocalDate.of(year, month, date);
-			newDate = Date.valueOf(takeDate);
-		}
+
+		DateTimeFormatter frmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate ld = LocalDate.parse(newInput, frmt);
+		Date dt = Date.valueOf(ld);
 		
-		
-		String sql1 = new String("Update Flightinformation Set Arr_Date =? where flightNo=?");
-		String sql2 = new String("Update Flightinformation Set Dep_Date =? where flightNo=?");
-		String sql3 = new String("Update Flightinformation Set Arr_time =? where flightNo=?");
-		String sql4 = new String("Update Flightinformation Set Dep_time =? where flightNo=?");
 		PreparedStatement pstFlight = null;
 		try{
 			connFlight = DBUtil.createConnection();
 			if(choice==1){
-				pstFlight = connFlight.prepareStatement(sql1);
-				pstFlight.setDate(1, newDate);
-				pstFlight.setString(2,flightNo);
+				String sql = new String("Update Flightinformation Set arr_Date =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
+				pstFlight.setDate(1, dt);
+				pstFlight.setString(1,flightNo);
 			}
 			else if(choice==2){
-				pstFlight = connFlight.prepareStatement(sql2);
+				String sql = new String("Update Flightinformation Set Dep_Date =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setDate(1, newDate);
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==3){
-				pstFlight = connFlight.prepareStatement(sql3);
+				String sql = new String("Update Flightinformation Set Arr_time =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1, newInput);
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==4){
-				pstFlight = connFlight.prepareStatement(sql4);
+				String sql = new String("Update Flightinformation Set Dep_time =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1, newInput);
 				pstFlight.setString(2,flightNo);
 			}
