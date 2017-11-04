@@ -294,7 +294,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	
 	@Override
 	public String validLogin(LoginMaster login) throws AirlineException{
-		String status = null;
+		String status = "";
 		Connection connBook = null;
 		Statement pstBook = null;
 		String sql=new String("Select role from users where username='"+login.getUsername()+"' AND password='"+login.getPassword()+"'");

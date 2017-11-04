@@ -13,9 +13,9 @@ import com.cg.exception.AirlineException;
 import com.cg.service.AirlineServiceImpl;
 
 
-public class SanjayClient {
+public class CustomerClient {
 
-	public static void main(String[] args) throws AirlineException {
+	public void customerPortal() throws AirlineException {
 
 		Scanner sc =new Scanner(System.in);
 
@@ -33,7 +33,7 @@ public class SanjayClient {
 			
 			if(choice==0){
 				System.out.println("Hi user! What do you want to do today");
-				System.out.println("1.LogIn\n2.SignUp\n3.Flight Search");
+				System.out.println("1.LogIn\n2.SignUp\n3.Flight Search\n-1.Exit");
 				choice = sc.nextInt();
 			}
 			int z=1;
@@ -45,7 +45,7 @@ public class SanjayClient {
 					if(!username.isEmpty())
 					{
 						int x=1;
-						while(x == 1)
+						exitCondition:while(x == 1)
 						{
 							System.out.println("Hi "+username+"! What do you want to do today");
 							System.out.println("1.Flight Search\n2.View Booking\n3.Booking Cancel\n4.Logout");
@@ -69,16 +69,24 @@ public class SanjayClient {
 							else if(option == 3)
 							{
 								int status=0;
+								int exitChoice=0;
 								do{
 									System.out.println("Please give Booking id :");
 									bookingId = sc.next();
 									status = service.bookingCancel(bookingId,username);
+									
 									if(status==1){
 										System.out.println("Your Flight Booking is Successfully cancelled");
 									}else{
 										System.out.println("Sorry! Booking Id is invalid, Try again");
+										System.out.println("Enter 1 to go to previous menu and 0 to re-enter bookingId");
+										exitChoice = sc.nextInt();
+										if(exitChoice==1){
+											break exitCondition;
+										}
+										
 									}
-								}while(status==0);
+								}while(status==0 || exitChoice==0);
 							}
 							else if(option == 2)
 							{
@@ -279,6 +287,7 @@ public class SanjayClient {
 					break;
 					
 				case 1://Login case
+					String loginValidation="";
 					do{
 						System.out.print("Enter Username :");
 						username = sc.next();
@@ -287,18 +296,19 @@ public class SanjayClient {
 						System.out.print("Enter Password :");
 						password = sc.nextLine();
 						login.setPassword(password);
-						login.setRole("customer");
-						if(!service.validLogin(login).equalsIgnoreCase("customer"))
+						loginValidation = service.validLogin(login);
+						if(loginValidation.equalsIgnoreCase(""))
 						{
 							System.out.println("Invalid Username/Password, Try Again");
 						}else{
 							if(!flightNo.isEmpty()){
-								choice = 5;
-								continue;
+									choice = 5;
+									continue;
+								
 							}else{
-								//choice = 1;
-								choice = 7;
-								continue;
+									choice = 7;
+									continue;
+								
 							}
 						}
 					}while(!service.validLogin(login).equalsIgnoreCase("customer"));	
@@ -321,6 +331,10 @@ public class SanjayClient {
 						break;
 					}
 					continue;
+				case -1:
+					System.out.println("Thankyou for using MyAirlines, Have a nice Day!");
+					System.exit(0);
+					break;
 				default:
 					System.out.println("Please provide valid choice");
 					break;

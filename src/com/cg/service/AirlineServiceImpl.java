@@ -1,10 +1,8 @@
 package com.cg.service;
 
+import java.time.LocalDate;
 import java.util.List;
-
-import java.util.Scanner;
 import java.util.regex.Pattern;
-
 
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
@@ -108,7 +106,7 @@ public class AirlineServiceImpl implements IAirlineService{
 	public int checkDateFormat(String newInput){
 		String validDate = "[20]{2}[0-9]{2}[-]{1}[0-9]{1,2}[-]{1}[0-9]{1,2}";
 		
-		if(Pattern.matches(validDate, newInput)){
+		if(Pattern.matches(validDate, newInput) && LocalDate.parse(newInput).compareTo(LocalDate.now())==-1){
 			return 1;
 		}else{
 			return 2;
