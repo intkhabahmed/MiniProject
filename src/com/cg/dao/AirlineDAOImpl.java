@@ -217,7 +217,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		if(status==0)
 			return "Flight Updation Failed";
 		else
-			return "Schedule updated for the flight number " + flightNo;
+			return "Schedule Updated for the flight number " + flightNo;
 	}
 	
 	@Override
@@ -227,28 +227,28 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		Connection connFlight = null;
 		int status = 0;
 		
-		String sql1 = new String("Update Flightinformation Set dep_city =? where flightNo=?");
-		String sql2 = new String("Update Flightinformation Set arr_city =? where flightNo=?");
-		String sql3 = new String("Update Flightinformation Set firstseatfare =? where flightNo=?");
-		String sql4 = new String("Update Flightinformation Set BUSSSEATSFARE =? where flightNo=?");
 		PreparedStatement pstFlight = null;
 		
 		try{
 			connFlight = DBUtil.createConnection();
 			if(choice==1){
-				pstFlight = connFlight.prepareStatement(sql1);
+				String sql = new String("Update Flightinformation Set arr_city =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1,newInput);
 			}
 			else if(choice==2){
-				pstFlight = connFlight.prepareStatement(sql2);
+				String sql = new String("Update Flightinformation Set dep_city =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1,newInput);
 			}
 			else if(choice==3){
-				pstFlight = connFlight.prepareStatement(sql3);
+				String sql = new String("Update Flightinformation Set firstseatfare =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setDouble(1, Double.parseDouble(newInput) );
 			}
 			else if(choice==4){
-				pstFlight = connFlight.prepareStatement(sql4);
+				String sql = new String("Update Flightinformation Set BUSSSEATSFARE =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setDouble(1, Double.parseDouble(newInput) );
 			}
 			

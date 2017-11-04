@@ -42,7 +42,8 @@ public class HimanshuClient {
 			System.out.println(service.updateFlightSchedule(flightNumber, newInput, choiceForUpdation));
 		}
 		*/
-	
+		System.out.println("Hello Admin");
+		System.out.println("Following flights are available");
 		System.out.println("Enter the flight number for which you want change the information");
 		String flightNumber = sc.next();
 		System.out.println("What do you want to change");
@@ -52,9 +53,7 @@ public class HimanshuClient {
 		if(choiceForUpdation==1){
 			System.out.println("Enter the new Arrival City");
 			String newInput=sc.next();
-			System.out.println("hi");
 			System.out.println(service.updateFlightInformation(flightNumber,newInput,1 ));
-			System.out.println("ho");
 		}
 		else if(choiceForUpdation==2){
 			System.out.println("Enter the new Departure City");
