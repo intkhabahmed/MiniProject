@@ -22,7 +22,7 @@ public class prashansaClient {
 		System.out.println("Enter flight no");
 		String flightNo=s.next();
 		
-		ias.flightOccupancyDetails(classType,flightNo);
+		ias.flightOccupancyDetails(flightNo);
 	}
 
 }

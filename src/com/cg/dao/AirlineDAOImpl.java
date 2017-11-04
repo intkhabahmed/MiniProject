@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
 import com.cg.bean.LoginMaster;
@@ -15,7 +17,7 @@ import com.cg.exception.AirlineException;
 import com.cg.utility.DBUtil;
 
 public class AirlineDAOImpl implements IAirlineDAO {
-
+	private static Logger logger = Logger.getLogger(com.cg.dao.AirlineDAOImpl.class);
 	public AirlineDAOImpl() {
 		
 	}
@@ -38,13 +40,16 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			if(rs.next()){
 				abbr = rs.getString(1);
 			}
+			logger.info("Abbreviation was retrieved for the following City Name: " + cityName);
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve Abbreviation for given city");
+			logger.error("Failed to retrieve abbreviation:" + e.getMessage());
+			throw new AirlineException("Server Error: Cannot retrieve Abbreviation for given city");
+
 		}finally{
 			try {
 				DBUtil.closeConnection();
 			} catch (SQLException e) {
-				throw new AirlineException("Cannot close database connection",e);
+				throw new AirlineException("Server Error: Cannot close database connection",e);
 			}
 		}
 		return abbr;
@@ -84,13 +89,16 @@ public class AirlineDAOImpl implements IAirlineDAO {
 						rs.getDouble(12));
 				flightList.add(flights);
 			}
+			logger.info("List of flights retrieved");
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve flight details",e);
+			logger.error("Failed to retrieve list of flights:" + e.getMessage());
+			throw new AirlineException("Server Error: Cannot retrieve flight details",e);
+
 		}finally{
 			try {
 				DBUtil.closeConnection();
 			} catch (SQLException e) {
-				throw new AirlineException("Cannot close database connection",e);
+				throw new AirlineException("Server Error: Cannot close database connection",e);
 			}
 		}
 		return flightList;
@@ -122,13 +130,16 @@ public class AirlineDAOImpl implements IAirlineDAO {
 						rs.getString(8),rs.getString(9));
 				bookingList.add(bookingInfo);
 			}
+			logger.info("Booking information retrieved");
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve booking details for the given query",e);
+			logger.error("Failed to retrieve booking information:" + e.getMessage());
+			throw new AirlineException("Server Error: Cannot retrieve booking details for the given query",e);
+
 		}finally{
 			try {
 				DBUtil.closeConnection();
 			} catch (SQLException e) {
-				throw new AirlineException("Cannot close database connection",e);
+				throw new AirlineException("Server Error: Cannot close database connection",e);
 			}
 		}
 		return bookingList;
@@ -156,13 +167,17 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				bookingInfo.setCustEmail(rs.getString(2));
 				passengerList.add(bookingInfo);
 			}
+			logger.info("List Passsengers of following was retrieved: " + flightNo);
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve booking details for the given flightNo-"+flightNo,e);
+
+			logger.error("Failed to retrieve passengers list of: " + flightNo+ " with following error " + e.getMessage());
+			throw new AirlineException("Server Error: Cannot retrieve booking details for the given flightNo-"+flightNo,e);
+
 		}finally{
 			try {
 				DBUtil.closeConnection();
 			} catch (SQLException e) {
-				throw new AirlineException("Cannot close database connection",e);
+				throw new AirlineException("Server Error: Cannot close database connection",e);
 			}
 		}
 		return passengerList;
@@ -181,13 +196,13 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			if(choice==1){
 				String sql = new String("Update Flightinformation Set arr_Date =? where flightNo=?");
 				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setString(1,"to_date('newInput','yyyy-MM-dd')");
+				pstFlight.setString(1,"to_date('"+newInput+"','yyyy-MM-dd')");
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==2){
 				String sql = new String("Update Flightinformation Set Dep_Date =? where flightNo=?");
 				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setString(1, "to_date('newInput','yyyy-MM-dd')");
+				pstFlight.setString(1, "to_date('"+newInput+"','yyyy-MM-dd')");
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==3){
@@ -203,70 +218,74 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				pstFlight.setString(2,flightNo);
 			}
 			status = pstFlight.executeUpdate();
+			logger.info("Flight Schedule of following flight number updated: " + flightNo);
 		}catch(Exception e){
-			throw new AirlineException("Cannot update the table");
+			logger.error("Flight Schedule Updation falied with following error message: " + e.getMessage());
+			throw new AirlineException("Server Error: Cannot update the table");
+
 		}finally{
 			try {
 				DBUtil.closeConnection();
 			} catch (SQLException e) {
-				throw new AirlineException("Cannot close database connection",e);
+				throw new AirlineException("Server Error: Cannot close database connection",e);
 			}
 		}
 		
 		if(status==0)
 			return "Flight Updation Failed";
 		else
-			return "Schedule updated for the flight number " + flightNo;
+			return "Schedule Updated for the flight number " + flightNo;
 	}
 	
 	@Override
 	public String updateFlightInformation(String flightNo, String newInput, int choice) throws AirlineException{
-		
-		
 		Connection connFlight = null;
 		int status = 0;
 		
-		String sql1 = new String("Update Flightinformation Set dep_city =? where flightNo=?");
-		String sql2 = new String("Update Flightinformation Set arr_city =? where flightNo=?");
-		String sql3 = new String("Update Flightinformation Set firstseatfare =? where flightNo=?");
-		String sql4 = new String("Update Flightinformation Set BUSSSEATSFARE =? where flightNo=?");
 		PreparedStatement pstFlight = null;
 		
 		try{
 			connFlight = DBUtil.createConnection();
 			if(choice==1){
-				pstFlight = connFlight.prepareStatement(sql1);
+				String sql = new String("Update Flightinformation Set arr_city =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1,newInput);
 			}
 			else if(choice==2){
-				pstFlight = connFlight.prepareStatement(sql2);
+				String sql = new String("Update Flightinformation Set dep_city =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1,newInput);
 			}
 			else if(choice==3){
-				pstFlight = connFlight.prepareStatement(sql3);
+				String sql = new String("Update Flightinformation Set firstseatfare =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setDouble(1, Double.parseDouble(newInput) );
 			}
 			else if(choice==4){
-				pstFlight = connFlight.prepareStatement(sql4);
+				String sql = new String("Update Flightinformation Set BUSSSEATSFARE =? where flightNo=?");
+				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setDouble(1, Double.parseDouble(newInput) );
 			}
 			
 			pstFlight.setString(2, flightNo);
 			status = pstFlight.executeUpdate();
+			logger.info("Flight Information of following flight number updated: " + flightNo);
 		}catch(Exception e){
-			throw new AirlineException("Cannot update the table");
+			logger.error("Flight Schedule Updation falied with following error message: " + e.getMessage());
+			throw new AirlineException("Server Error: Cannot update the table");
+
 		}finally{
 			try {
 				DBUtil.closeConnection();
 			} catch (SQLException e) {
-				throw new AirlineException("Cannot close database connection",e);
+				throw new AirlineException("Server Error: Cannot close database connection",e);
 			}
 		}
 		
 		if(status==0)
 			return "Flight Updation Failed";
 		else
-			return "Following changes made";
+			return "Information Updated for the flight number " + flightNo;
 	}
 	
 	@Override
@@ -284,17 +303,19 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			{
 				status = rset.getString(1);
 			}
+			logger.info("Following user logged in: " + login.getUsername());
 		}catch(SQLException se){
-			throw new AirlineException("Record not inserted",se);
+			logger.error("Login failed with user name: "+ login.getUsername()+ " " + se.getMessage());
+			throw new AirlineException("Server Error: Could not retrieve login details",se);
+
 		}finally{
 			try{
 				DBUtil.closeConnection();
 
 			}catch(SQLException se){
-				throw new AirlineException("Problems in Closing Connection",se);
+				throw new AirlineException("Server Error: Problems in Closing Connection",se);
 			}
 		}
-	//	System.out.println(status);
 		return status;
 
 	}
@@ -316,14 +337,17 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			pstBook.setString(4, login.getRole());
 			pstBook.setLong(5, login.getMobile());
 			status = pstBook.executeUpdate();
+			logger.info(login.getRole() + " registered with following username " + login.getUsername());
 		}catch(SQLException se){
-			throw new AirlineException("Record could not be inserted",se);
+			logger.error("Signup failed for username: " +login.getUsername());
+			throw new AirlineException("Server Error: Records could not be inserted",se);
+
 		}finally{
 			try{
 				DBUtil.closeConnection();
 
 			}catch(SQLException se){
-				throw new AirlineException("Problems in Closing Connection",se);
+				throw new AirlineException("Server Error: Problems in Closing Connection",se);
 			}
 		}
 		return status;
@@ -341,48 +365,20 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			connBook=DBUtil.createConnection();
 			pstBook = connBook.prepareStatement(sql);
 			status = pstBook.executeUpdate();
+			logger.info("Booking done with following booking id:" + bookingId );
 		}catch(SQLException se){
-			throw new AirlineException("Problem in cancel",se);
+			logger.error("Booking failed");
+			throw new AirlineException("Server Error: Problem in cancellation of Flight",se);
+
 		}finally{
 			try{
 				DBUtil.closeConnection();
 
 			}catch(SQLException se){
-				throw new AirlineException("Problems in Closing Connection",se);
+				throw new AirlineException("Server Error: Problems in Closing Connection",se);
 			}
 		}
 		return status;
-	}
-
-	
-	@Override
-	public int flightIsAvail(String source,String destination,String flightNo) throws AirlineException {
-		int status = 0;
-		Connection connBook = null;
-		Statement pstBook = null;
-		String sql=new String("SELECT count(flightno) FROM FlightInformation WHERE DEP_CITY='"+source+"' AND ARR_CITY='"+destination+"' AND flightNo='"+flightNo+"'");
-
-		try{
-			connBook=DBUtil.createConnection();
-			pstBook = connBook.createStatement();
-			ResultSet rset  = pstBook.executeQuery(sql);
-			if(rset.next())
-			{
-				status = rset.getInt(1);
-			}
-		}catch(SQLException se){
-			throw new AirlineException("Error in flight validation",se);
-		}finally{
-			try{
-				DBUtil.closeConnection();
-
-			}catch(SQLException se){
-				throw new AirlineException("Problems in Closing Connection",se);
-			}
-		}
-		
-		return status;
-
 	}
 	
 	
@@ -391,7 +387,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * @see com.cg.dao.IAirlineDAO#flightOccupancyDetails(java.lang.String, java.lang.String)
 	 * for getting flight occupancy details
 	 */
-	public int[] flightOccupancyDetails(String classType,String flightNo) throws AirlineException
+	public int[] flightOccupancyDetails(String flightNo) throws AirlineException
 	{
 		int seats[]=new int[4];
 		ResultSet rs = null;
@@ -437,11 +433,19 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			{
 				seats[3]=rs.getInt(1);
 			}
-		
+			logger.info("Flight occupany details checked for " + flightNo);
 		}
 		catch(Exception e)
 		{
-			throw new AirlineException("Cannot get number of seats",e);
+			logger.error("Flight occupancy details checking failed");
+			throw new AirlineException("Server Error: Cannot get number of seats",e);
+		}finally{
+			try{
+				DBUtil.closeConnection();
+
+			}catch(SQLException se){
+				throw new AirlineException("Server Error: Problems in Closing Connection",se);
+			}
 		}
 		return seats;
 	}
@@ -473,14 +477,15 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		String sql2 = "INSERT INTO BOOKINGINFORMATION VALUES(booking_id_seq.nextval,(SELECT cust_email FROM users WHERE username='"+username+"'),'"+noOfPassengers+"','"+classType+"',"+fare+",'"+creditCard+"','"+depCity+"','"+arrCity+"','"+flightNo+"')";
 		st = conn.createStatement();
 		status = st.executeUpdate(sql2);
-		
+		logger.info(username + "booked the tickets");
 		}catch(Exception e){
-			throw new AirlineException("Cannot retrieve booking details for the given user",e);
+			logger.error("Booking failed");
+			throw new AirlineException("Server Error: Cannot retrieve booking details for the given user",e);
 		}finally{
 			try {
 				DBUtil.closeConnection();
 			} catch (SQLException e) {
-				throw new AirlineException("Cannot close database connection",e);
+				throw new AirlineException("Server Error: Cannot close database connection",e);
 			}
 		}
 		return status;
@@ -508,14 +513,17 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			{
 				status = rset.getInt(1);
 			}
+			logger.info("Availability checked");
 		}catch(SQLException se){
-			throw new AirlineException("Record not inserted",se);
+			logger.error("Availability checking  failed");
+			throw new AirlineException("Server Error: Problem in cheking the query",se);
+
 		}finally{
 			try{
 				DBUtil.closeConnection();
 
 			}catch(SQLException se){
-				throw new AirlineException("Problems in Closing Connection",se);
+				throw new AirlineException("Server Error: Problems in Closing Connection",se);
 			}
 		}
 		return status;
