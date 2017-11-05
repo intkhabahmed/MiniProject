@@ -2,8 +2,6 @@ package com.cg.dao;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +36,9 @@ public class AirlineDAOImplTest {
 
 	@Test
 	public void LoginTest() throws AirlineException {		
-		login.setRole("Customer");
-		login.setUsername("prashu");
-		login.setPassword("123456");
+		login.setRole("customer");
+		login.setUsername("intu");
+		login.setPassword("12345678");
 		assertEquals(login.getRole(),service.validLogin(login));
 	}
 	
@@ -51,7 +49,7 @@ public class AirlineDAOImplTest {
 			"2015-09-06", "2017-04-05", "07:30","10:30", 30, 4000.0,40, 10000.0);
 	List<Flight> flightList = new ArrayList<Flight>();
 	flightList.add(flight);
-	assertEquals(flightList,service.viewListOfFlights("PNQ-BOM", "9W-617"));
+	assertEquals(flightList,service.viewListOfFlights("PNQ-BOM", "route"));
 	}
 	
 	@Test
@@ -60,7 +58,7 @@ public class AirlineDAOImplTest {
 		flight = new Flight("9W-617", "JET_AIRWAYS", "PNQ", "BOM",
 				"2015-09-06", "2017-04-05", "07:30","10:30", 30, 4000.0,40, 10000.0);
 		booking = new BookingInfo("1001","prashu@gmail.com",5,"first",12000.0,51,"1234567890","PNQ","BOM");
-		int []seatsAvailable = {30-5,40-0};
+		int []seatsAvailable = {30-2,40-0};
 		assertArrayEquals(seatsAvailable,service.flightOccupancyDetails("9W-617"));
 		
 	}

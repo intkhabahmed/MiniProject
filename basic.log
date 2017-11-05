@@ -223,3 +223,21 @@
 2017-11-06 00:31:47,429 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
 2017-11-06 00:31:47,473 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
 2017-11-06 00:33:10,659 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:45:01,545 ERROR [com.cg.dao.AirlineDAOImpl] - Failed to retrieve list of flights:SQL statement to execute cannot be empty or null
+2017-11-06 00:45:01,709 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: prashu
+2017-11-06 00:45:01,823 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for 9W-617
+2017-11-06 00:46:57,904 ERROR [com.cg.dao.AirlineDAOImpl] - Failed to retrieve list of flights:SQL statement to execute cannot be empty or null
+2017-11-06 00:46:58,059 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: prashu
+2017-11-06 00:46:58,111 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for 9W-617
+2017-11-06 00:47:41,377 ERROR [com.cg.dao.AirlineDAOImpl] - Failed to retrieve list of flights:SQL statement to execute cannot be empty or null
+2017-11-06 00:47:41,466 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 00:47:41,522 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for 9W-617
+2017-11-06 00:48:53,434 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:48:53,506 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 00:48:53,551 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for 9W-617
+2017-11-06 00:50:38,741 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:50:38,785 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 00:50:38,819 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for 9W-617
+2017-11-06 00:51:48,864 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:51:48,908 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 00:51:48,943 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for 9W-617
