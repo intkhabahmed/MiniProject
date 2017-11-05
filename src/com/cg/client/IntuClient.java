@@ -10,7 +10,7 @@ public class IntuClient {
 		IAirlineService service = new AirlineServiceImpl();
 		try {
 			
-			System.out.println(service.viewListOfFlights("SG-619","flightNo"));
+			System.out.println(service.viewListOfFlights("2017-11-22","day"));
 			System.out.println("****************************");
 			System.out.println(service.viewBookings("9W-617","byFlight"));
 			System.out.println("****************************");

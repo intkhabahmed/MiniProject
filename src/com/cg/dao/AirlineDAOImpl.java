@@ -330,7 +330,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		Connection connBook = null;
 		PreparedStatement pstBook = null;
 
-		String sql = new String("INSERT INTO users VALUES(booking_sequence.nextval,?,?,?,?,?)");
+		String sql = new String("INSERT INTO users VALUES(userid_sequence.nextval,?,?,?,?,?)");
 
 		try{
 			connBook=DBUtil.createConnection();
@@ -478,13 +478,22 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				fare*=noOfPassengers;
 			}
 		
-		String sql2 = "INSERT INTO BOOKINGINFORMATION VALUES(booking_id_seq.nextval,(SELECT cust_email FROM users WHERE username='"+username+"'),'"+noOfPassengers+"','"+classType+"',"+fare+",'"+creditCard+"','"+depCity+"','"+arrCity+"','"+flightNo+"')";
-		st = conn.createStatement();
+		String sql2 = "INSERT INTO BOOKINGINFORMATION VALUES(ticketbooking_id_seq.nextval,(SELECT cust_email FROM users WHERE username='"+username+"'),'"+noOfPassengers+"','"+classType+"',"+fare+",'"+creditCard+"','"+depCity+"','"+arrCity+"','"+flightNo+"')";
+		//st = conn.createStatement();
 		status = st.executeUpdate(sql2);
+		
+		
+		if(status==1){
+			rs = st.executeQuery("SELECT ticketbooking_id_seq.currval from dual");
+			if(rs.next()){
+				return rs.getInt(1);
+			}
+			
+		}
 		logger.info(username + "booked the tickets");
 		}catch(Exception e){
 			logger.error("Booking failed");
-			throw new AirlineException("Server Error: Cannot retrieve booking details for the given user",e);
+			throw new AirlineException("Server Error: Cannot process booking of ticket",e);
 		}finally{
 			try {
 				DBUtil.closeConnection();

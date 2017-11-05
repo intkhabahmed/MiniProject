@@ -105,7 +105,7 @@ public class BookingInfo {
 
 	@Override
 	public String toString() {
-		return "BookingInfo [bookingId=" + bookingId + ", custEmail="
+		return "BookingInfo \n[bookingId=" + bookingId + ", custEmail="
 				+ custEmail + ", noOfPassengers=" + noOfPassengers
 				+ ", classType=" + classType + ", totalFare=" + totalFare
 				+ ", seatnumber=" + seatnumber + ", creditcardInfo="

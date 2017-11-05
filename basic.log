@@ -1,4 +1,4 @@
-2017-11-04 13:01:17,624 INFO [com.cg.dao.AirlineDAOImpl] - Flight Information of following flight number updated: 10N
+07:48 PM 05-11-20172017-11-04 13:01:17,624 INFO [com.cg.dao.AirlineDAOImpl] - Flight Information of following flight number updated: 10N
 2017-11-04 13:02:58,130 INFO [com.cg.dao.AirlineDAOImpl] - Flight Information of following flight number updated: 10N
 2017-11-04 13:04:37,800 ERROR [com.cg.dao.AirlineDAOImpl] - ORA-01858: a non-numeric character was found where a numeric was expected
 
@@ -86,3 +86,140 @@
 2017-11-04 18:53:32,260 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
 2017-11-04 18:53:33,290 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
 2017-11-04 18:53:37,706 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 19:18:12,304 ERROR [com.cg.dao.AirlineDAOImpl] - Login failed with user name: iyu ORA-01017: invalid username/password; logon denied
+
+2017-11-05 19:46:14,489 ERROR [com.cg.dao.AirlineDAOImpl] - Login failed with user name: Executive ORA-28009: connection as SYS should be as SYSDBA or SYSOPER
+
+2017-11-05 19:51:48,331 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Executive
+2017-11-05 19:51:59,813 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 19:51:59,878 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for SG-519
+2017-11-05 19:51:59,930 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 19:53:41,383 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:53:41,428 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:53:52,143 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:55:34,801 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:55:34,868 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:55:47,243 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:55:59,000 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:56:11,494 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:56:11,516 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:56:36,043 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:56:36,089 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 19:56:49,598 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 20:00:37,200 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 20:00:37,266 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 20:00:48,180 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 20:00:57,229 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 20:00:57,276 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-05 20:03:14,169 INFO [com.cg.dao.AirlineDAOImpl] - customer registered with following username intu
+2017-11-05 20:05:42,805 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-05 20:05:42,946 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: mumbai
+2017-11-05 20:05:43,065 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 20:05:48,343 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 20:05:48,464 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 20:06:02,083 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-05 20:06:02,122 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-05 20:06:12,472 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-05 20:06:12,512 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-05 20:06:18,763 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for 9W-617
+2017-11-05 20:06:32,322 INFO [com.cg.dao.AirlineDAOImpl] - intubooked the tickets
+2017-11-05 20:20:21,173 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-05 20:20:21,236 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-05 20:20:56,793 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: mumbai
+2017-11-05 20:20:56,939 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: bangalore
+2017-11-05 20:20:57,020 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 20:21:03,962 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 20:21:04,017 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 20:21:09,396 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for SG-415
+2017-11-05 20:21:27,992 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-05 20:24:13,373 INFO [com.cg.dao.AirlineDAOImpl] - Booking done with following booking id:asf
+2017-11-05 20:24:23,939 INFO [com.cg.dao.AirlineDAOImpl] - Booking done with following booking id:saf
+2017-11-05 20:24:37,255 INFO [com.cg.dao.AirlineDAOImpl] - Booking done with following booking id:4
+2017-11-05 21:00:14,655 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:00:38,908 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:00:38,949 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-05 21:00:38,980 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:03:57,460 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:03:57,524 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-05 21:03:57,565 INFO [com.cg.dao.AirlineDAOImpl] - List Passsengers of following was retrieved: 9W-617
+2017-11-05 21:04:17,172 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:04:17,257 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-05 21:04:17,309 INFO [com.cg.dao.AirlineDAOImpl] - List Passsengers of following was retrieved: 9W-617
+2017-11-05 21:05:10,649 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:05:10,702 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-05 21:05:10,734 INFO [com.cg.dao.AirlineDAOImpl] - List Passsengers of following was retrieved: 9W-617
+2017-11-05 21:05:24,389 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:05:24,459 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-05 21:05:24,559 INFO [com.cg.dao.AirlineDAOImpl] - List Passsengers of following was retrieved: 9W-617
+2017-11-05 21:09:10,056 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:09:10,133 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-05 21:09:10,186 INFO [com.cg.dao.AirlineDAOImpl] - List Passsengers of following was retrieved: 9W-617
+2017-11-05 21:09:25,048 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:09:30,753 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:12:20,154 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:12:33,180 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:12:37,706 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:18:49,717 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:19:01,922 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:21:40,943 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:21:55,921 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:22:08,544 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: SG-415
+2017-11-05 21:36:48,898 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:37:01,898 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:37:12,119 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:38:01,670 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: SG-415
+2017-11-05 21:41:30,650 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:41:40,990 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:51:43,349 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:51:49,137 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:52:42,204 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: SG-415
+2017-11-05 21:52:51,379 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:54:08,755 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 21:54:17,602 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:54:42,955 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: SG-415
+2017-11-05 21:54:48,683 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 21:55:14,213 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: SG-415
+2017-11-05 22:03:21,374 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 22:03:33,422 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 22:04:14,783 INFO [com.cg.dao.AirlineDAOImpl] - Flight Information of following flight number updated: SG-415
+2017-11-05 22:04:18,987 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 22:06:18,906 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 22:06:26,334 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 22:07:27,703 INFO [com.cg.dao.AirlineDAOImpl] - Flight Information of following flight number updated: SG-415
+2017-11-05 22:07:30,003 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 22:07:46,229 INFO [com.cg.dao.AirlineDAOImpl] - Flight Information of following flight number updated: SG-415
+2017-11-05 22:07:47,575 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 22:08:03,388 INFO [com.cg.dao.AirlineDAOImpl] - Flight Information of following flight number updated: SG-415
+2017-11-05 23:33:14,365 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 23:33:42,457 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 23:34:46,457 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 23:36:15,884 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: hyderabad
+2017-11-05 23:36:28,012 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-05 23:36:28,079 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 23:38:14,151 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 23:38:30,303 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 23:47:29,171 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 23:52:24,401 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-05 23:52:40,315 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 23:54:04,128 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-05 23:54:17,914 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: mangalore
+2017-11-05 23:54:34,859 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-05 23:54:34,916 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:04:31,161 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 00:04:48,457 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:24:05,776 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 00:24:35,454 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:24:35,494 INFO [com.cg.dao.AirlineDAOImpl] - List Passsengers of following was retrieved: SG-415
+2017-11-06 00:24:35,525 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:26:44,027 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 00:26:51,237 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:26:51,274 INFO [com.cg.dao.AirlineDAOImpl] - List Passsengers of following was retrieved: SG-415
+2017-11-06 00:26:51,340 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:28:26,436 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 00:28:33,785 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:28:33,835 INFO [com.cg.dao.AirlineDAOImpl] - List Passsengers of following was retrieved: SG-415
+2017-11-06 00:28:33,937 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:31:47,382 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:31:47,429 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-06 00:31:47,473 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 00:33:10,659 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved

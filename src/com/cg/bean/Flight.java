@@ -5,18 +5,18 @@ public class Flight {
 	private String flightName;
 	private String deptCity;
 	private String arrCity;
-	private String arrDate;
 	private String deptDate;
-	private String arrTime;
+	private String arrDate;
 	private String deptTime;
+	private String arrTime;
 	private int firstSeats;
 	private double firstSeatsFare;
 	private int bussSeats;
 	private double bussSeatsFare;
 	
 	public Flight(String flightNo, String flightName, String deptCity, String arrCity,
-			String arrDate, String deptDate, String arrTime,
-			String deptTime, int firstSeats, double firstSeatsFare,
+			String deptDate, String arrDate, String deptTime,
+			String arrTime, int firstSeats, double firstSeatsFare,
 			int bussSeats, double bussSeatsFare) {
 		super();
 		this.flightNo = flightNo;

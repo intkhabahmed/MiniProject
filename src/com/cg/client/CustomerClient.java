@@ -62,7 +62,6 @@ public class CustomerClient {
 							}
 							else if(option == 1){
 
-								//choice = 4;
 								choice = 3;
 								break LoopHandler;
 							}
@@ -111,7 +110,6 @@ public class CustomerClient {
 					System.out.println("1.Login\n2.Signup");
 					int option = sc.nextInt();
 					if(option==1){
-						//choice = 7;//Login
 						choice = 1;
 						continue;
 					}
@@ -164,7 +162,6 @@ public class CustomerClient {
 					if(!username.isEmpty()){
 						choice = 5;
 					}else{
-						//choice = 3;
 						choice = 4;
 					}
 					continue;
@@ -175,7 +172,7 @@ public class CustomerClient {
 						String classType;
 						int[] seatsAvailable=null;
 						do{
-							System.out.println("Enter Class Type:first or Bussiness");
+							System.out.println("Enter Airline Class Type: first or Bussiness");
 							classType = sc.next();
 							if(!classType.equalsIgnoreCase("first") && !classType.equalsIgnoreCase("business")){
 								System.out.println("Please enter a valid class type");
@@ -188,21 +185,21 @@ public class CustomerClient {
 						int no_of_passengers;
 						do{
 							flag=0;
-							System.out.println("No of passengers");
+							System.out.println("Enter No of passengers");
 							no_of_passengers = sc.nextInt();
 							if((classType.equalsIgnoreCase("first") && seatsAvailable[0] >= no_of_passengers)
 									|| (classType.equalsIgnoreCase("business") && seatsAvailable[1] >= no_of_passengers)){
 								String creditCard="";
 								do{
-									System.out.println("Credit card Number");
+									System.out.println("Enter Credit card Number");
 									creditCard = sc.next();
 									if(!creditCard.matches("[0-9]{10}")){
 										System.out.println("Credit card should have only 10 digits, Try again!");
 									}else{
-										if(service.bookingConfirm(username, flightNo, no_of_passengers, classType, creditCard)==1){
-										System.out.println("Booking Confirmed! for Flight No: "+flightNo);
+										int bookingIdValue = service.bookingConfirm(username, flightNo, no_of_passengers, classType, creditCard);
+										if(bookingIdValue!=0){
+										System.out.println("Your Flight Booking is Confirmed for Flight No: "+flightNo+" with Booking Id-"+bookingIdValue);
 										
-										//choice = 1;
 										choice = 7;
 										break LoopHandler;
 										}
@@ -248,13 +245,13 @@ public class CustomerClient {
 					do{
 						System.out.print("Enter Email :");
 						email = sc.next();
-						if(!email.matches("[a-zA-Z_.0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]{2,}?.[a-zA-Z0-9]{2,}")){
+						if(!email.matches("[a-zA-Z_.0-9]+@[a-zA-Z0-9]{2,}.[a-zA-Z0-9]{2,}?.[a-zA-Z0-9]{2,}")){
 							System.out.println("Error: Wrong Email Format");
 						}else if(service.checkAvailability(email, "email") ==1)
 						{
 							System.out.println("Error: Email already exists");
 						}
-					}while(service.checkAvailability(email, "email") ==1 || !email.matches("[a-zA-Z_.0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]{2,}?.[a-zA-Z0-9]{2,}"));
+					}while(service.checkAvailability(email, "email") ==1 || !email.matches("[a-zA-Z_.0-9]+@[a-zA-Z0-9]{2,}.[a-zA-Z0-9]{2,}?.[a-zA-Z0-9]{2,}"));
 					login.setEmail(email);
 					
 			        sc.nextLine();
@@ -318,11 +315,9 @@ public class CustomerClient {
 					System.out.println("1.LogIn\n2.Flight Search");
 					int opt = sc.nextInt();
 					if(opt==1){
-						//choice = 7;
 						choice = 1;
 						
 					}else if(opt==2){
-						//choice = 4;
 						choice = 3;
 						
 					}
