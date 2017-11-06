@@ -41,7 +41,7 @@ public class ExecutiveClient {
 			}
 			else{
 				validationStatus = "";
-				System.out.println("Sorry! You are not admin, try again");
+				System.out.println("Sorry! You are not Airline Executive, try again");
 			}
 		}while(validationStatus.equals("") || exitCondition==1);
 		
