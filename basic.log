@@ -86,3 +86,9 @@
 2017-11-04 18:53:32,260 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
 2017-11-04 18:53:33,290 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
 2017-11-04 18:53:37,706 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:06:53,569 ERROR [com.cg.dao.AirlineDAOImpl] - Login failed with user name: intu ORA-01017: invalid username/password; logon denied
+
+2017-11-06 09:07:24,548 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 09:09:35,144 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 09:10:26,261 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 09:10:51,216 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin

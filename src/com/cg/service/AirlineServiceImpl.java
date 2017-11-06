@@ -106,7 +106,7 @@ public class AirlineServiceImpl implements IAirlineService{
 	public int checkDateFormat(String newInput){
 		String validDate = "[20]{2}[0-9]{2}[-]{1}[0-9]{1,2}[-]{1}[0-9]{1,2}";
 		
-		if(Pattern.matches(validDate, newInput) && LocalDate.parse(newInput).compareTo(LocalDate.now())==-1){
+		if(Pattern.matches(validDate, newInput)){
 			return 1;
 		}else{
 			return 2;

@@ -36,12 +36,16 @@ public class ExecutiveClient {
 					System.out.println("Thankyou! Have a nice day.");
 					System.exit(0);
 				}
-			}else{
+			}else if(validationStatus.equals("admin")){
 				break;
+			}
+			else{
+				validationStatus = "";
+				System.out.println("Sorry! You are not admin, try again");
 			}
 		}while(validationStatus.equals("") || exitCondition==1);
 		
-		eixtCondition:do{
+		do{
 			System.out.println("Hi "+username+", What do you want to do?");
 			System.out.println("1.See Flight Occupancy Details\n2.Logout");
 			choice = sc.nextInt();
@@ -54,7 +58,7 @@ public class ExecutiveClient {
 					flightNo=sc.next();
 					if(service.viewListOfFlights(flightNo, "flightNo").isEmpty()){
 						System.out.println("Sorry! wrong flight No, Try again.");
-						System.out.println("Want to continue? 1. Yes\n2. No");
+						System.out.println("Enter 1 to continue or \nEnter 2 to go to previous menu");
 						exitCond = sc.nextInt();
 						if(exitCond==2){
 							break;
@@ -68,15 +72,15 @@ public class ExecutiveClient {
 				
 				break;
 			case 2:
+				System.out.println("Thank you "+username+"! Have a nice day.");
 				username="";
-				System.out.println("Thank you! Have a nice day.");
 				System.exit(0);
 				break;
 			default:
 				System.out.println("Enter Valid Choice");
 			}
 		}while(!username.isEmpty());
-		
+		sc.close();
 	}
 	
 }
