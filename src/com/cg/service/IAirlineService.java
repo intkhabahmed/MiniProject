@@ -19,9 +19,10 @@ public interface IAirlineService {
 	public int bookingCancel(String bookingId, String username) throws AirlineException;
 	public String updateFlightInformation(String oldFlightNo, String newFlightNo, int choice) throws AirlineException;
 	public int[] flightOccupancyDetails(String flightNo) throws AirlineException;
-	int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
+	public int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
 			String creditCard) throws AirlineException;
 	public int checkAvailability(String query, String type) throws AirlineException;
 	public int checkTimeFormat(String newInput);
-	public int checkDateFormat(String newInput);
+	public int checkDateFormat(String newInput) throws AirlineException;
+	public void checkValidation(String query, String basis) throws AirlineException;
 }

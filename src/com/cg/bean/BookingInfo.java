@@ -110,4 +110,15 @@ public class BookingInfo {
 				noOfPassengers,classType,totalFare,creditcardInfo,
 				rcCity,destCity,flightNo+"\n");
 	}
+
+	@Override
+	public String toString() {
+		return "BookingInfo [bookingId=" + bookingId + ", custEmail="
+				+ custEmail + ", noOfPassengers=" + noOfPassengers
+				+ ", classType=" + classType + ", totalFare=" + totalFare
+				+ ", creditcardInfo=" + creditcardInfo + ", rcCity=" + rcCity
+				+ ", destCity=" + destCity + ", flightNo=" + flightNo + "]";
+	}
+	
+	
 }

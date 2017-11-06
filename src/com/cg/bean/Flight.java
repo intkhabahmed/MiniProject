@@ -89,6 +89,17 @@ public class Flight {
 		System.out.format("%10s%10s%10s%10s%30s%30s%10s%10s%15s%20s%10s%15s",flightNo,flightName,deptCity,arrCity,arrDate,deptDate
 				,arrTime,deptTime,firstSeats,firstSeatsFare,bussSeats,bussSeatsFare+"\n");
 	}
+
+	@Override
+	public String toString() {
+		return "Flight [flightNo=" + flightNo + ", flightName=" + flightName
+				+ ", deptCity=" + deptCity + ", arrCity=" + arrCity
+				+ ", deptDate=" + deptDate + ", arrDate=" + arrDate
+				+ ", deptTime=" + deptTime + ", arrTime=" + arrTime
+				+ ", firstSeats=" + firstSeats + ", firstSeatsFare="
+				+ firstSeatsFare + ", bussSeats=" + bussSeats
+				+ ", bussSeatsFare=" + bussSeatsFare + "]";
+	}
 	
 	
 }

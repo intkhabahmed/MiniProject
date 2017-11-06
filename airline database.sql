@@ -40,5 +40,6 @@ total_fare number(10,2),
 CreditCard_info varchar2(10), 
 src_city varchar2(10), 
 dest_city varchar2(10),
-flightNo varchar2(10) references flightInformation(flightno)
+flightNo varchar2(10) references flightInformation(flightno),
+booking_date date
 );

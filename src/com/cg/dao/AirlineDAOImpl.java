@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +31,14 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	@Override
 	public String getCityAbbreviation(String cityName) throws AirlineException {
 		ResultSet rs = null;
-		Statement st = null;
+		PreparedStatement pst = null;
 		String abbr = "";
 		try{
 			airlineConn = DBUtil.createConnection();
-			String sql = "SELECT abbreviation FROM Airport WHERE location=upper('"+cityName+"')";
-			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql);
+			String sql = "SELECT abbreviation FROM Airport WHERE location=UPPER(?)";
+			pst = airlineConn.prepareStatement(sql);
+			pst.setString(1, cityName);
+			rs = pst.executeQuery();
 			if(rs.next()){
 				abbr = rs.getString(1);
 			}
@@ -65,27 +66,39 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	public List<Flight> viewListOfFlights(String query, String searchBasis) throws AirlineException {
 		List<Flight> flightList = new ArrayList<Flight>();
 		ResultSet rs = null;
-		Statement st = null;
+		PreparedStatement pst = null;
 		String sql="";
 		try{
 			airlineConn = DBUtil.createConnection();
 			if(searchBasis.equals("dest")){
-				sql = "SELECT * FROM FlightInformation WHERE arr_city='"+query+"'";
+				sql = "SELECT * FROM FlightInformation WHERE arr_city=?";
+				pst = airlineConn.prepareStatement(sql);
+				pst.setString(1, query);
 			}else if(searchBasis.equals("day")){
-				sql = "SELECT * FROM FlightInformation WHERE dep_date=to_date('"+query+"','yyyy-mm-dd')";
+				sql = "SELECT * FROM FlightInformation WHERE dep_date=to_date(?,'yyyy-mm-dd')";
+				pst = airlineConn.prepareStatement(sql);
+				pst.setString(1, query);
 			}else if(searchBasis.equals("route")){
 				String route[] = query.split("-");
-				sql = "SELECT * FROM FlightInformation WHERE dep_city='"+route[0]+"' AND arr_city='"+route[1]+"'";
+				sql = "SELECT * FROM FlightInformation WHERE dep_city=? AND arr_city=?";
+				pst = airlineConn.prepareStatement(sql);
+				pst.setString(1, route[0]);
+				pst.setString(2, route[1]);
 			}else if(searchBasis.equals("flightNo")){
-				sql = "SELECT * FROM FlightInformation WHERE flightNo='"+query+"'";
+				sql = "SELECT * FROM FlightInformation WHERE flightNo=UPPER(?)";
+				pst = airlineConn.prepareStatement(sql);
+				pst.setString(1, query);
+			}else if(searchBasis.equals("all")){
+				sql = "SELECT * FROM FlightInformation";
+				pst = airlineConn.prepareStatement(sql);
 			}
 			
-			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql);
+			rs = pst.executeQuery();
 			while(rs.next()){
+				SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
 				Flight flights = new Flight(rs.getString(1),rs.getString(2)
-						,rs.getString(3),rs.getString(4),rs.getString(5),
-						rs.getString(6),rs.getString(7),rs.getString(8),
+						,rs.getString(3),rs.getString(4),format.format(rs.getDate(5)),
+						format.format(rs.getDate(6)),rs.getString(7),rs.getString(8),
 						rs.getInt(9),rs.getDouble(10),rs.getInt(11),
 						rs.getDouble(12));
 				flightList.add(flights);
@@ -114,21 +127,24 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	public List<BookingInfo> viewBookings(String query, String searchBasis) throws AirlineException {
 		List<BookingInfo> bookingList = new ArrayList<BookingInfo>();
 		ResultSet rs = null;
-		Statement st = null;
+		PreparedStatement pst = null;
 		String sql="";
 		try{
 			airlineConn = DBUtil.createConnection();
 			if(searchBasis.equals("byFlight")){
-				sql = "SELECT * FROM BookingInformation WHERE flightNo='"+query+"'";
+				sql = "SELECT * FROM BookingInformation WHERE flightNo=Upper(?)";
+				pst = airlineConn.prepareStatement(sql);
+				pst.setString(1, query);
 			}else if(searchBasis.equals("byUser")){
-				sql = "SELECT * FROM BookingInformation WHERE cust_email=(SELECT cust_email FROM users WHERE username='"+query+"')";
+				sql = "SELECT * FROM BookingInformation WHERE cust_email=(SELECT cust_email FROM users WHERE username=?)";
+				pst = airlineConn.prepareStatement(sql);
+				pst.setString(1, query);
 			}
-			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql);
+			rs = pst.executeQuery();
 			while(rs.next()){
 				BookingInfo bookingInfo = new BookingInfo(rs.getString(1),rs.getString(2),rs.getInt(3),
-						rs.getString(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),
-						rs.getString(8),rs.getString(9));
+						rs.getString(4),rs.getDouble(5),rs.getString(6),
+						rs.getString(7),rs.getString(8),rs.getString(9));
 				bookingList.add(bookingInfo);
 			}
 			logger.info("Booking information retrieved");
@@ -156,12 +172,13 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			throws AirlineException {
 		List<BookingInfo> passengerList = new ArrayList<BookingInfo>();
 		ResultSet rs = null;
-		Statement st = null;
+		PreparedStatement pst = null;
 		try{
 			airlineConn = DBUtil.createConnection();
-			String sql = "SELECT booking_id,cust_email FROM BookingInformation WHERE flightNo='"+flightNo+"'";
-			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql);
+			String sql = "SELECT booking_id,cust_email FROM BookingInformation WHERE flightNo=Upper(?)";
+			pst = airlineConn.prepareStatement(sql);
+			pst.setString(1, flightNo);
+			rs = pst.executeQuery();
 			while(rs.next()){
 				BookingInfo bookingInfo = new BookingInfo();
 				bookingInfo.setBookingId(rs.getString(1));
@@ -195,7 +212,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		try{
 			connFlight = DBUtil.createConnection();
 			if(choice==1){
-				String sql = new String("Update Flightinformation Set arr_Date =? where flightNo=?");
+				String sql = new String("Update Flightinformation Set arr_Date =? where flightNo=Upper(?)");
 				pstFlight = connFlight.prepareStatement(sql);
 				Date d = Date.valueOf(newInput);
 				pstFlight.setDate(1, d);
@@ -203,20 +220,20 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==2){
-				String sql = new String("Update Flightinformation Set Dep_Date =? where flightNo=?");
+				String sql = new String("Update Flightinformation Set Dep_Date =? where flightNo=Upper(?)");
 				pstFlight = connFlight.prepareStatement(sql);
 				Date d = Date.valueOf(newInput);
 				pstFlight.setDate(1, d);
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==3){
-				String sql = new String("Update Flightinformation Set Arr_time =? where flightNo=?");
+				String sql = new String("Update Flightinformation Set Arr_time =? where flightNo=Upper(?)");
 				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1, newInput);
 				pstFlight.setString(2,flightNo);
 			}
 			else if(choice==4){
-				String sql = new String("Update Flightinformation Set Dep_time =? where flightNo=?");
+				String sql = new String("Update Flightinformation Set Dep_time =? where flightNo=Upper(?)");
 				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1, newInput);
 				pstFlight.setString(2,flightNo);
@@ -251,22 +268,22 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		try{
 			connFlight = DBUtil.createConnection();
 			if(choice==1){
-				String sql = new String("Update Flightinformation Set arr_city =? where flightNo=?");
+				String sql = new String("Update Flightinformation Set arr_city =? where flightNo=UPPER(?)");
 				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1,newInput);
 			}
 			else if(choice==2){
-				String sql = new String("Update Flightinformation Set dep_city =? where flightNo=?");
+				String sql = new String("Update Flightinformation Set dep_city =? where flightNo=UPPER(?)");
 				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setString(1,newInput);
 			}
 			else if(choice==3){
-				String sql = new String("Update Flightinformation Set firstseatfare =? where flightNo=?");
+				String sql = new String("Update Flightinformation Set firstseatfare =? where flightNo=UPPER(?)");
 				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setDouble(1, Double.parseDouble(newInput) );
 			}
 			else if(choice==4){
-				String sql = new String("Update Flightinformation Set BUSSSEATSFARE =? where flightNo=?");
+				String sql = new String("Update Flightinformation Set BUSSSEATSFARE =? where flightNo=UPPER(?)");
 				pstFlight = connFlight.prepareStatement(sql);
 				pstFlight.setDouble(1, Double.parseDouble(newInput) );
 			}
@@ -296,13 +313,15 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	public String validLogin(LoginMaster login) throws AirlineException{
 		String status = "";
 		Connection connBook = null;
-		Statement pstBook = null;
-		String sql=new String("Select role from users where username='"+login.getUsername()+"' AND password='"+login.getPassword()+"'");
+		PreparedStatement pstBook = null;
+		String sql=new String("Select role from users where username=? AND password=?");
 
 		try{
 			connBook=DBUtil.createConnection();
-			pstBook = connBook.createStatement();
-			ResultSet rset  = pstBook.executeQuery(sql);
+			pstBook = connBook.prepareStatement(sql);
+			pstBook.setString(1, login.getUsername());
+			pstBook.setString(2, login.getPassword());
+			ResultSet rset  = pstBook.executeQuery();
 			if(rset.next())
 			{
 				status = rset.getString(1);
@@ -363,15 +382,17 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		Connection connBook = null;
 		PreparedStatement pstBook = null;
 
-		String sql = new String("DELETE FROM BookingInformation WHERE Booking_id='"+bookingId+"' AND cust_email=(SELECT cust_email FROM users WHERE username='"+username+"')");
+		String sql = new String("DELETE FROM BookingInformation WHERE Booking_id=? AND cust_email=(SELECT cust_email FROM users WHERE username=?");
 
 		try{
 			connBook=DBUtil.createConnection();
 			pstBook = connBook.prepareStatement(sql);
+			pstBook.setString(1, bookingId);
+			pstBook.setString(2, username);
 			status = pstBook.executeUpdate();
 			logger.info("Booking done with following booking id:" + bookingId );
 		}catch(SQLException se){
-			logger.error("Booking failed");
+			logger.error("Booking failed: "+se.getMessage());
 			throw new AirlineException("Server Error: Problem in cancellation of Flight",se);
 
 		}finally{
@@ -395,43 +416,47 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	{
 		int seats[]=new int[4];
 		ResultSet rs = null;
-		Statement st = null;
+		PreparedStatement pst = null;
 		String sql="";
 		try
 		{
 			
 			airlineConn = DBUtil.createConnection();
-			sql = "select firstSeats from flightInformation where flightNo='"+flightNo+"'";
-			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql);
+			sql = "select firstSeats from flightInformation where flightNo=UPPER(?)";
+			pst = airlineConn.prepareStatement(sql);
+			pst.setString(1, flightNo);
+			rs = pst.executeQuery();
 			if(rs.next())
 			{
 				seats[0] = rs.getInt(1);
 			}
 			
-			sql = "select bussSeats from flightInformation where flightNo='"+flightNo+"'";
-			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql);
+			sql = "select bussSeats from flightInformation where flightNo=UPPER(?)";
+			pst = airlineConn.prepareStatement(sql);
+			pst.setString(1, flightNo);
+			rs = pst.executeQuery();
 			if(rs.next())
 			{
 				seats[1] = rs.getInt(1);
 			}
 			
 
-			sql ="select sum(no_of_passengers) from Bookinginformation where class_type='first' and flightno='"+flightNo+"' group by class_type,flightno";
+			sql ="select sum(no_of_passengers) from Bookinginformation where class_type='first' and flightno=UPPER(?) group by class_type,flightno";
 
-			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql);
+			pst = airlineConn.prepareStatement(sql);
+			pst.setString(1, flightNo);
+			rs = pst.executeQuery();
 			if(rs.next())
 			{
 					seats[2]= rs.getInt(1);
 			}
 
-			sql ="select sum(no_of_passengers) from Bookinginformation where class_type='business' and flightno='"+flightNo+"' group by class_type,flightno";
+			sql ="select sum(no_of_passengers) from Bookinginformation where class_type='business' and flightno=UPPER(?) group by class_type,flightno";
 
 
-			st = airlineConn.createStatement();
-			rs = st.executeQuery(sql);
+			pst = airlineConn.prepareStatement(sql);
+			pst.setString(1, flightNo);
+			rs = pst.executeQuery();
 			
 			if(rs.next())
 			{
@@ -461,12 +486,13 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		double fare = 0 ;
 		int status =0;
 		Connection conn = null;
-		Statement st = null;
+		PreparedStatement pst = null;
 		try{
 			conn = DBUtil.createConnection();;
-			String sql = "SELECT * FROM FLIGHTINFORMATION WHERE FLIGHTNO='"+flightNo+"'";
-			st = conn.createStatement();
-		ResultSet rs=st.executeQuery(sql);
+			String sql = "SELECT * FROM FLIGHTINFORMATION WHERE FLIGHTNO=UPPER(?)";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, flightNo);
+		ResultSet rs=pst.executeQuery();
 			while(rs.next()){
 				depCity = rs.getString(3);
 				arrCity = rs.getString(4);
@@ -478,13 +504,21 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				fare*=noOfPassengers;
 			}
 		
-		String sql2 = "INSERT INTO BOOKINGINFORMATION VALUES(ticketbooking_id_seq.nextval,(SELECT cust_email FROM users WHERE username='"+username+"'),'"+noOfPassengers+"','"+classType+"',"+fare+",'"+creditCard+"','"+depCity+"','"+arrCity+"','"+flightNo+"')";
-		//st = conn.createStatement();
-		status = st.executeUpdate(sql2);
+		String sql2 = "INSERT INTO BOOKINGINFORMATION VALUES(ticketbooking_id_seq.nextval,(SELECT cust_email FROM users WHERE username=?),?,?,?,?,?,?,UPPER(?))";
+		pst = conn.prepareStatement(sql2);
+		pst.setString(1, username);
+		pst.setInt(2, noOfPassengers);
+		pst.setString(3, classType);
+		pst.setDouble(4, fare);
+		pst.setString(5, creditCard);
+		pst.setString(6, depCity);
+		pst.setString(7, arrCity);
+		pst.setString(8, flightNo);
+		status = pst.executeUpdate();
 		
 		
 		if(status==1){
-			rs = st.executeQuery("SELECT ticketbooking_id_seq.currval from dual");
+			rs = pst.executeQuery("SELECT ticketbooking_id_seq.currval from dual");
 			if(rs.next()){
 				return rs.getInt(1);
 			}
@@ -511,17 +545,23 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			throws AirlineException {
 		int status = 0;
 		Connection connBook = null;
-		Statement pstBook = null;
+		PreparedStatement pstBook = null;
 		String sql="";
-		if(type.equals("username")){
-			sql="Select count(username) from users where username='"+query+"'";
-		}else if(type.equals("email")){
-			sql="Select count(cust_email) from users where cust_email='"+query+"'";
-		}
+		
 		try{
 			connBook=DBUtil.createConnection();
-			pstBook = connBook.createStatement();
-			ResultSet rset  = pstBook.executeQuery(sql);
+			if(type.equals("username")){
+				sql="Select count(username) from users where username=?";
+				pstBook = connBook.prepareStatement(sql);
+				pstBook.setString(1, query);
+				
+			}else if(type.equals("email")){
+				sql="Select count(cust_email) from users where cust_email=?";
+				pstBook = connBook.prepareStatement(sql);
+				pstBook.setString(1, query);
+			}
+			
+			ResultSet rset  = pstBook.executeQuery();
 			if(rset.next())
 			{
 				status = rset.getInt(1);

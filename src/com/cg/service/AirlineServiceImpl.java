@@ -1,6 +1,7 @@
 package com.cg.service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -95,7 +96,14 @@ public class AirlineServiceImpl implements IAirlineService{
 		String validTime = "[0-9]{2}[:]{1}[0-9]{2}";
 		
 		if(Pattern.matches(validTime, newInput)){
-			return 1;
+			int hours = Integer.parseInt(newInput.substring(0, 2));
+			int mins = Integer.parseInt(newInput.substring(3));
+			if((hours>=0 && hours<24) && (mins>=0 && mins<60)){
+				return 1;
+			}else{
+				System.out.println("Hours should be from 0 to 23 and minutes should be from 0 to 59");
+				return 2;
+			}
 		}else{
 			return 2;
 		}
@@ -103,13 +111,37 @@ public class AirlineServiceImpl implements IAirlineService{
 	
 	
 	@Override
-	public int checkDateFormat(String newInput){
+	public int checkDateFormat(String newInput) throws AirlineException{
 		String validDate = "[20]{2}[0-9]{2}[-]{1}[0-9]{1,2}[-]{1}[0-9]{1,2}";
 		
 		if(Pattern.matches(validDate, newInput)){
-			return 1;
-		}else{
+			try{
+				LocalDate date = LocalDate.parse(newInput);
+				if(date.compareTo(LocalDate.now())<0){
+					throw new AirlineException("Date should be current date or later");
+				}else{
+					return 1;
+				}
+				
+			}catch(DateTimeParseException dtpe){
+				throw new AirlineException("Wrong Date Format, Try again",dtpe);
+			}
+		}
 			return 2;
+	}
+	
+	@Override
+	public void checkValidation(String query, String basis) throws AirlineException{
+		switch(basis){
+		case "cityName":
+			if(!query.matches("[a-zA-Z]{2,}")){
+				throw new AirlineException("City Name should have only alphabets");
+			}
+			break;
+		case "":
+			break;
+		default:
 		}
 	}
+	
 }
