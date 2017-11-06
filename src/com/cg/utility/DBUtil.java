@@ -9,15 +9,19 @@ import java.util.ResourceBundle;
  */
 public class DBUtil {
 	private static Connection connAirline;
+	private static ResourceBundle resOracle = null;
+	private static String url="";
+	private static String username="";
+	private static String password="";
 	
 	/*
 	 * Static method to create the database connection
 	 */
 	public static Connection createConnection() throws SQLException{
-		ResourceBundle resOracle = ResourceBundle.getBundle("oracle");
-		String url = resOracle.getString("url");
-		String username = resOracle.getString("username");
-		String password = resOracle.getString("password");
+		resOracle = ResourceBundle.getBundle("oracle");
+		url = resOracle.getString("url");
+		username = resOracle.getString("username");
+		password = resOracle.getString("password");
 		
 		/*
 		 * Registering the DriverManager

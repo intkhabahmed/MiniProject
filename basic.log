@@ -65,3 +65,8 @@
 2017-11-06 10:13:41,330 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
 2017-11-06 10:13:41,353 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
 2017-11-06 10:13:41,376 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 14:33:06,568 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 14:33:06,591 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: mumbai
+2017-11-06 14:33:06,625 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 14:34:26,524 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: fgh
+2017-11-06 14:34:26,547 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: 75

@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
-import com.cg.bean.LoginMaster;
+import com.cg.bean.User;
 import com.cg.exception.AirlineException;
 import com.cg.service.AirlineServiceImpl;
 
@@ -25,7 +25,7 @@ public class CustomerClient {
 		String password = "";
 		String flightNo = "";
 		String bookingId = "";
-		LoginMaster login = new LoginMaster();
+		User login = new User();
 		AirlineServiceImpl service = new AirlineServiceImpl();
 
 		int y=1;

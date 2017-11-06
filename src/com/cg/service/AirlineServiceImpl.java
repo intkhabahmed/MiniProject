@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
-import com.cg.bean.LoginMaster;
+import com.cg.bean.User;
 import com.cg.dao.AirlineDAOImpl;
 import com.cg.dao.IAirlineDAO;
 import com.cg.exception.AirlineException;
@@ -14,11 +14,11 @@ import com.cg.exception.AirlineException;
 public class AirlineServiceImpl implements IAirlineService{
 
 	IAirlineDAO dao;
-	LoginMaster login;
+	User login;
 	
 	public AirlineServiceImpl() {
 		dao = new AirlineDAOImpl();
-		login = new LoginMaster();
+		login = new User();
 	}
 	
 	@Override
@@ -45,12 +45,12 @@ public class AirlineServiceImpl implements IAirlineService{
 	}
 	
 	@Override
-	public int signUp(LoginMaster login) throws AirlineException{
+	public int signUp(User login) throws AirlineException{
 		return dao.signUp(login);
 	}
 	
 	@Override
-	public String validLogin(LoginMaster login) throws AirlineException{
+	public String validLogin(User login) throws AirlineException{
 		return dao.validLogin(login);
 	}
 	

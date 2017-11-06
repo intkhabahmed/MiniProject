@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
-import com.cg.bean.LoginMaster;
+import com.cg.bean.User;
 import com.cg.exception.AirlineException;
 import com.cg.utility.DBUtil;
 
@@ -127,7 +127,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			rs = st.executeQuery(sql);
 			while(rs.next()){
 				BookingInfo bookingInfo = new BookingInfo(rs.getString(1),rs.getString(2),rs.getInt(3),
-						rs.getString(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),
+						rs.getString(4),rs.getDouble(5),rs.getString(6),rs.getString(7),
 						rs.getString(8),rs.getString(9));
 				bookingList.add(bookingInfo);
 			}
@@ -293,7 +293,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	}
 	
 	@Override
-	public String validLogin(LoginMaster login) throws AirlineException{
+	public String validLogin(User login) throws AirlineException{
 		String status = "";
 		Connection connBook = null;
 		Statement pstBook = null;
@@ -325,7 +325,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	}
 	
 	@Override
-	public int signUp(LoginMaster login) throws AirlineException{
+	public int signUp(User login) throws AirlineException{
 		int status = 0;
 		Connection connBook = null;
 		PreparedStatement pstBook = null;

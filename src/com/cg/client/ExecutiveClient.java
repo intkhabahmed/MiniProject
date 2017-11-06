@@ -2,7 +2,7 @@ package com.cg.client;
 
 import java.util.Scanner;
 
-import com.cg.bean.LoginMaster;
+import com.cg.bean.User;
 import com.cg.exception.AirlineException;
 import com.cg.service.AirlineServiceImpl;
 import com.cg.service.IAirlineService;
@@ -18,7 +18,7 @@ public class ExecutiveClient {
 		int choice=0;
 		int exitCondition=1;
 		IAirlineService service = new AirlineServiceImpl();
-		LoginMaster login = new LoginMaster();
+		User login = new User();
 		do{
 			System.out.print("Enter Username: ");
 			username = sc.next();

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
-import com.cg.bean.LoginMaster;
+import com.cg.bean.User;
 import com.cg.exception.AirlineException;
 
 public interface IAirlineDAO {
@@ -13,8 +13,8 @@ public interface IAirlineDAO {
 	public List<BookingInfo> viewBookings(String query, String searchBasis) throws AirlineException;
 	public List<BookingInfo> viewPassengersOfFlight(String flightNo) throws AirlineException;
 	public String updateFlightSchedule(String flightNo, String dateInput, int choice) throws AirlineException;
-	public int signUp(LoginMaster login) throws AirlineException;
-	public String validLogin(LoginMaster login) throws AirlineException;
+	public int signUp(User login) throws AirlineException;
+	public String validLogin(User login) throws AirlineException;
 	public int bookingCancel(String bookingId, String username) throws AirlineException;
 	public String updateFlightInformation(String flightNo, String depCity,int choice) throws AirlineException;
     public int[] flightOccupancyDetails(String flightNo) throws AirlineException;

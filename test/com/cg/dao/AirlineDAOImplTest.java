@@ -12,12 +12,12 @@ import org.junit.Test;
 
 import com.cg.bean.BookingInfo;
 import com.cg.bean.Flight;
-import com.cg.bean.LoginMaster;
+import com.cg.bean.User;
 import com.cg.exception.AirlineException;
 import com.cg.service.AirlineServiceImpl;
 
 public class AirlineDAOImplTest {
-	private LoginMaster login;
+	private User login;
 	private AirlineServiceImpl service;
 	private Flight flight;
 	private BookingInfo booking;
@@ -25,7 +25,7 @@ public class AirlineDAOImplTest {
 
 	@Before
 	public void setUp() throws Exception {
-		login = new LoginMaster();
+		login = new User();
 		service = new AirlineServiceImpl();			
 	}
 
@@ -57,7 +57,7 @@ public class AirlineDAOImplTest {
 	{
 		flight = new Flight("9W-617", "JET_AIRWAYS", "PNQ", "BOM",
 				"2015-09-06", "2017-04-05", "07:30","10:30", 30, 4000.0,40, 10000.0);
-		booking = new BookingInfo("1001","prashu@gmail.com",5,"first",12000.0,51,"1234567890","PNQ","BOM");
+		booking = new BookingInfo("1001","prashu@gmail.com",5,"first",12000.0,"51","1234567890","PNQ","BOM");
 		int []seatsAvailable = {30-2,40-0};
 		assertArrayEquals(seatsAvailable,service.flightOccupancyDetails("9W-617"));
 		
