@@ -40,7 +40,7 @@ public class AdminClient {
 					System.out.println("Thankyou! Have a nice day.");
 					System.exit(0);
 				}
-<<<<<<< HEAD
+
 			}else if(validationStatus.equals("admin")){
 				break;
 			}
@@ -48,11 +48,7 @@ public class AdminClient {
 				validationStatus = "";
 				System.out.println("Sorry! You are not admin, try again");
 			}
-=======
-			}else{
-				break;
-			}
->>>>>>> 067b22dc6e681e8d3f631914d636edaa0ca466c4
+
 		}while(validationStatus.equals("") || exitCondition==1);
 		
 		do{
