@@ -41,7 +41,7 @@ public class AdminClient {
 					System.exit(0);
 				}
 
-			}else if(validationStatus.equals("admin")){
+			}else if(validationStatus.equalsIgnoreCase("admin")){
 				break;
 			}
 			else{
