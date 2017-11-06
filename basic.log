@@ -10,3 +10,58 @@
 2017-11-06 09:26:55,319 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
 2017-11-06 09:26:55,344 INFO [com.cg.dao.AirlineDAOImpl] - Flight occupany details checked for SG-415
 2017-11-06 09:26:55,383 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:27:47,309 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 09:27:56,282 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Executive
+2017-11-06 09:38:23,051 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:38:35,481 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:38:57,245 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:38:57,272 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:40:19,642 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:40:26,197 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:40:26,250 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:42:05,593 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:42:09,935 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:42:09,998 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:43:19,070 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:43:22,141 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:43:22,193 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:45:02,927 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:45:07,909 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:45:07,965 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:46:00,819 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:46:03,731 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:46:03,776 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:46:37,487 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:46:41,200 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:46:41,251 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:48:27,119 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:48:31,917 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:48:31,962 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:50:12,027 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:50:15,772 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:50:15,853 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 09:50:44,179 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:50:47,427 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 09:50:47,485 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:00:18,780 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 10:00:24,811 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:00:24,835 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-06 10:07:08,805 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 10:07:15,259 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:07:15,279 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-06 10:07:15,328 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:07:50,125 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:07:50,187 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-06 10:07:50,232 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:08:53,110 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 10:08:59,759 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:08:59,785 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-06 10:08:59,830 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:11:55,062 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 10:12:00,092 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:12:00,124 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-06 10:12:00,153 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:13:36,821 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 10:13:41,330 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 10:13:41,353 INFO [com.cg.dao.AirlineDAOImpl] - Booking information retrieved
+2017-11-06 10:13:41,376 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved

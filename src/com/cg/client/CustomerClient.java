@@ -3,6 +3,7 @@ package com.cg.client;
 
 
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -93,7 +94,14 @@ public class CustomerClient {
 								if(bookings.isEmpty()){
 									System.out.println("Sorry! No Flight Booking done by you.");
 								}else{
-									System.out.println(bookings);
+										System.out.println("Following are the bookings done for flightNo - "+flightNo);
+										System.out.format("%15s%15s%20s%15s%15s%20s%20s%15s%15s","bookingId","custEmail",
+												"noOfPassengers","classType","totalFare","creditcardInfo",
+												"rcCity","destCity","flightNo\n");
+										Iterator<BookingInfo> itr = bookings.iterator();
+										while(itr.hasNext()){
+											itr.next().formattedString();
+										}
 								}
 							}
 							else{
@@ -141,7 +149,12 @@ public class CustomerClient {
 						}
 						else{
 							List<Flight> flights = service.viewListOfFlights(source+"-"+destination, "route");
-							System.out.println(flights);
+							System.out.format("%10s%15s%10s%10s%20s%25s%20s%15s%15s%15s%10s%20s","flightNo","flightName","deptCity","arrCity","arrDate","deptDate"
+									,"arrTime","deptTime","firstSeats","firstSeatsFare","bussSeats","bussSeatsFare\n");
+							Iterator<Flight> itr = flights.iterator();
+							while(itr.hasNext()){
+								itr.next().formattedString();
+							}
 							if(flights.isEmpty()){
 								System.out.println("Sorry! No flights available for this route, Try Again");
 								flag=1;

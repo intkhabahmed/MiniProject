@@ -286,7 +286,12 @@ public class AdminClient {
 								if(flights.isEmpty()){
 									System.out.println("Sorry! There are no flights on the given date: "+day);
 								}else{
-									System.out.println(flights);
+									System.out.format("%10s%15s%10s%10s%20s%25s%20s%15s%15s%15s%10s%20s","flightNo","flightName","deptCity","arrCity","arrDate","deptDate"
+											,"arrTime","deptTime","firstSeats","firstSeatsFare","bussSeats","bussSeatsFare\n");
+									Iterator<Flight> itr = flights.iterator();
+									while(itr.hasNext()){
+										itr.next().formattedString();
+									}
 								}
 							
 							}
@@ -307,7 +312,12 @@ public class AdminClient {
 							dest = service.getCityAbbreviation(dest);
 							if(dest!=""){
 								flights = service.viewListOfFlights(dest, "dest");
-								System.out.println(flights);
+								System.out.format("%10s%15s%10s%10s%20s%25s%20s%15s%15s%15s%10s%20s","flightNo","flightName","deptCity","arrCity","arrDate","deptDate"
+										,"arrTime","deptTime","firstSeats","firstSeatsFare","bussSeats","bussSeatsFare\n");
+								Iterator<Flight> itr = flights.iterator();
+								while(itr.hasNext()){
+									itr.next().formattedString();
+								}
 							}else{
 								System.out.println("Entered city does not exists in our database, Try again");
 								
@@ -342,8 +352,18 @@ public class AdminClient {
 						}
 					}else{
 						List<BookingInfo> bookings = service.viewBookings(flightNo, "byFlight");
-						System.out.println("Following are the bookings done for flightNo - "+flightNo);
-						System.out.println(bookings);
+						if(bookings.isEmpty()){
+							System.out.println("There are no bookings for this flight");
+						}else{
+							System.out.println("Following are the bookings done for flightNo - "+flightNo);
+							System.out.format("%15s%15s%20s%15s%15s%20s%20s%15s%15s","bookingId","custEmail",
+									"noOfPassengers","classType","totalFare","creditcardInfo",
+									"rcCity","destCity","flightNo\n");
+							Iterator<BookingInfo> itr = bookings.iterator();
+							while(itr.hasNext()){
+								itr.next().formattedString();
+							}
+						}
 					}
 				}while(service.viewListOfFlights(flightNo, "flightNo").isEmpty());
 				

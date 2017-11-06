@@ -84,19 +84,11 @@ public class Flight {
 	public double getBussSeatsFare() {
 		return bussSeatsFare;
 	}
-
-	@Override
-	public String toString() {
-
-		return "Flight \n[flightNo=" + flightNo + ", flightName=" + flightName
-				+ ", deptCity=" + deptCity + ", arrCity=" + arrCity 
-				+ ", arrDate=" + arrDate + ", deptDate=" + deptDate
-				+ ", arrTime=" + arrTime + ", deptTime=" + deptTime
-				+ ", firstSeats=" + firstSeats + ", firstSeatsFare="
-				+ firstSeatsFare + ", bussSeats=" + bussSeats
-				+ ", bussSeatsFare=" + bussSeatsFare + "]";
-	}
 	
+	public void formattedString(){
+		System.out.format("%10s%10s%10s%10s%30s%30s%10s%10s%15s%20s%10s%15s",flightNo,flightName,deptCity,arrCity,arrDate,deptDate
+				,arrTime,deptTime,firstSeats,firstSeatsFare,bussSeats,bussSeatsFare+"\n");
+	}
 	
 	
 }
