@@ -36,7 +36,7 @@ public class ExecutiveClient {
 					System.out.println("Thankyou! Have a nice day.");
 					System.exit(0);
 				}
-			}else if(validationStatus.equalsIgnoreCase("admin")){
+			}else if(validationStatus.equalsIgnoreCase("executive")){
 				break;
 			}
 			else{
