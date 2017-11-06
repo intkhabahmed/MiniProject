@@ -1,0 +1,6 @@
+2017-11-06 09:20:20,760 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:20:28,151 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 09:20:34,602 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: intu
+2017-11-06 09:20:40,217 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 09:22:41,712 ERROR [com.cg.dao.AirlineDAOImpl] - Login failed with user name: Admin ORA-01017: invalid username/password; logon denied
+
