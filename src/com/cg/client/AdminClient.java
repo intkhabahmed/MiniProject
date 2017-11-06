@@ -59,13 +59,21 @@ public class AdminClient {
 			switch(choice){
 			case 1:
 				int flag=0;
+				List<Flight> flightList=null;
 				while(flag==0){
+					flightList = service.viewListOfFlights("all", "all");
+					Iterator<Flight> itr = flightList.iterator();
+					System.out.format("%10s%15s", "FlightNo", "Flight Name\n");
+					while(itr.hasNext()){
+						Flight flight = (Flight)itr.next();
+						System.out.format("%10s%15s",flight.getFlightNo(),flight.getFlightName()+"\n");
+					}
 					System.out.println("Enter the flight number for which you want change the schedule");
 					String flightNo = sc.next();
 					
 					int opt;
 				do{
-					List<Flight> flightList = service.viewListOfFlights(flightNo, "flightNo");
+					flightList = service.viewListOfFlights(flightNo, "flightNo");
 					if(flightList.size()!=0){
 						flag=1;
 						
@@ -80,28 +88,39 @@ public class AdminClient {
 							int choiceForUpdation = sc.nextInt();
 							
 							if(choiceForUpdation==1){
-								System.out.println("Enter the New Arrival Date in YYYY-MM-DD format");
+								
 								boolean b = true;
 								while(b==true){
+									System.out.println("Enter the New Arrival Date in YYYY-MM-DD format");
 									String newInput = sc.next();
-									if(service.checkDateFormat(newInput)==1){
-										System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
-										b =false;
-									}else{
-										System.out.println("Please enter in YYYY-MM-DD format");
+									try{
+										
+										if(service.checkDateFormat(newInput)==1){
+											System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+											b =false;
+										}else{
+											System.out.println("Please enter in YYYY-MM-DD format");
+										}
+									}catch(AirlineException ae){
+										System.out.println(ae.getMessage());
 									}
 								}
 							}
 							else if(choiceForUpdation==2){
-								System.out.println("Enter the New Departure Date in YYYY-MM-DD format");
+								
 								boolean b = true;
 								while(b==true){
+									System.out.println("Enter the New Departure Date in YYYY-MM-DD format");
 									String newInput = sc.next();
-									if(service.checkDateFormat(newInput)==1){
-										System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
-										b =false;
-									}else{
-										System.out.println("Please enter in YYYY-MM-DD format");
+									try{
+										if(service.checkDateFormat(newInput)==1){
+											System.out.println(service.updateFlightSchedule(flightNo, newInput, choiceForUpdation));
+											b =false;
+										}else{
+											System.out.println("Please enter in YYYY-MM-DD format");
+										}
+									}catch(AirlineException ae){
+										System.out.println(ae.getMessage());
 									}
 								}
 							}
@@ -168,11 +187,19 @@ public class AdminClient {
 			case 2:
 				flag=0;
 				while(flag==0){
+					flightList = service.viewListOfFlights("all", "all");
+					Iterator<Flight> itr = flightList.iterator();
+					System.out.format("%10s%15s", "FlightNo", "Flight Name\n");
+					while(itr.hasNext()){
+						Flight flight = (Flight)itr.next();
+						System.out.format("%10s%15s",flight.getFlightNo(),flight.getFlightName()+"\n");
+					}
+					
 					System.out.println("Enter the flight number for which you want change the information");
 					String flightNo = sc.next();
 				int opt;	
 				do{
-					List<Flight> flightList = service.viewListOfFlights(flightNo, "flightNo");
+					flightList = service.viewListOfFlights(flightNo, "flightNo");
 				
 					if(flightList.size()!=0){
 						flag = 1;
@@ -277,23 +304,27 @@ public class AdminClient {
 						String day;
 						int opt;
 						do{
-							System.out.println("Enter the date in YYYY-MM-DD format to see flights");
-							day = sc.next();
-							if(service.checkDateFormat(day)==2){
-								System.out.println("Wrong Date Format, Try again");
-							}else{
-								flights = service.viewListOfFlights(day, "day");
-								if(flights.isEmpty()){
-									System.out.println("Sorry! There are no flights on the given date: "+day);
+							try{
+								System.out.println("Enter the date in YYYY-MM-DD format to see flights");
+								day = sc.next();
+								if(service.checkDateFormat(day)==2){
+									System.out.println("Wrong Date Format, Try again");
 								}else{
-									System.out.format("%10s%15s%10s%10s%20s%25s%20s%15s%15s%15s%10s%20s","flightNo","flightName","deptCity","arrCity","arrDate","deptDate"
-											,"arrTime","deptTime","firstSeats","firstSeatsFare","bussSeats","bussSeatsFare\n");
-									Iterator<Flight> itr = flights.iterator();
-									while(itr.hasNext()){
-										itr.next().formattedString();
+									flights = service.viewListOfFlights(day, "day");
+									if(flights.isEmpty()){
+										System.out.println("Sorry! There are no flights on the given date: "+day);
+									}else{
+										System.out.format("%10s%15s%10s%10s%20s%25s%20s%15s%15s%15s%10s%20s","flightNo","flightName","deptCity","arrCity","arrDate","deptDate"
+												,"arrTime","deptTime","firstSeats","firstSeatsFare","bussSeats","bussSeatsFare\n");
+										Iterator<Flight> itr = flights.iterator();
+										while(itr.hasNext()){
+											itr.next().formattedString();
+										}
 									}
+								
 								}
-							
+							}catch(AirlineException ae){
+								System.out.println(ae.getMessage());
 							}
 							System.out.println("Enter 1 to go to main menu or\nEnter 2 to go to previous menu\nEnter 3 to Continue Searching");
 							opt = sc.nextInt();
@@ -307,8 +338,21 @@ public class AdminClient {
 						String dest;
 						int opt;
 						do{
-							System.out.println("Enter the destination city for which you want to see flights");
-							dest = sc.next();
+							do{
+								System.out.println("Enter the destination city for which you want to see flights");
+								dest = sc.next();
+								if(dest.matches("[a-zA-Z]{3,}")){
+									break;
+								}else{
+									System.out.println("City Name can only have alphabets");
+									System.out.println("Enter 1 to go to main menu or\nEnter 2 to go to previous menu\nEnter 3 to Continue Searching");
+									opt = sc.nextInt();
+									if(opt==2){
+										flag=0;
+										break;
+									}
+								}
+							}while(!dest.matches("[a-zA-Z]{3,}"));
 							dest = service.getCityAbbreviation(dest);
 							if(dest!=""){
 								flights = service.viewListOfFlights(dest, "dest");

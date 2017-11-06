@@ -23,5 +23,6 @@ public interface IAirlineService {
 			String creditCard) throws AirlineException;
 	public int checkAvailability(String query, String type) throws AirlineException;
 	public int checkTimeFormat(String newInput);
-	public int checkDateFormat(String newInput);
+	public int checkDateFormat(String newInput) throws AirlineException;
+	public void checkValidation(String query, String basis) throws AirlineException;
 }

@@ -36,9 +36,9 @@ public class AirlineDAOImplTest {
 
 	@Test
 	public void LoginTest() throws AirlineException {		
-		login.setRole("customer");
-		login.setUsername("intu");
-		login.setPassword("12345678");
+		login.setRole("Admin");
+		login.setUsername("Admin");
+		login.setPassword("admin");
 		assertEquals(login.getRole(),service.validLogin(login));
 	}
 	
@@ -46,7 +46,7 @@ public class AirlineDAOImplTest {
 	public void viewFlightScheduleTest() throws AirlineException
 	{
 	flight = new Flight("9W-617", "JET_AIRWAYS", "PNQ", "BOM",
-			"2015-09-06", "2017-04-05", "07:30","10:30", 30, 4000.0,40, 10000.0);
+			"2017-10-23", "2012-05-06", "17:35","18:20", 30, 4567.0,40, 5432.0);
 	List<Flight> flightList = new ArrayList<Flight>();
 	flightList.add(flight);
 	assertEquals(flightList,service.viewListOfFlights("PNQ-BOM", "route"));
@@ -57,8 +57,13 @@ public class AirlineDAOImplTest {
 	{
 		flight = new Flight("9W-617", "JET_AIRWAYS", "PNQ", "BOM",
 				"2015-09-06", "2017-04-05", "07:30","10:30", 30, 4000.0,40, 10000.0);
+
 		booking = new BookingInfo("1001","prashu@gmail.com",5,"first",12000.0,"51","1234567890","PNQ","BOM");
 		int []seatsAvailable = {30-2,40-0};
+
+		//booking = new BookingInfo("1001","prashu@gmail.com",5,"first",12000.0,"1234567890","PNQ","BOM","");
+		//int []seatsAvailable = {30,40-0};
+
 		assertArrayEquals(seatsAvailable,service.flightOccupancyDetails("9W-617"));
 		
 	}

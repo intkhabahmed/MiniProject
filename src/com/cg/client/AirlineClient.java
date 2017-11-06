@@ -34,7 +34,8 @@ public class AirlineClient {
 					System.out.println("Invalid Choice, Enter 1 to continue or 0 to exit");
 					exitCondition = sc.nextInt();
 				}
-			}while(exitCondition!=0);
+			}
+			while(exitCondition!=0);
 			sc.close();
 		
 		} catch (AirlineException e) {
