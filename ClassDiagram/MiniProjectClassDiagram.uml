@@ -3027,7 +3027,6 @@
 <XPD:ATTR name="Name" type="string">AirlineServiceImpl</XPD:ATTR>
 <XPD:REF name="Namespace">c/YI7wovtU2ixQgzNNEAHwAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
-<<<<<<< HEAD
 <XPD:REF name="Views[0]">nbRn35L8EkG43BQ40c942QAA</XPD:REF>
 <XPD:REF name="Views[1]">0je5D/91X0GsGfodgGVsGAAA</XPD:REF>
 <XPD:REF name="Views[2]">jUOjhQD96Uyc0MdBpGPtkAAA</XPD:REF>
@@ -3528,7 +3527,6 @@
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">int</XPD:ATTR>
 <XPD:REF name="Owner">t8cezTW800KHgT2S5//2sgAA</XPD:REF>
->>>>>>> 86a9ad844e86850e03378fbd5f7a084094a32ead
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[41]" type="UMLAssociation" guid="tGCxG77JhEeLT2HYpIl+3gAA">
@@ -3753,7 +3751,6 @@
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[49]" type="UMLAssociation" guid="pX74M8qVKEGc8vzwmDWGVAAA">
 <XPD:REF name="Namespace">c/YI7wovtU2ixQgzNNEAHwAA</XPD:REF>
-<<<<<<< HEAD
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">zQLN6dkWIkGCGQyLvxKIqQAA</XPD:REF>
 <XPD:REF name="Views[1]">6BuqdDJMe0uxm2yhXgGHrwAA</XPD:REF>
