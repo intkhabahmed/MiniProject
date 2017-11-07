@@ -166,11 +166,15 @@ public class AdminClient {
 						System.out.println("1. To continue");
 						System.out.println("2. For Main Menu");
 						int option = sc.nextInt();
-						if(option==1)
+						if(option==1){
 							flag=0;
+							break;
+						}
+							
 						else{
 							flag=1;
 							System.out.println("Thank You");
+							break;
 						}
 					}
 				System.out.println("Do you want to change anything else?\nEnter 1 if Yes and 2 to go to Main Menu");

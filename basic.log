@@ -236,3 +236,63 @@
 2017-11-06 16:47:50,732 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
 2017-11-06 16:47:50,779 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
 >>>>>>> 86a9ad844e86850e03378fbd5f7a084094a32ead
+2017-11-06 17:24:25,294 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: pune
+2017-11-06 17:24:25,317 INFO [com.cg.dao.AirlineDAOImpl] - Abbreviation was retrieved for the following City Name: mumbai
+2017-11-06 17:24:25,356 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:24:51,164 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:24:51,193 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:24:54,861 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:24:54,885 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:24:56,428 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:24:56,451 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:26:49,824 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 17:27:21,319 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 17:27:44,279 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:28:15,021 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:28:26,870 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:28:41,625 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:28:56,988 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:39:32,036 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 17:39:36,601 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:39:39,765 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:40:03,454 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:41:45,121 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 17:41:47,048 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:41:49,975 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:41:57,769 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:43:12,905 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:43:57,716 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 17:43:59,294 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:44:01,361 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:44:42,669 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 17:44:44,610 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:44:46,475 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:44:48,081 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:45:31,601 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 17:45:32,847 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:45:35,460 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:45:48,663 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:46:55,641 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 17:46:58,868 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:47:01,382 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:47:15,701 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:47:20,902 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:47:27,655 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:47:31,540 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:48:04,955 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Admin
+2017-11-06 17:48:07,585 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:48:16,506 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:48:40,428 INFO [com.cg.dao.AirlineDAOImpl] - Flight Schedule of following flight number updated: 6E-797
+2017-11-06 17:48:45,650 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:49:11,035 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:50:55,801 INFO [com.cg.dao.AirlineDAOImpl] - List of flights retrieved
+2017-11-06 17:52:01,036 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: 45
+2017-11-06 17:52:01,058 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: 45
+2017-11-06 17:52:34,880 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-06 17:52:34,905 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-06 17:54:14,571 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Customer
+2017-11-06 17:54:14,593 INFO [com.cg.dao.AirlineDAOImpl] - Following user logged in: Customer
+2017-11-06 17:54:27,764 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-06 17:54:27,791 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-06 17:55:39,898 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
+2017-11-06 17:55:39,925 INFO [com.cg.dao.AirlineDAOImpl] - Availability checked
