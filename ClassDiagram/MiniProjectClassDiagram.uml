@@ -2706,13 +2706,11 @@
 <XPD:ATTR name="TypeExpression" type="string">Date</XPD:ATTR>
 <XPD:REF name="Owner">t8cezTW800KHgT2S5//2sgAA</XPD:REF>
 </XPD:OBJ>
-<<<<<<< HEAD
 <XPD:OBJ name="Attributes[6]" type="UMLAttribute" guid="hMt/WUlvHkGH0kzaqHqAXQAA">
 <XPD:ATTR name="Name" type="string">cardInfo</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">String</XPD:ATTR>
 <XPD:REF name="Owner">t8cezTW800KHgT2S5//2sgAA</XPD:REF>
-=======
 <XPD:ATTR name="#Associations" type="integer">6</XPD:ATTR>
 <XPD:REF name="Associations[0]">R37Dm1fqxUC4pI7bZh99UAAA</XPD:REF>
 <XPD:REF name="Associations[1]">3uIjE1MKtECIzO80zyMcZwAA</XPD:REF>
@@ -2720,7 +2718,6 @@
 <XPD:REF name="Associations[3]">iuaGPUDdJUKzQtlmkGB+ngAA</XPD:REF>
 <XPD:REF name="Associations[4]">AqwStfZIU0+T+BRSgX4LcAAA</XPD:REF>
 <XPD:REF name="Associations[5]">Bb63tKljdkK87IzxmGeBxAAA</XPD:REF>
->>>>>>> 86a9ad844e86850e03378fbd5f7a084094a32ead
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[7]" type="UMLAttribute" guid="x2A30ACOeUaI8AMrMk60bgAA">
 <XPD:ATTR name="Name" type="string">srcCity</XPD:ATTR>
